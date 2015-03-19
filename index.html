@@ -1,18 +1,18 @@
 ---
 layout: workshop
 root: .
-venue: FIXME (brief name of host site)
-address: FIXME (street address of home location)
-country: FIXME (country (hyphenated if need be, like 'United-Kingdom')
-language: FIXME (language code like 'en' or 'fr')
-latlng: (fractional latitude and longitude like 41.7901128,-87.6007318)
-humandate: FIXME (use the format 'Feb 17-18, 2020' (without the quotes)
-humantime: FIXME (use the format '9:00 am - 4:30 pm' (without the quotes)
-startdate: FIXME (use YYYY-MM-DD format like 2015-01-01)
-enddate: FIXME (use YYYY-MM-DD format like 2015-01-02)
-instructor: (list of names like ["Kay McNulty", "Betty Jennings", "Betty Snyder"])
-helper: (list of names like ["Marlyn Wescoff", "Fran Bilas", "Ruth Lichterman"])
-contact: FIXME (contact email address for workshop organizer)
+venue: University of California, Santa Barbara
+address: 1007 SSMS
+country: USA
+language: en
+latlng: 34.415274, -119.849467
+humandate: Apr 17-18, 2015
+humantime: 9:00 am - 4:30 pm
+startdate: 2015-04-17
+enddate: 2015-04-18
+instructor: ["Tom Bell", "Umi Hoshijima", "Tom Smith", "Louise Stevenson", "Mark Wilber"]
+helper: ["Max Castorani"]
+contact: mqwilber@gmail.com
 etherpad: # FIXME (insert the URL for your Etherpad if you're using one)
 eventbrite: # FIXME (delete this if not used, otherwise uncomment and provide 1234567890AB key for Eventbrite registration)
 ---
@@ -69,7 +69,8 @@ eventbrite: # FIXME (delete this if not used, otherwise uncomment and provide 12
 -->
 <p>
   <strong>Who:</strong>
-  The course is aimed at graduate students and other researchers.
+  The course is aimed at graduate students and other researchers looking to use
+  R as a research tool.
 </p>
 
 <!--
@@ -137,23 +138,29 @@ eventbrite: # FIXME (delete this if not used, otherwise uncomment and provide 12
   <div class="col-md-6">
     <h3>Day 1</h3>
     <table class="table table-striped">
-      <tr> <td>09:00</td>  <td>Automating tasks with the Unix shell</td> </tr>
-      <tr> <td>10:30</td> <td>Coffee</td> </tr>
-      <tr> <td>12:00</td>  <td>Lunch break</td> </tr>
-      <tr> <td>13:00</td>  <td>Building programs with Python</td> </tr>
-      <tr> <td>14:30</td>  <td>Coffee</td> </tr>
-      <tr> <td>16:00</td>  <td>Wrap-up</td> </tr>
+      <tr> <td>8:30-9:00</td>  <td>Installation help (optional)</td> </tr>
+      <tr> <td>9:00-9:30</td>  <td>Introduction</td> </tr>
+      <tr> <td>9:30-10:45</td> <td>Shell/Intro to R I</td> </tr>
+      <tr> <td>10:45-11:00</td>  <td>Coffee Break</td> </tr>
+      <tr> <td>11:00-12:30</td>  <td>Intro to R II</td> </tr>
+      <tr> <td>12:30-1:30</td>  <td>Lunch</td> </tr>
+      <tr> <td>1:30-3:00</td>  <td>Data Reading and Writing</td> </tr>
+      <tr> <td>3:00-3:15</td>  <td>Coffee Break</td> </tr>
+      <tr> <td>3:15-4:45</td>  <td>Intro to Plotting and Basic Stats</td> </tr>
+      <tr> <td>4:45-5:00</td>  <td>Wrap up</td> </tr>
     </table>
   </div>
   <div class="col-md-6">
     <h3>Day 2</h3>
     <table class="table table-striped">
-      <tr> <td>09:00</td>  <td>Version control with Git</td> </tr>
-      <tr> <td>10:30</td>  <td>Coffee</td> </tr>
-      <tr> <td>12:00</td>  <td>Lunch break</td> </tr>
-      <tr> <td>13:00</td>  <td>Managing data with SQL</td> </tr>
-      <tr> <td>14:30</td>  <td>Coffee</td> </tr>
-      <tr> <td>16:00</td>  <td>Wrap-up</td> </tr>
+      <tr> <td>9:00-10:45</td>  <td>Version control/Unit testing</td> </tr>
+      <tr> <td>10:45-11:00</td>  <td>Coffee Break</td> </tr>
+      <tr> <td>11:00-12:15</td>  <td>Advanced R Topics: ggplot </td> </tr>
+      <tr> <td>12:15-1:15</td>  <td>Lunch</td> </tr>
+      <tr> <td>1:15-2:30</td>  <td>Advanced R Topics: plyr and big data</td> </tr>
+      <tr> <td>2:30-2:45</td>  <td>Coffee Break</td> </tr>
+      <tr> <td>2:45-4:00</td>  <td>Advanced R Topics: Dynamic modeling</td> </tr>
+      <tr> <td>4:00-4:30</td>  <td>Wrap-up and discussion</td> </tr>
     </table>
   </div>
 </div>
@@ -197,7 +204,7 @@ eventbrite: # FIXME (delete this if not used, otherwise uncomment and provide 12
   please preview your site before committing, and make sure to run
   'tools/check' as well.
 -->
-<h2>Syllabus</h2>
+<!-- <h2>Syllabus</h2>
 
 <div class="row">
   <div class="col-md-6">
@@ -225,7 +232,7 @@ eventbrite: # FIXME (delete this if not used, otherwise uncomment and provide 12
       <li><a href="{{site.swc_lessons}}/ref/03-python.html">Reference...</a></li>
     </ul>
   </div>
-  <!--
+
   <div class="col-md-6">
     <h3>Programming in R</h3>
     <ul>
@@ -237,7 +244,7 @@ eventbrite: # FIXME (delete this if not used, otherwise uncomment and provide 12
       <li><a href="{{site.swc_lessons}}/ref/06-R.html">Reference...</a></li>
     </ul>
   </div>
-  -->
+
 </div>
 
 <div class="row">
@@ -271,7 +278,7 @@ eventbrite: # FIXME (delete this if not used, otherwise uncomment and provide 12
   </div>
 </div>
 
-<hr/>
+<hr/> -->
 
 <!--
   SETUP
@@ -288,14 +295,60 @@ eventbrite: # FIXME (delete this if not used, otherwise uncomment and provide 12
 <h2 id="setup">Setup</h2>
 
 <p>
-  To participate in a Software Carpentry workshop, you will need 
-  access to the software described below. In addition, you will 
+  To participate in a Software Carpentry workshop, you will need
+  access to the software described below. In addition, you will
   need an up-to-date web browser.
   <a href="setup/index.html">This page</a> has instructions on testing
   that you have the right software installed.
 </p>
 
-<div id="editor"> <!-- Start of 'editor' section. -->
+<div id="r"> <!-- Start of 'R' section. -->
+  <h3>R</h3>
+
+  <p>
+    <a href="http://www.r-project.org">R</a> is a programming language
+    that is especially powerful for data exploration, visualization, and
+    statistical analysis. To interact with R, we will be using
+    <a href="http://www.rstudio.com/">RStudio</a>.
+  </p>
+
+  <div class="row">
+    <div class="col-md-4">
+      <h4 id="r-windows">Windows</h4>
+      <p>
+  Install R by downloading and running
+  <a href="http://cran.r-project.org/bin/windows/base/release.htm">this .exe file</a>
+  from <a href="http://cran.r-project.org/index.html">CRAN</a>.
+  Also, please install the
+  <a href="http://www.rstudio.com/ide/download/desktop">RStudio IDE</a>.
+      </p>
+    </div>
+    <div class="col-md-4">
+      <h4 id="r-macosx">Mac OS X</h4>
+      <p>
+  Install R by downloading and running
+  <a href="http://cran.r-project.org/bin/macosx/R-latest.pkg">this .pkg file</a>
+  from <a href="http://cran.r-project.org/index.html">CRAN</a>.
+  Also, please install the
+  <a href="http://www.rstudio.com/ide/download/desktop">RStudio IDE</a>.
+      </p>
+    </div>
+    <div class="col-md-4">
+      <h4 id="r-linux">Linux</h4>
+      <p>
+  You can download the binary files for your distribution
+  from <a href="http://cran.r-project.org/index.html">CRAN</a>. Or
+  you can use your package manager (e.g. for Debian/Ubuntu
+  run <code>sudo apt-get install r-base</code> and for Fedora run
+        <code>sudo yum install R</code>).  Also, please install the
+  <a href="http://www.rstudio.com/ide/download/desktop">RStudio IDE</a>.
+      </p>
+    </div>
+  </div>
+</div> <!-- End of 'R' section. -->
+
+<!--
+<div id="editor">
   <h3>Text Editor</h3>
 
   <p>
@@ -344,7 +397,9 @@ eventbrite: # FIXME (delete this if not used, otherwise uncomment and provide 12
       </p>
     </div>
   </div>
-</div> <!-- End of 'editor' section. -->
+</div>  -->
+
+<!-- End of 'editor' section. -->
 
 <div id="shell"> <!-- Start of 'shell' section. -->
   <h3>The Bash Shell</h3>
@@ -425,7 +480,7 @@ eventbrite: # FIXME (delete this if not used, otherwise uncomment and provide 12
 	<strong>For OS X 10.8 and higher</strong>, install Git for Mac
 	by downloading and running
 	<a href="http://sourceforge.net/projects/git-osx-installer/files/latest/download">the installer</a>.
-	After installing Git, there will not be anything in your <code>/Applications</code> folder, 
+	After installing Git, there will not be anything in your <code>/Applications</code> folder,
 	as Git is a command line program.
 	<strong>For older versions of OS X (10.5-10.7)</strong> use the
 	most recent available installer for your
@@ -446,11 +501,9 @@ eventbrite: # FIXME (delete this if not used, otherwise uncomment and provide 12
   </div>
 </div> <!-- End of 'Git' section. -->
 
-<div id="python"> <!-- Start of 'Python' section. Remove the third paragraph if
-           the workshop will teach Python using something other than
-           the IPython notebook.
-           Details at http://ipython.org/ipython-doc/2/install/install.html#browser-compatibility -->
-  <h3>Python</h3>
+<!--
+<div id="python">
+   <h3>Python</h3>
 
   <p>
     <a href="http://python.org">Python</a> is a popular language for
@@ -470,9 +523,9 @@ eventbrite: # FIXME (delete this if not used, otherwise uncomment and provide 12
       We will teach Python using the IPython notebook, a programming environment
       that runs in a web browser. For this to work you will need a reasonably
       up-to-date browser. The current versions of the Chrome, Safari and
-      Firefox browsers are all <a 
-      href='http://ipython.org/ipython-doc/2/install/install.html#browser-compatibility'>supported</a> 
-      (some older browsers, including Internet Explorer version 9 
+      Firefox browsers are all <a
+      href='http://ipython.org/ipython-doc/2/install/install.html#browser-compatibility'>supported</a>
+      (some older browsers, including Internet Explorer version 9
       and below, are not).
     </p>
 
@@ -519,7 +572,7 @@ eventbrite: # FIXME (delete this if not used, otherwise uncomment and provide 12
 	<li>
           Download the installer that matches your operating
           system and save it in your home folder.
-	  Download the default Python 2 installer (do not follow the link to version 3). 
+	  Download the default Python 2 installer (do not follow the link to version 3).
 	</li>
 	<li>
           Open a terminal window.
@@ -541,85 +594,7 @@ eventbrite: # FIXME (delete this if not used, otherwise uncomment and provide 12
       </ol>
     </div>
   </div>
-</div> <!-- End of 'Python' section. -->
-
-<div id="r"> <!-- Start of 'R' section. -->
-  <h3>R</h3>
-
-  <p>
-    <a href="http://www.r-project.org">R</a> is a programming language
-    that is especially powerful for data exploration, visualization, and
-    statistical analysis. To interact with R, we use
-    <a href="http://www.rstudio.com/">RStudio</a>.
-  </p>
-
-  <div class="row">
-    <div class="col-md-4">
-      <h4 id="r-windows">Windows</h4>
-      <p>
-	Install R by downloading and running
-	<a href="http://cran.r-project.org/bin/windows/base/release.htm">this .exe file</a>
-	from <a href="http://cran.r-project.org/index.html">CRAN</a>.
-	Also, please install the
-	<a href="http://www.rstudio.com/ide/download/desktop">RStudio IDE</a>.
-      </p>
-    </div>
-    <div class="col-md-4">
-      <h4 id="r-macosx">Mac OS X</h4>
-      <p>
-	Install R by downloading and running
-	<a href="http://cran.r-project.org/bin/macosx/R-latest.pkg">this .pkg file</a>
-	from <a href="http://cran.r-project.org/index.html">CRAN</a>.
-	Also, please install the
-	<a href="http://www.rstudio.com/ide/download/desktop">RStudio IDE</a>.
-      </p>
-    </div>
-    <div class="col-md-4">
-      <h4 id="r-linux">Linux</h4>
-      <p>
-	You can download the binary files for your distribution
-	from <a href="http://cran.r-project.org/index.html">CRAN</a>. Or
-	you can use your package manager (e.g. for Debian/Ubuntu
-	run <code>sudo apt-get install r-base</code> and for Fedora run
-        <code>sudo yum install R</code>).  Also, please install the
-	<a href="http://www.rstudio.com/ide/download/desktop">RStudio IDE</a>.
-      </p>
-    </div>
-  </div>
-</div> <!-- End of 'R' section. -->
-
-<div id="sql"> <!-- Start of 'SQLite' section. -->
-  <h3>SQLite</h3>
-
-  <p>
-    SQL is a specialized programming language used with databases.  We
-    use a simple database manager called
-    <a href="http://www.sqlite.org/">SQLite</a> in our lessons.
-  </p>
-
-  <div class="row">
-    <div class="col-md-4">
-      <h4 id="sql-windows">Windows</h4>
-      <p>
-	Download the <a href="{{site.swc_files}}/sqlite3.exe">sqlite3
-	  program</a> and put it in the directory where you are running
-	examples.
-      </p>
-    </div>
-    <div class="col-md-4">
-      <h4 id="sql-macosx">Mac OS X</h4>
-      <p>
-	<code>sqlite3</code> comes pre-installed on Mac OS X.
-      </p>
-    </div>
-    <div class="col-md-4">
-      <h4 id="sql-linux">Linux</h4>
-      <p>
-	<code>sqlite3</code> comes pre-installed on Linux.
-      </p>
-    </div>
-  </div>
-</div> <!-- End of 'SQLite' section. -->
+</div> --> <!-- End of 'Python' section. -->
 
 <!--
   Uncomment this section if you are using our virtual machine.
