@@ -154,23 +154,23 @@ command.
 
     Desktop$ cd ..
     ~$ pwd
-    /Users/jkitzes
+    /Users/mqwilber
     ~$ cd Desktop/
     Desktop$ pwd
-    /Users/jkitzes/Desktop
+    /Users/mqwilber/Desktop
     Desktop$ 
 
 Before we move on to working with files, one final important vocabulary word is 
 "path". The path refers to the location of a directory or file on your hard 
-drive - we would thus say that `/Users/jkitzes/Desktop` is the path to my 
+drive - we would thus say that `/Users/mqwilber/Desktop` is the path to my 
 Desktop directory. There are two ways to think of paths - absolute and 
-relative. Absolute paths, like `/Users/jkitzes/Desktop`, give the location of a 
+relative. Absolute paths, like `/Users/mqwilber/Desktop`, give the location of a 
 file or directory from the root of your entire file system, which is indicated 
 by the leading `/` character (`cd /` will take you to this root). Relative 
 paths specify the location of a file or folder relative to your present working 
 directory (i.e., the relative path is "glued on" to your current path). If 
-you're in your home folder `/Users/jkitzes`, the commands `cd 
-/Users/jkitzes/Desktop` and `cd Desktop` thus take you to the same place, but 
+you're in your home folder `/Users/mqwilber`, the commands `cd 
+/Users/mqwilber/Desktop` and `cd Desktop` thus take you to the same place, but 
 the former uses an absolute path (and would work from anywhere) while the 
 latter uses a relative path.
 
@@ -334,40 +334,42 @@ to Excel file formats for saving and working with tabular data.
 >you see that one of these prints to standard out and one drops you into its 
 >own environment? (For the latter, press `q` to exit when you're done.)
 
-A very important command line program that we'll be working with later is 
-`python`, which (as you guessed) will read and execute python code. There are 
-two ways that we'll use the `python` program at the command line. First, if you 
-just type `python` with no arguments, you'll be dropped into what's called the 
-"python interpreter", which is an interactive environment in which you can 
-enter Python commands and see output.
+`R`, the program/language that we will be using during this workshop can also be invoked from the command line. Just type `R` with no arguments at the command prompt and you should see
 
-    bootcamp$ python
-    Enthought Canopy Python 2.7.3 | 64-bit | (default, Jun 14 2013, 18:17:36) 
-    [GCC 4.2.1 (Apple Inc. build 5666) (dot 3)] on darwin
-    Type "help", "copyright", "credits" or "license" for more information.
-    >>> 
+     ~$ R
+
+    R version 3.1.2 (2014-10-31) -- "Pumpkin Helmet"
+    Copyright (C) 2014 The R Foundation for Statistical Computing
+    Platform: x86_64-apple-darwin13.4.0 (64-bit)
+
+    R is free software and comes with ABSOLUTELY NO WARRANTY.
+    You are welcome to redistribute it under certain conditions.
+    Type 'license()' or 'licence()' for distribution details.
+
+      Natural language support but running in an English locale
+
+    R is a collaborative project with many contributors.
+    Type 'contributors()' for more information and
+    'citation()' on how to cite R or R packages in publications.
+
+    Type 'demo()' for some demos, 'help()' for on-line help, or
+    'help.start()' for an HTML browser interface to help.
+    Type 'q()' to quit R.
+
+    > 
 
 Although your shell session has seemingly not vanished in the same way as it 
 did when you opened `nano`, you'll notice that your command prompt at the 
-bottom of the screen now starts with `>>>` symbols instead of `$`. This 
-helpfully indicates to you that you're actually inside of the python 
-interpreter, not the shell, at this point, and that whatever you type will be 
-executed by the Python interpreter program. Try typing `ls` and hitting return, 
-for example, and notice that Python has no idea what you're talking about. Type 
-`2+2` and hit return, though, and you'll see that Python knows what to do with 
-that. To quit, type `quit()` and press return, and you'll see that the `$` 
-prompt indicates that you're now back in the shell.
+bottom of the screen now starts with `>` symbols instead of `$`. This 
+helpfully indicates to you that you're actually inside of the R 
+console, not the shell, at this point, and that whatever you type will be 
+executed by R. Try typing `pwd` and hitting return, 
+for example, and notice that `R` has no idea what you're talking about. Instead, try typing `getwd()` (meaning get working directory: the equivalent of `pwd`) and notice that `R` now tells you where you are. 
 
-If you're an R or Matlab user, you'll notice that this looks a lot like what 
-you see when you open the graphical programs for R and Matlab. In fact, if you 
-have R installed on your computer, type the command `r` and hit return and 
-you'll see essentially the same type of interpreter that we just saw when we 
-ran `python`, only now you're in an R interpreter at the command line.
-
-A second way to use the Python program from the command line is to give 
-`python` an argument that's the path to a file containing Python code - in this 
-case, `python` will execute the code in that file, printing any output to the 
-command line. We'll make use of that approach in later lessons.
+As another example, type 
+`2+2` and hit return, though, and you'll see that R knows what to do with 
+that. To quit, type `q()` and then `y` press return, and you'll see that the `$` 
+prompt indicates that you're now back in the shell.  While we often don't interact with `R` directly through the command line, it is important to know that you can!
 
 Chaining commands
 --------------------
