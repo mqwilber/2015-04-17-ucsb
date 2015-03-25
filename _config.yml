@@ -1,8 +1,8 @@
 #--------------------------------------------------------------------------------
 # Values for this workshop - EDIT THIS SECTION.
 #--------------------------------------------------------------------------------
-workshop_repo   : "http://github.com/swcarpentry/workshop-template"
-workshop_site   : "http://swcarpentry.github.io/workshop-template"
+workshop_repo   : "http://github.com/mqwilber/2015-04-17-ucsb"
+workshop_site   : "http://mqwilber.github.io/2015-04-17-ucsb"
 #--------------------------------------------------------------------------------
 # Standard Software Carpentry settings - should not need to be modified.
 #--------------------------------------------------------------------------------
@@ -23,3 +23,5 @@ kramdown        :
   entity_output : as_input # &mdash; is output as &mdash;
   smart_quotes  : [39, 39, 34, 34] # decimal for left/right single/double quotes
 exclude         : [tools]
+
+url:  "http://0.0.0.0:4000/"
