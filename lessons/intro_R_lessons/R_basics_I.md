@@ -6,18 +6,87 @@ title: Scientific Programming with R
 
 *Prepared by Mark Wilber, Original Material from Justin Kitzes and Tom Wright*
 
-<!-- # Novice R materials
+*Supplementary Files*: [Answers to Exercises](R_basics_I_answers.R)
 
-* Draw concept map of where we are headed towards best scientific practices, and reproducibility.
-* Its really important that you know what you did. More journals/grants/etc. are also making it important for them to know what you did.
-* A lot of scientific code is *not* reproducible.
-* If you keep a lab notebook, why are we not as careful with our code?
-* We edit each others manuscripts, but we don't edit each other's code.
-* If you write your code with "future you" in mind, you will save yourself and others a lot of time. -->
+Goals
+-----
 
-# What is R?
+The goals of this modules is 
+to teach you the basic, core concepts of programming that transcend languages, 
+how they fit together, and how you can use them to become a better scientist.  We will be using the language R to do this.
 
-R is a versatile, open source programming language that was specifically designed for data analysis. As such R is extremely useful both for statistics and data science. Inspired by the programming language S.
+By the end of these R lessons, you will be able to:
+
+1.  Describe and distinguish the seven core elements shared by all programming 
+    languages.
+2.  Use R to write simple programs that use these core elements, using 
+    both the core library and external packages.
+3.  Make and save simple plots using basic plots and ggplot.
+5.  Understand how to run basic statistics in R.
+
+6.  Read, manipulate, and save data files in csv and text formats.
+7.  Have an idea of how to use R for more complex data manipulation
+
+We (the instructors) recognize that you all unavoidably have come with very 
+different levels of background in R programming. We expect that some of 
+you might have little experience R and a few of you might have decent R experience already - for those in that 
+category, this section of the workshop may not be as novel as the other 
+sections. However, we hope that the method of presentation will help to 
+solidify your existing knowledge. We also encourage you to take the opportunity 
+to ask the instructors and volunteers about more advanced techniques that you 
+might have heard of but do not know how to use well.
+
+For those who have no (or almost no) background in programming in any language, 
+you may find that these lessons proceed quickly. We encourage you to make 
+liberal use of the helpful volunteers as we proceed through these lessons. You 
+may also wish to consider working together with a partner to complete the 
+exercises as a team.
+
+Regardless of your background, you will probably feel like trying to take in 
+all of this material is like trying to drink from a firehose. That's OK - the 
+idea is to at least introduce you to a wide variety of topics, with the hope 
+that you (a) will get to reinforce the most important concepts during 
+exercises, and (b) will be able to come back to these materials later to 
+continue mastering the concepts.
+
+The Seven Core Concepts
+-----------------------
+
+As noted by Greg Wilson (the founder of Software Carpentry), every programming 
+language shares [seven core elements][1]:
+
+1.  Individual things (the number 2, the character 'hello')
+2.  Commands that operate on things (the + symbol, the `length` function)
+3.  Groups of things (R vectors, dataframes, and arrays)
+4.  Ways to repeat yourself (for and while loops)
+5.  Ways to make choices (if and try statements)
+6.  Ways to create chunks (functions, objects/classes, and packages)
+7.  Ways to combine chunks (function composition)
+
+The lines between these are often blurry in practice - they are purely a conceptual framework that helps programmers write 
+code that does what they want it to do.
+
+We expect that you'll find the basics of 1 and 2 fairly straightforward. We'll 
+go quickly through those and will spend the most time on items 3-6. We won't 
+really talk about 7, as it is not as common in R programming as 
+it is in, say, shell scripting (pipes and redirection).
+
+Don't worry if you don't already know what all of the above examples mean - 
+you'll know by the end of this lesson.
+
+Asking Questions
+----------------
+
+As we go through this lesson, you can ask questions in two ways:
+
+1.  If you have a question for me, just raise your hand and ask.
+2.  If you have a question that you think might be restricted to just you (like something on your computer isn't working), raise your hand an a volunteer 
+will come over to help you individually.
+
+What is R?
+-----------
+
+R is a versatile, open source programming language that was specifically designed for data analysis. As such R is extremely useful both for statistics and data science and was inspired by the programming language S.  Here are some fun facts to usher you into the R community.
 
 * Open source software under GPL.
 * Superior (if not just comparable) to commercial alternatives. R has over 5,000 user contributed packages at this time. It's widely used both in academia and industry.
@@ -26,14 +95,17 @@ R is a versatile, open source programming language that was specifically designe
 * Is (sort of) object oriented and functional.
 * Large and growing community of peers.
 
-# Introduction to RStudio
+Starting with RStudio
+----------------------
+
+To open RStudio, click on the RStudio icon in the Applications (if you are on a Mac) or in your Programs if you are on Windows.
 
 There are four windows in RStudio that we will refer to throughout the workshop
 
-1. The R Script: Where you write R code
-2. The R Console: Where you execute R code
-3. The R Environment: Where you see you defined variables
-4. R "Information": Where you see plots, help and other R information
+1. *The R Script*: Typically the upper left hand corner of RSutdio.  This is where you write R code that you can save and reuse later.
+2. *The R Console*: Typically in the lower left hand corner. This is where you execute R code.
+3. *The R Environment*: Typically in the upper right hand corner. This is where you can see defined variables. 
+4. *R "Information"*: Typically in the lower right hand corner. This is where you see plots, help and other R information.
 
 ## 1. Individual things
 
@@ -41,7 +113,7 @@ The most basic component of any programming language are "things", also called v
 (in special cases) objects.
 
 The most common basic "things" in R are integers and doubles (i.e. numerics), characters, logicals, and
-some special objects of various types. We'll meet many of these as we go through the lesson.
+some special objects of various types (e.g. lists, dataframes, etc.). We'll meet many of these as we go through the lesson.
 
     # A thing
     2
@@ -60,11 +132,13 @@ Things can be stored as variables using `<-`.  `=` also works, but R programmers
     b
     c
 
-We can figure out the type of these things using the `typeof` function
+We can figure out the type of these things using the `class` function
 
-    typeof(a)
-    typeof(b)
-    typeof(c)
+    class(a)
+    class(b)
+    class(c)
+
+> **Tip**: You can also use `typeof` to get an idea of what type a thing is.  Note that this will not always return the same information as `class`!
 
 ## 2. Commands that operate on things
 
@@ -138,7 +212,7 @@ There are thousands of R packages with many useful functions and datasets!  That
 > 
 > Throughout this lesson, we will successively build towards a program that will calculate the
 > logistic growth of a population of bacteria in a petri dish (or bears in the woods, if you
-> prefer). The exercises will build on each other - if at any time you get behind, you can find the answers to the previous exercises here and catch up.
+> prefer). The exercises will build on each other - if at any time you get behind, you can find the answers to the previous exercises [here](R_basics_I_answers.R) and catch up.
 > 
 > As a reminder, a commonly used discrete time equation for logistic population growth is
 > 
@@ -501,6 +575,11 @@ Let's now give `people` a default value.  In the example below, people will now 
 > population given the old population. Make this line another function called `grow_one_step` that takes
 > in the old population, `r`, and `K`, and returns the new population. Have your `logistic_growth` function
 > use the `grow_one_step` function to calculate the new population in each time step.
+
+
+
+[1]: 
+http://software-carpentry.org/2012/08/applying-pedagogical-principles-in-this-course.html
 
 
 
