@@ -189,7 +189,8 @@ would expect.
     as.integer(3.3)
     paste("3.3 rounded is", round(3.3))  # Paste together characters and integers
 
-To find out what a function does type a `?` before the function name (or just Google it!)
+> **Tip**To find out what a function does type a `?` before the function name (or just Google it!).  We instructors Google R help ALL THE TIME!  Don't be afraid to do it.
+
         
     ?round
     round(4.567, digits=1)
