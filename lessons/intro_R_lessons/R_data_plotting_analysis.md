@@ -1,16 +1,16 @@
 ---
 layout: lesson
 root: ../..
-title: Reading and writing data in R
+title: Data, plotting, and analysis 
 ---
 
 *Edited and updated by Mark Wilber, Original material from Tom Wright*
 
-**Supplementary Material**: [Anuerism Data](../../data/anuerysm_data.csv)
+**Supplementary Material**: [Data from 5 sites as zip](../../data/anuerysm_data.zip)
 
-For this lesson we are going to be using the and dataset in which 100 patients were were examined and 9 variables about the patients were recorded such as anuerisms, blood pressure, age, etc.  Download the data by clicking [here](../../data/anuerysm_data.csv) or by clicking the **Supplementary Material** link above and save the data file into the directory `~/Desktop/workshop/`. 
+For this lesson we are going to be using the and dataset in which 100 patients were were examined and 9 variables about the patients were recorded such as anuerisms, blood pressure, age, etc.  Download the data by clicking [here](../../data/anuerysm_data.zip) or by clicking the **Supplementary Material** link above and save the data file into the directory `~/Desktop/workshop/`. 
 
-The datasets we will use in this workshop are stored in [comma-separated values](../../gloss.html#comma-separeted-values) (CSV) format: each row holds information for a single patient, and the columns represent different variables of that patient.
+The datasets we will use in this workshop are stored in comma-separated values (CSV) format: each row holds information for a single patient, and the columns represent different variables of that patient.
 
 With this dataset, we want to:
 
@@ -39,7 +39,7 @@ Alternatively you can change the working directory using the RStudio GUI using t
 
 Now we could load the data into R using `read.csv`:
 
-    dat <- read.csv("anuerysm_data.csv", header = TRUE)
+    dat <- read.csv("anuerysm_data_site-1.csv", header = TRUE)
 
 The expression `read.csv(...)` asks R to run the function `read.csv`
 
@@ -96,6 +96,7 @@ The function `str()` gives information about all the columns in a dataframe.
 We see the first two columns (ID and Gender) are type factor. Factors are a very useful datatype in R and we will look at them in detail next. The Group column is a logical datatype (values are `TRUE` or `FALSE`). 5 columns (BloodPressure, Aneurisms_q1-4) are all type integer. One column is type num (Age).
 
 ### 4. Addressing data
+
 There are 3 main ways to address data in a data frame:
 * By Index
 * By Logical vector
@@ -162,19 +163,18 @@ Columns can be addressed using the `$` operator
 > #### Exercise 1
 > A subsection of a data frame is called a slice.
 > We can take slices of character vectors as well:
->
+> 
 >     element <- c("o", "x", "y", "g", "e", "n")
 >     # first three characters
 >     element[1:3]
 >     # last three characters
 >     element[4:6]
-
+> 
 > 1.  If the first four characters are selected using the slice `element[1:4]`, how can we obtain the first four characters in reverse order?
 >2.  What is `element[-1]`?
     What is `element[-4]`?
-    Given those answers,
-    explain what `element[-1:-4]` does.
-> 3. Returning to dataset, select all rows with lower case "m" for gender.
+    Given those answers, what does `element[-1:-4]` do?
+> 3. Returning to the dataset, select all rows `dat` with lower case "m" for Gender.  How many are there?
 
 ### Combining indexing and assignment
 
@@ -184,10 +184,9 @@ We can combine these two operations:
     x <- c(5,3,7,10,15,13,17)
     x[x>10] <- 0
 
-### Exercise 2
-
-1. Combine indexing and assignment to correct the Gender column so that all values of 'm' and 'f' are uppercase.
-
+> ### Exercise 2
+> 
+> 1. Combine indexing and assignment to correct the Gender column so that all values of 'm' and 'f' are uppercase.
 
 ### 5. Factors
 
@@ -250,7 +249,7 @@ have to go via a character vector. Compare:
     as.numeric(as.character(f)) ## works...
     as.numeric(levels(f))[f]    ## The recommended way.
 
-> ### Exercise 3
+> **Exercise 3**
 > 
 > The function `table()` tabulates observations and can be used to create
 > bar plots quickly. For instance:
@@ -313,17 +312,13 @@ To support this, we can use the `apply` function.
 
 `apply` allows us to repeat a function on all of the rows (`MARGIN = 1`) or columns (`MARGIN = 2`) of a data frame.
 
-Thus, to obtain the average inflammation of each patient we will need to calculate the mean of all of the rows (`MARGIN = 1`) of the data frame.
+Thus, to obtain the average aneurisms of each patient we will need to calculate the mean of all of the rows (`MARGIN = 1`) of the data frame.
 
-```{r}
-avg_patient_aneurisms <- apply(dat[,6:9], 1, mean)
-```
+    avg_patient_aneurisms <- apply(dat[,6:9], 1, mean)
 
-And to obtain the average inflammation of each eye we will need to calculate the mean of all of the columns (`MARGIN = 2`) of the data frame.
+And to obtain the average aneurisms for both eyes we will need to calculate the mean of all of the columns (`MARGIN = 2`) of the data frame.
 
-```{r}
-avg_eye_aneurisms <- apply(dat[,6:9], 2, mean)
-```
+    avg_eye_aneurisms <- apply(dat[,6:9], 2, mean)
 
 Since the second argument to `apply` is `MARGIN`, the above command is equivalent to `apply(dat, MARGIN = 2, mean)`.  
 
@@ -331,11 +326,121 @@ Since the second argument to `apply` is `MARGIN`, the above command is equivalen
 For example, you can calculate the row-wise or column-wise means with `rowMeans` and `colMeans`, respectively.
 
 
-> ### Exercise 4
+>**Exercise 4**
 > 
-> Make a new column in `dat` called `Average_Anuerism` which is the average aneurisms over Aneurisms_q1-4 for each patient (*Hint*: Try dat['Average_Anuerism'] = something for making the new column).  Write your new data as a csv file using the function `write.csv(...)`.
+> Make a new column in `dat` called `average_anuerism` which is the average aneurisms over Aneurisms_q1-4 for each patient (*Hint*: Try `dat['average_anuerism'] = something` for making the new column).  Write your new data as a csv file using the function `write.csv(...)`.
 
-#### Key Points
+
+### 6. Exploratory Plotting!
+
+
+
+### 7. Combining concepts: A full analysis
+
+Now that you are familiar with the basics of R computing, reading and writing data, and plotting let's work through an analysis work flow you might encounter in your everyday work. Here is the **goal**.
+
+> You have collected data on eye aneurisms across 5 sites and stored in the data in 5 separate files `aneurism_data_site-1.csv`, `aneurism_data_site-2.csv`, ..., 
+> `aneurism_data_site-5.csv`. You are interested in asking the question whether the average number eye aneurysms for a given person depends on treatment type, blood pressure, or sex for each site separately.
+> 
+
+This may seem daunting, but you can do this analysis using what you have learned so far.  The best way to approach any analysis is to break it into chunks (maybe even functions!).
+
+1. Load in your data
+1. If necessary, clean up your data.
+1. Define a new response variable that is the mean of your aneurysms
+1. Visualize your data with a few plots
+1. Run your analysis on each of your cleaned data sets
+1. Output the results
+1. Repeat for all 5 datasets
+
+Here's at outline of how this problem might look in pseudocode. Let's build on this as the as we progress through the next sections
+
+    analyze <- function(filename){
+        # A function that plots and analyzes aneurysm data
+
+        # 1. Load in data in filename and save it to a variable
+
+        # 2. Clean your data
+
+        # 3. Define a new response that is the mean number of anuerysms
+
+        # 4. Visualize your data with a few plots
+
+        # 5. Run an analysis for each dataset and return results
+
+    }
+
+#### 7.1 Load in your data
+
+> **Exercise 5**: Within the function `analyze`, use `read.csv` to load in the `filename` and assign it to the variable `tdata`. What is the `class` of this filename? Test that your function works.
+
+#### 7.2 Clean your data
+
+Let's reuse the code that we previously wrote in this lesson to clean our data.
+
+    tdata$Gender[tdata$Gender == "m"] = "M"
+    tdata$Gender[tdata$Gender == "f"] = "F"
+    tdata <- droplevels(tdata)
+
+Let's test if our function works.
+
+    analyze("aneurism_data_site-1.csv")
+ 
+>**Exercise 6**: Make your code more readable by making the cleaning step a separate function of its own called `clean_data` that takes in a dataframe as an argument, cleans the data set and returns the cleaned dataset. *Hint*:  Make sure you define the `clean_data` function *before* the `analyze` function.
+
+#### 7.3 Make a new variable
+
+We now want to define a new variable called `average_anuerism` in our dataframe which is the average over all four anuerism columns.  Let's just copy the code we used before
+
+    tdata['avg_anuerism'] <- apply(data[, 6:9], MARGIN=1, mean)
+
+or
+
+    tdata['avg_anuerism'] <- rowMeans(tdata[, 6:9])
+
+#### 7.4 Visualize your data with a few plots
+
+> **Exercise 7**: Choose one or two of the plots you learned and plot the data in some way to visualize whether Gender, Treatment, and/or BloodPressure might be having some effect of average number of anuerysms per person.
+
+#### 7.5 Fit a statistical model to the data and return results
+
+R is an amazing statistical environment that you can begin to explore once you understand the inner workings of R. To answer our question we are going two of the thousands of statistical functions that R has to offer: `lm` (Linear Model) and `anova`.
+
+    # Fit a linear model. Response on the left predictors on the right
+    fit <- lm(avg_aneurism ~ Gender + Group + BloodPressure, data=tdata)
+    results <- anova(fit)
+    return(results)
+
+Now you have a function that performs your analysis on a single dataset! 
+
+#### 7.6 Repeat for all 5 datasets 
+
+We know how to repeat ourselves - use loops. In the case we might want to loop over the all 5 datasets and use our `analyze` function on each.  But how do we get the names for these data sets?
+
+    # Set your working direction to your data file
+    setwd("~/Desktop/workshop/")
+
+The `ls` command in the shell has an equivalent command in R called `list.files()`
+
+    # Look at the files in the data directory
+    list.files()
+    all_files <- list.files()
+    all_files
+
+Great! But how do we just get the anuerysm files? We can use a default argument of `list.files()` called `pattern`.  This argument allows you to only select certain files that match the pattern.
+
+    # List all files that start with aneurysm
+    all_files <- list.files(pattern="anuerysm")
+    all_files
+
+Now `all_files` contains the filenames of all of our datafiles
+
+> **Exercise 8**: Loop through `all_files` and run `analyze` on each data file. Print the results of each analysis to the Rconsole.
+> 
+
+Congratulations! You have completed your analysis! Go write the paper.
+
+<!-- #### Key Points the first 5 sections
 
 * Use `variable <- value` to assign a value to a variable in order to record it in memory.
 * Objects are created on demand whenever a value is assigned to them.
@@ -346,5 +451,4 @@ For example, you can calculate the row-wise or column-wise means with `rowMeans`
 * Use `#` to add comments to programs.
 * Use `mean`, `max`, `min` and `sd` to calculate simple statistics.
 * Use `apply` to calculate statistics across the rows or columns of a data frame.
-
-### 6. Loops and functions with data
+ -->
