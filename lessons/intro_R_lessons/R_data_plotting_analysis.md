@@ -6,9 +6,9 @@ title: Data, plotting, and analysis
 
 *Edited and updated by Mark Wilber, Original material from Tom Wright*
 
-**Supplementary Material**: [Data from 5 sites as zip](../../data/anuerysm_data.zip)
+**Supplementary Material**: [Data from 5 sites as zip](../../data/anuerysm_data.zip), [answers to exercises](R_data_plotting_analysis_answers.R)
 
-For this lesson we are going to be using the and dataset in which 100 patients were were examined and 9 variables about the patients were recorded such as anuerisms, blood pressure, age, etc.  Download the data by clicking [here](../../data/anuerysm_data.zip) or by clicking the **Supplementary Material** link above and save the data file into the directory `~/Desktop/workshop/`. 
+For this lesson we are going to be using 5 datasets in which 100 patients were were examined and 9 variables about the patients were recorded such as anuerisms, blood pressure, age, etc.  Download the data by clicking [here](../../data/anuerysm_data.zip) or by clicking the **Supplementary Material** link above and save the data file into the directory `~/Desktop/workshop/`. 
 
 The datasets we will use in this workshop are stored in comma-separated values (CSV) format: each row holds information for a single patient, and the columns represent different variables of that patient.
 
