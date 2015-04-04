@@ -8,11 +8,11 @@ title: Introducing the Shell
 
 Our introduction to best practices in scientific computing begins with one of 
 the oldest and most venerable software tools - the shell. As with every tool 
-and practice that we'll cover during this two day bootcamp, we'll only have 
+and practice that we'll cover during this two day workshop, we'll only have 
 time to introduce you to the very basics of using the shell. We'll focus our 
 time here on (a) the core skills that you'll need to get stuff done, including 
 in particular those that you'll need to complete the lessons in the rest of the 
-bootcamp, and (b) the overarching concepts of scientific computing that the use 
+workshop, and (b) the overarching concepts of scientific computing that the use 
 of the shell illustrates.
 
 Before we get started, I'll note that some of you, especially those of you who 
@@ -178,25 +178,25 @@ Finally, remember that if you ever get lost, `cd` with no arguments will take
 you back to your home folder.
 
 Now that you're in your Desktop directory, let's create a directory to hold all 
-of the materials for this bootcamp. The command `mkdir`, short for "make 
+of the materials for this workshop. The command `mkdir`, short for "make 
 directory", will create a directory. It requires one argument, which is the 
 path (absolute or relative) to the directory that you wish to create.
 
-    Desktop$ mkdir bootcamp
-    Desktop$ cd bootcamp
-    bootcamp$ 
+    Desktop$ mkdir workshop
+    Desktop$ cd workshop
+    workshop$ 
 
-We've now created and moved into a directory named `bootcamp` in our Desktop 
+We've now created and moved into a directory named `workshop` in our Desktop 
 directory. If you look at your actual Desktop on your computer, you should see 
-that, in fact, a new folder called `bootcamp` has appeared there.
+that, in fact, a new folder called `workshop` has appeared there.
 
 Now that we've created our directory, let's put a file in it. A simple command 
 that lets us create an empty file with nothing in it is `touch`, which takes 
 one argument for the path to the file (using the file name as the argument 
 represents a relative path, which puts the file in your current directory).
 
-    bootcamp$ touch file.txt
-    bootcamp$ ls
+    workshop$ touch file.txt
+    workshop$ ls
     file.txt
 
 We can easily rename or move existing files with the `mv` command, which takes 
@@ -204,16 +204,16 @@ one argument for the existing path to the file and one argument for the new
 path to the file. The command below uses two relative paths to perform a simple 
 rename of the file.
 
-    bootcamp$ mv file.txt file1.txt
-    bootcamp$ ls
+    workshop$ mv file.txt file1.txt
+    workshop$ ls
     file1.txt
 
 Since this file isn't doing much for us, let's delete it using `rm`, short for 
 "remove".
 
-    bootcamp$ rm file1.txt
-    bootcamp$ ls
-    bootcamp$ 
+    workshop$ rm file1.txt
+    workshop$ ls
+    workshop$ 
 
 Important note - the shell has no concept of a trash can, so once you've 
 deleted a file using `rm`, it's gone forever. As such, use it carefully.
@@ -225,13 +225,13 @@ on this concept later) - `rm -r directory-name` will delete a directory called
 
 >###Exercise 1
 >Change directories to your desktop. Use `touch` to recreate `file.txt` on your 
->Desktop, and then use `mv` to move it into your `bootcamp` directory. Remove 
->the `bootcamp` directory and the file in it. Recreate the `bootcamp` directory 
+>Desktop, and then use `mv` to move it into your `workshop` directory. Remove 
+>the `workshop` directory and the file in it. Recreate the `workshop` directory 
 >and `cd` back into it.
 
 As you perform the above steps, there are two very useful productivity 
 shortcuts for working in the shell that you should try out. The first is called 
-tab completion. After you create the `bootcamp` directory, for example, try 
+tab completion. After you create the `workshop` directory, for example, try 
 typing `cd bo` and then hitting tab - you'll see that the shell fills in the 
 rest of the directory or file name for you (if there are multiple options that 
 start with those letters, your shell will either show you all of the options or 
@@ -298,7 +298,7 @@ when you're done.
 Aside from programs like `ls` that print their output right to the command line 
 (in technical terms, they print to "standard output"), there are also programs 
 that launch entire environments for themselves. One of those is the command 
-line text editor `nano`. First, make sure that you're in your `bootcamp` 
+line text editor `nano`. First, make sure that you're in your `workshop` 
 directory, then execute the command `nano`.
 
 When you do this, your shell session will appear to vanish (don't worry, it's 
@@ -334,7 +334,7 @@ to Excel file formats for saving and working with tabular data.
 >you see that one of these prints to standard out and one drops you into its 
 >own environment? (For the latter, press `q` to exit when you're done.)
 
-`R`, the program/language that we will be using during this workshop can also be invoked from the command line. Just type `R` with no arguments at the command prompt and you should see
+`R`, the program/language that we will be using during this workshop can also be invoked from the command line. Just type `R` (or `r`) with no arguments at the command prompt and you should see
 
      ~$ R
 
@@ -364,7 +364,7 @@ bottom of the screen now starts with `>` symbols instead of `$`. This
 helpfully indicates to you that you're actually inside of the R 
 console, not the shell, at this point, and that whatever you type will be 
 executed by R. Try typing `pwd` and hitting return, 
-for example, and notice that `R` has no idea what you're talking about. Instead, try typing `getwd()` (meaning get working directory: the equivalent of `pwd`) and notice that `R` now tells you where you are. 
+for example, and notice that `R` has no idea what you're talking about. Instead, try typing `getwd()` (meaning get working directory; the equivalent of `pwd`) and notice that `R` now tells you where you are. 
 
 As another example, type 
 `2+2` and hit return, though, and you'll see that R knows what to do with 
@@ -390,7 +390,7 @@ the output that a program would normally print to your terminal window into a
 file. For example, the `cat` command, which we saw above, will print the 
 contents of a file (or multiple files, glued together) to the terminal window.
 
-    bootcamp$ cat mammals.csv birds.csv
+    workshop$ cat mammals.csv birds.csv
     Fox,1
     Wolverine,5
     Wolf,3
@@ -403,10 +403,10 @@ contains both the mammal and the bird data. To do this, we can save the output
 of our `cat` command above to a file by using the `>` character, as shown 
 below.
 
-    bootcamp$ cat mammals.csv birds.csv > animals.csv
-    bootcamp$ ls
+    workshop$ cat mammals.csv birds.csv > animals.csv
+    workshop$ ls
     animals.csv	birds.csv	mammals.csv
-    bootcamp$ cat animals.csv 
+    workshop$ cat animals.csv 
     Fox,1
     Wolverine,5
     Wolf,3
@@ -424,17 +424,16 @@ mammal and bird tables, but we also wanted to sort the resulting combined table
 by animal name. For sorting, we can use the command `sort`, which prints the 
 sorted contents of a file to the terminal.
 
-    bootcamp$ sort animals.csv
+    workshop$ sort animals.csv
     Fox,1
     Hawk,7
     Owl,4
     Tern,3
     Wolf,3
     Wolverine,5
-    bootcamp$ sort animals.csv > sorted_animals.csv
+    workshop$ sort animals.csv > sorted_animals.csv
    
-Note how the output of `sort animals.csv` compares to the output of `cat 
-animals.csv`. The second command here saves our sorted list to a new `csv` 
+Note how the output of `sort animals.csv` compares to the output of `cat animals.csv`. The second command here saves our sorted list to a new `csv` 
 file.
 
 Conceptually, we can see that what we've done is use `cat` to combine our two 
@@ -444,9 +443,9 @@ these steps involves taking the output of one command and giving it to another,
 which here we've done by saving the intermediate file `animals.csv`. We can 
 skip that step by using a pipe.
 
-    bootcamp$ rm animals.csv sorted_animals.csv
-    bootcamp$ cat mammals.csv birds.csv | sort > sorted_animals.csv
-    bootcamp$ cat sorted_animals.csv 
+    workshop$ rm animals.csv sorted_animals.csv
+    workshop$ cat mammals.csv birds.csv | sort > sorted_animals.csv
+    workshop$ cat sorted_animals.csv 
     Fox,1
     Hawk,7
     Owl,4
@@ -480,7 +479,7 @@ The basic usage of `grep` involves two arguments, the first giving the string
 to match and the second giving the file to match it in. For example, if we 
 wanted to find all of the animals with 3 sightings, we could run
 
-    bootcamp$ grep 3 sorted_animals.csv
+    workshop$ grep 3 sorted_animals.csv
     Tern,3
     Wolf,3
 
@@ -488,7 +487,7 @@ Since `grep` matches text strings, independent of their locations within lines,
 we can also easily search, for example, for all lines containing the letter 
 "n".
 
-    bootcamp$ grep n sorted_animals.csv
+    workshop$ grep n sorted_animals.csv
     Tern,3
     Wolverine,5
 
@@ -497,11 +496,11 @@ review these using `man grep` (or `grep --help` in Git Bash). For example, `-n`
 will print the number line for each match and `-i` makes the search insensitive 
 to case.
 
-    bootcamp$ grep -n o sorted_animals.csv
+    workshop$ grep -n o sorted_animals.csv
     1:Fox,1
     5:Wolf,3
     6:Wolverine,5
-    bootcamp$ grep -n -i o sorted_animals.csv
+    workshop$ grep -n -i o sorted_animals.csv
     1:Fox,1
     3:Owl,4
     5:Wolf,3
@@ -523,13 +522,13 @@ To use regular expressions in our `grep` calls, we use the option `-E` to
 denote that we're using extended regular expression as our pattern. For 
 example, here's an expression to find all lines that start with the letter "W"
 
-    bootcamp$ grep -E '^W' sorted_animals.csv
+    workshop$ grep -E '^W' sorted_animals.csv
     Wolf,3
     Wolverine,5
 
 and one to find all the lines in which the second letter is "o".
 
-    bootcamp$ grep -E '^.o' sorted_animals.csv
+    workshop$ grep -E '^.o' sorted_animals.csv
     Fox,1
     Wolf,3
     Wolverine,5
