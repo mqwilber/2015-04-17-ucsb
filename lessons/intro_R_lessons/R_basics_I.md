@@ -578,9 +578,9 @@ Let's now give `people` a default value.  In the example below, people will now 
 > use the `grow_one_step` function to calculate the new population in each time step.
 
 
+<!-- Links -->
 
-[1]: 
-http://software-carpentry.org/2012/08/applying-pedagogical-principles-in-this-course.html
+[1]: http://software-carpentry.org/2012/08/applying-pedagogical-principles-in-this-course.html
 
 
 
