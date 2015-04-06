@@ -328,7 +328,7 @@ For example, you can calculate the row-wise or column-wise means with `rowMeans`
 
 >**Exercise 4**
 > 
-> Make a new column in `dat` called `average_anuerism` which is the average aneurisms over Aneurisms_q1-4 for each patient (*Hint*: Try `dat['average_anuerism'] = something` for making the new column).  Write your new data as a csv file using the function `write.csv(...)`.
+> Make a new column in `dat` called `average_anuerism` which is the average aneurisms over Aneurisms_q1-4 for each patient (*Hint*: Try `dat['average_anuerism'] <- something` for making the new column).  Write your new data as a csv file using the function `write.csv(...)`.
 
 
 ### 6. Exploratory Plotting!

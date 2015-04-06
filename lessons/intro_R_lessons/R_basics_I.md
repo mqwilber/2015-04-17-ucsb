@@ -256,33 +256,33 @@ You can create an empty vector with `vector()`. (By default the mode is `logical
 You can easily make vectors that contain data using the `c()` function
 
     # Make a vector with numbers
-    x = c(1, 2, 3)
+    x <- c(1, 2, 3)
     x
     length(x)
 
     # Make a vector with characters
-    y = c("R", "is", "awesome")
+    y <- c("R", "is", "awesome")
     y
 
     # What happens here
-    z = c(1, 2, "hello")
+    z <- c(1, 2, "hello")
     z
     typeof(z)
 
 You can easily add elements to vectors as well
 
     # Make an empty vector
-    x = numeric()
+    x <- numeric()
 
     # Add 2 to x
-    x = c(x, 2)
+    x <- c(x, 2)
     x
 
     y = 1:10  # Make a numeric vector with numbers 1 - 10
     y
 
     # Add y to x
-    z = c(x, y)
+    z <- c(x, y)
     z
 
 You can then look at specific things in the vector by specifying the *index*
@@ -301,7 +301,7 @@ You can then look at specific things in the vector by specifying the *index*
 > 
 > Reuse your code from Exercise 1 and do the following:
 > 
-> 1. Modify your code so that the values of `n0`, `n1`, and `n2` are stored in a numeric vector and not separate individual variables. HINT: You can start off by declaring an empty list using the syntax `n = numeric()`, and then append each new calculated value of `nt` to the list.
+> 1. Modify your code so that the values of `n0`, `n1`, and `n2` are stored in a numeric vector and not separate individual variables. HINT: You can start off by declaring an empty list using the syntax `n <- numeric()`, and then append each new calculated value of `nt` to the list.
 >  
 > 1. Get the first and last values in the list, calculate their ratio, and print out "Grew by a factor of" followed by the result.
 > 
@@ -362,7 +362,7 @@ You can also easily make arrays of number sequences
     a
 
     # Sequence from 0 to 10 with 25 equally spaced elements
-    b = seq(0, 10, length=25)
+    b <- seq(0, 10, length=25)
     b
 
 
@@ -547,6 +547,12 @@ Functions can also have default parameters, which don't need to be passed as arg
 
     say_hello('afternoon', 'friends')
 
+What happens when you try this
+
+    say_hello('afternoon')
+
+You must pass in two arguments because that is how you defined the function!
+
 Let's now give `people` a default value.  In the example below, people will now have the value of `world` unless we explicitly specify otherwise.
 
     say_hello <- function(time, people='world'){
@@ -554,6 +560,7 @@ Let's now give `people` a default value.  In the example below, people will now 
         return(paste('Good', time, people))
     }
 
+    # Default is returned
     say_hello('afternoon')
 
     say_hello('afternoon', 'students')
