@@ -160,7 +160,7 @@ Columns can be addressed using the `$` operator
     dat$Age
     dat$Gender
 
-> #### Exercise 1
+> **Exercise 1**
 > A subsection of a data frame is called a slice.
 > We can take slices of character vectors as well:
 > 
@@ -184,7 +184,7 @@ We can combine these two operations:
     x <- c(5,3,7,10,15,13,17)
     x[x>10] <- 0
 
-> ### Exercise 2
+> **Exercise 2**
 > 
 > 1. Combine indexing and assignment to correct the Gender column so that all values of 'm' and 'f' are uppercase.
 
