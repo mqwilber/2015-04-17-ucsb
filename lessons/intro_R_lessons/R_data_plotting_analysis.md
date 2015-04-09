@@ -98,6 +98,7 @@ We see the first two columns (ID and Gender) are type factor. Factors are a very
 ### 4. Addressing data
 
 There are 3 main ways to address data in a data frame:
+
 * By Index
 * By Logical vector
 * By Name (columns only)
@@ -254,13 +255,11 @@ have to go via a character vector. Compare:
 > The function `table()` tabulates observations and can be used to create
 > bar plots quickly. For instance:
 > 
->    ## Question: How can you recreate this plot but by having "control"
->    ## being listed last instead of first?
->    exprmt <- factor(c("treat1", "treat2", "treat1", "treat3", "treat1", "control", "treat1", "treat2", "treat3"))
->    table(exprmt)
->    barplot(table(exprmt))
-
-    exprmt <- factor(exprmt, levels=c("treat1", "treat2", "treat3", "control"))
+>  Question: How can you recreate this plot but by having "control"
+>  being listed last instead of first?
+>   
+    exprmt <- factor(c("treat1", "treat2", "treat1", "treat3", "treat1", "control", "treat1", "treat2", "treat3"))
+    table(exprmt)
     barplot(table(exprmt))
 
 ### Removing levels from a factor
