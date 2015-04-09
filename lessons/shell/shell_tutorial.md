@@ -541,10 +541,10 @@ and one to find all the lines in which the second letter is "o".
 
 It's usually the case in practice that we'll combine `grep` with pipes and 
 redirects to immediately do additional processing on the results of our search. 
-That said, a very simple and common use case is `grep TODO *.py`, which 
+That said, a very simple and common use case is `grep TODO *.R`, which 
 searches for and prints all of the lines (usually code comments) containing the 
-string `TODO` that occur in all of the Python files in this directory (the 
-`*.py` uses a simple system wildcard to find all files ending with `.py` in 
+string `TODO` that occur in all of the R files in this directory (the 
+`*.R` uses a simple system wildcard to find all files ending with `.R` in 
 this directory).
 
 One final note about wildcards - unfortunately, there are several possible 

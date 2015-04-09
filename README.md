@@ -1,3 +1,5 @@
+The github page for this Repo can be found [here](http://mqwilber.github.io/2015-04-17-ucsb/)
+
 # workshop-template
 
 This repository is [Software Carpentry](http://software-carpentry.org)'s
