@@ -107,10 +107,20 @@ There are four windows in RStudio that we will refer to throughout the workshop
 3. *The R Environment*: Typically in the upper right hand corner. This is where you can see defined variables. 
 4. *R "Information"*: Typically in the lower right hand corner. This is where you see plots, help and other R information.
 
+For all the work in this workshop, we will be typing code in the R script and then executing it in the R console.  For simple commands (e.g. `2 + 2`) this may seem stupid, but writing in a script will help all of your work be reproducible! Think of the script as your lab notebook.
+
+> **TIP**: Some helpful R studio shortcuts
+> 
+> 1. Run the current line of selection
+>   - Windows: `Ctrl-Enter`
+>   - Mac: `Command-Enter`
+> 2. Source the entire script
+>   - Windows: `Ctrl-Shift-Enter`
+>   - Mac: `Command-Shift-Enter`
+
 ## 1. Individual things
 
-The most basic component of any programming language are "things", also called variables or
-(in special cases) objects.
+The most basic component of any programming language are "things", also called variables or objects.
 
 The most common basic "things" in R are integers and doubles (i.e. numerics), characters, logicals, and
 some special objects of various types (e.g. lists, dataframes, etc.). We'll meet many of these as we go through the lesson.
@@ -171,7 +181,9 @@ Logical operators compare two things. This amounts to asking R a question
 
 R will either answer `TRUE` or `FALSE`
 
+    (1 > 3)
     a <- (1 > 3)
+    (3 == 3)
     b <- (3 == 3)
     a
     b
@@ -189,11 +201,19 @@ would expect.
     as.integer(3.3)
     paste("3.3 rounded is", round(3.3))  # Paste together characters and integers
 
-> **Tip**: To find out what a function does type a `?` before the function name (or just Google it!).  We instructors Google R help ALL THE TIME!  Don't be afraid to do it.
+To find out what a function does, type the `?` before the function name.
 
-        
     ?round
     round(4.567, digits=1)
+
+> **Tip**: Sometimes the R help can be pretty unhelpful.  The best option then (or maybe before you even use the R help, is to Google it!).  We instructors Google R help ALL THE TIME!  Don't be afraid to do it.  Here are a list of sites that we find very helpful
+> 
+>   1. [Stock Overflow](http://stackoverflow.com/)
+>   2. [R Graphics Cookbook by Wynston Chang](http://proquest.safaribooksonline.com/book/programming/r/9781449363086)
+>   3. [*Mixed Effects Models and Extensions in Ecology with R*](http://link.springer.com/book/10.1007%2F978-0-387-87458-6), by Zuur et al., sometimes called "the penguin book"
+>   4. The **Use R!** series is largely available as downloadable ebooks from the UCSB library; they are generally excellent
+>   5. [Ecological Model and Data in R](http://ms.mcmaster.ca/~bolker/emdbook/) by Ben Bolker
+>   6. And many more...
 
 Many useful functions are in external packages and you need to install them and load them into the R environment.  For example, what if we wanted to figure out how to do a negative binomial regression in R?
 
@@ -222,7 +242,7 @@ There are thousands of R packages with many useful functions and datasets!  That
 > where n(t) is the population size at time t, r is the net per capita growth rate, and K is the
 > carrying capacity of the dish/woods.
 > 
-> To get started, write Python expressions that do the following:
+> To get started, write R expressions that do the following:
 > 
 > 1. Create variables for `r`, `K`, and `n0`, setting these equal to 0.6, 100, and 10, respectively.
 > 1. Create the variable `n1` and calculate it's value. Do the same for `n2`.
@@ -243,7 +263,7 @@ all individually starts to get unwieldy. To help stay organized, we can use coll
 
 The most fundamental type of collection is a `vector`.  A vector is a collection of elements that are most commonly `character`, `logical`, `integer` or `numeric`.
 
-You can create an empty vector with `vector()`. (By default the mode is `logical`. You can be more explicit as shown in the examples below.) It is more common to use direct constructors such as `character()`, `numeric()`, etc
+You can create an empty vector with `vector()`. (By default the mode is `logical`). You can be more explicit as shown in the examples below.) It is more common to use direct constructors such as `character()`, `numeric()`, etc
 
     x <- vector()  # Empty vector
 
@@ -269,6 +289,8 @@ You can easily make vectors that contain data using the `c()` function
     z
     typeof(z)
 
+Vectors contain "things" of the same type!
+
 You can easily add elements to vectors as well
 
     # Make an empty vector
@@ -278,7 +300,7 @@ You can easily add elements to vectors as well
     x <- c(x, 2)
     x
 
-    y = 1:10  # Make a numeric vector with numbers 1 - 10
+    y <- 1:10  # Make a numeric vector with numbers 1 - 10
     y
 
     # Add y to x
@@ -297,17 +319,17 @@ You can then look at specific things in the vector by specifying the *index*
     z[11]
 
 
-> ### EXERCISE 2 - Storing population size in a list
+> ### EXERCISE 2 - Storing population size in a vector
 > 
 > Reuse your code from Exercise 1 and do the following:
 > 
-> 1. Modify your code so that the values of `n0`, `n1`, and `n2` are stored in a numeric vector and not separate individual variables. HINT: You can start off by declaring an empty list using the syntax `n <- numeric()`, and then append each new calculated value of `nt` to the list.
+> 1. Modify your code so that the values of `n0`, `n1`, and `n2` are stored in a numeric vector and not separate individual variables. HINT: You can start off by declaring an empty list using the syntax `n <- numeric()`, and then append each new calculated value of `nt` to the vector.
 >  
 > 1. Get the first and last values in the list, calculate their ratio, and print out "Grew by a factor of" followed by the result.
 > 
 > __Bonus__
 > 
-> 1. Extract the last value in two different ways: first, by using the index for the last item in the list, and second, presuming that you do not know how long the list is.
+> 1. Extract the last value in two different ways: first, by using the index for the last item in the vector, and second, presuming that you do not know how long the vector is.
 >  
 > 1. Change the values of `r` and `K` to make sure that your cell still runs correctly and gives reasonable answers.
 > 
@@ -371,7 +393,7 @@ You can also easily make arrays of number sequences
 > Copy your code from Exercise 2 and do the following:
 > 
 > 1.  Pre-allocate an array containing 100 blank space (i.e. NAs) as if we were going to fill in 100 time steps. Modify your code from Exercise 2 so that you fill your the first 4 elements of your array using array indexing rather than appending.
-2. Imagine that each discrete time step actually represents 0.25 of an hour. Create an array `t` storing 100 time step, in hours, from 0 to 24.75. For example, t[1] should be 0 t[1] should be 0.25, etc.
+2. Imagine that each discrete time step actually represents 0.25 of an hour. Create an array `t` storing 100 time step, in hours, from 0 to 24.75. For example, `t[1]` should be 0 `t[2]` should be 0.25, etc.
 3. Use logical indexing to extract the value of `n` corresponding to a `t` of 0.5.
 
 ## 4. Repeating yourself
@@ -493,7 +515,7 @@ easily - for example, what if we wanted to run our logistic growth model for sev
 initial parameters?
 
 The most important ways to "chunk" code into more manageable pieces is to create functions and then
-to gather these functions into modules, and eventually packages.  The R packages that you download from CRAN essentially collections of functions, though they also contain datasets and high level chunks called objects. Below we will discuss how to create
+to gather these functions into modules, and eventually packages.  The R packages that you download from CRAN essentially contain collections of functions, though they also contain datasets and high level chunks called objects. Below we will discuss how to create
 functions in R. Functions are good for making code more **reusable**, **readable**, and **maintainable**.
 
 We've been using functions all day
