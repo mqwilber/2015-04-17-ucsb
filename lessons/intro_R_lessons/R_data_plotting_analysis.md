@@ -418,24 +418,24 @@ Let's test if our function works.
 
 #### 7.3 Make a new variable
 
-We now want to define a new variable called `avg_anuerysm` in our dataframe which is the average over all four aneurysm columns.  Let's just copy the code we used before
+We now want to define a new variable called `avg_an` in our dataframe which is the average over all four aneurysm columns.  Let's just copy the code we used before
 
-    tdata['avg_anuerism'] <- apply(data[, 6:9], MARGIN=1, mean)
+    tdata['avg_an'] <- apply(data[, 6:9], MARGIN=1, mean)
 
 or
 
-    tdata['avg_anuerism'] <- rowMeans(tdata[, 6:9])
+    tdata['avg_an'] <- rowMeans(tdata[, 6:9])
 
 #### 7.4 Visualize your data with a few plots
 
-> **Exercise 7**: Choose one or two of the plots you learned and plot the data in some way to visualize whether Gender, Treatment, and/or BloodPressure might be having some effect of average number of anuerysms per person.  Any plot will do!
+> **Exercise 7**: Choose one or two of the plots you learned and plot the data in some way to visualize whether Gender, Treatment, and/or BloodPressure might be having some effect of average number of aneurysms per person.  Any plot will do!
 
 #### 7.5 Fit a statistical model to the data and return results
 
 R is an amazing statistical environment that you can begin to explore once you understand the inner workings of R. To answer our question we are going to use two of the thousands of statistical functions that R has to offer: `lm` (Linear Model) and `anova`.
 
     # Fit a linear model. Response on the left predictors on the right
-    fit <- lm(avg_aneurism ~ Gender + Group + BloodPressure, data=tdata)
+    fit <- lm(avg_an ~ Gender + Group + BloodPressure, data=tdata)
     results <- anova(fit)
     return(results)
 
