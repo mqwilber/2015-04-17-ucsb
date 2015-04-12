@@ -34,6 +34,24 @@ dat['min_aneurysm'] <- apply(dat[, 6:9], 1, min)
 write.csv(dat, "updated_data.csv")
 new_dat <- read.csv("updated_data.csv", header=T)
 
+### Answer to Exercise 5 ###
+
+boxplot(BloodPressure~GenderCorrected, data=dat)
+
+#Or something like:
+
+jpeg("file path/boxplot.jpg") 
+par(mar=c(5,5,1,1))                 ###this sets the margins within the plot device
+boxplot(BloodPressure~GenderCorrected, data=dat, 
+        ylim=c(50,200),
+        ylab=c("Blood Pressure (mm Hg)"), xlab=c("Gender"),
+        col="light grey",
+        cex.axis=2, cex.lab=2, 
+        font.lab=2,
+        lwd=4)
+abline(mean(dat$BloodPressure),0)
+dev.off()
+
 
 ### Answers for Exercises 5-8 ###
 
