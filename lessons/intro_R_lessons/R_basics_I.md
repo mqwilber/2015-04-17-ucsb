@@ -213,7 +213,9 @@ To find out what a function does, type the `?` before the function name.
 >   3. [*Mixed Effects Models and Extensions in Ecology with R*](http://link.springer.com/book/10.1007%2F978-0-387-87458-6), by Zuur et al., sometimes called "the penguin book"
 >   4. The **Use R!** series is largely available as downloadable ebooks from the UCSB library; they are generally excellent
 >   5. [Ecological Model and Data in R](http://ms.mcmaster.ca/~bolker/emdbook/) by Ben Bolker
->   6. And many more...
+>   6. [GGplot google groups](https://groups.google.com/forum/?utm_source=digest&utm_medium=email#!forum/ggplot2/topics)
+>   7. [GGplot Docs](http://docs.ggplot2.org/0.9.2.1/index.html)
+>   8. And many more...
 
 Many useful functions are in external packages and you need to install them and load them into the R environment.  For example, what if we wanted to figure out how to do a negative binomial regression in R?
 
