@@ -361,6 +361,149 @@ For example, you can calculate the row-wise or column-wise means with `rowMeans`
 
 ### 6. Exploratory Plotting!
 
+We just got an idea of what our aneurysm data looks like by calculating some partial statistics.  We can also do this using some exploratory plots.  Of course, plotting will become one of your most important tools for exploring, interpreting, and communicating your data, but here we will take a moment just to introduce plotting.
+
+Let's create a very quick plot of the `aneurysm` data set using R's default graphics.  First, make sure your data is loaded.  We fixed the m/M and f/F problem in the `dat$Gender` variable earlier, but will do it slightly differently here, by creating a new vector of reformatted genders:
+
+```{r}
+dat<-read.csv("C://Users//Thomas//Documents//2015-04-17-ucsb//data//aneurysm_data_site-1.csv", header = TRUE)
+index_m<-dat$Gender=='m'
+index_f<-dat$Gender=='f'
+index_M<-dat$Gender=='M'
+index_F<-dat$Gender=='F'
+
+dat$GenderCorrected<-NULL
+dat$GenderCorrected[index_f]<-"Female"
+dat$GenderCorrected[index_F]<-"Female"
+dat$GenderCorrected[index_m]<-"Male"
+dat$GenderCorrected[index_M]<-"Male"
+```
+
+You can start by telling R to plot the whole data frame, and see what happens:
+
+```{r}
+plot(dat)
+```
+
+R will plot each variable against every other variable, whether or not that makes sense.
+
+There are pros and cons to plotting the entire dataframe.
+
+Though these plots are messy, tiny, and potentially meaningless, they allow you to can very quickly assess your data: 
+  
+  * are there wild outliers that might be typos?  __No.__
+  * are all your variables coded correctly - typos, number vs. factor? __Looks like it.__
+    * They may not it you did not chance "m" and "f" to "M" and "F" in Exercise 1.
+  * are you excited about any of those patterns?  __Well, are ya, tiger?__
+  
+Nothing looks suspicious, and it does look like there might be patterns among gender, blood pressure, and some of the aneurysm variables.
+
+> **Tip:** You will almost certainly run into a couple wrinkles in your data.  We already fixed the m/M and f/F problem, but this plot can give you a very quick visual of whether everything looks the way you expect it to.  
+
+> **Another Tip:** In some R GUIs (RStudio, R Console SDI...) the plot window may be small, making multi-faceted figure like this one hard to interpret.  Try the following to open whole new windows for your figure:
+>    
+>   * `windows()`, `x11()`, or `quartz()` in windows, unix, or Mac respectively.
+>   * any of these can be closed to return to the GUI and default graphics settings using `dev.off()`.
+  
+Scientists tend to make two or three types of plots very frequently: scatter plots, histograms, and boxplots.  For the `aneurysm` data, let's make a scatter plot of Blood Pressure and Age.
+
+####6.1 Scatter Plot
+This time, rather than plotting the whole data frame, we will plot only those variables for which we want to see the relationship.
+
+```{r}
+plot(BloodPressure~Age, data=dat)
+```
+
+`plot` takes three arguments to make a very basic plot:  
+
+  * The third, 'data' specifies the data frame from which which you are drawing data.
+  * The first two are the two variables you want to examine.  They are related by `~` which means something like "BloodPressure with respect to Age".  You'll see that symbol again in later lessons, doing something similar.
+
+####6.2 A little style
+This figure looks OK, certainly useful for exploratory analyses and proofing your data.  But lets add a couple arguments to the `plot()` function to enhance the figure so you can show it to your committee!  Here's a few we like to use when making basic figures for presentation:
+  
+  * `xlab` and `ylab` allow you to specify character strings to change your axis labels; for example, to remove that `.` and to add your measurement units.
+  * `pch` lets you set the shape of data points
+  * `cex` scales text and symbols relative to default.
+    * `col` sets [colors](http://research.stowers-institute.org/efg/R/Color/Chart/ColorChart.pdf), using words is easiest 
+  * specifying `.axis` or `.lab` after these allows you to control the size or color of the axis and labels
+  * `xlim` or `ylim` allow you to specify the ranges of your axes
+  
+Let's give that plot some steez:
+
+```{r}
+windows()
+plot(BloodPressure~Age, data=dat,
+     ylab=c("Blood Pressure (mm Hg)"), xlab=c("Age"),
+     cex=2, cex.axis=1.5, cex.lab=1.5, 
+     pch=21, 
+     col="black", bg="grey",
+     xlim=c(11,21), ylim=c(50,200))
+dev.off()
+```
+
+There is a very long list of graphical parameters you can set. Use `?par` to see most of them.  Here, we have moved some of the parameters you set in `plot()` to a new function `par()` that precedes the plot.  
+
+```{r}
+windows()
+par(bg="white", fg="black", cex=1.5)
+plot(BloodPressure~Age, data=dat,
+     ylab=c("Blood Pressure (mm Hg)"), xlab=c("Age"),
+     pch=21, bg="grey",
+     xlim=c(11,21), ylim=c(50,200))
+dev.off()
+```
+
+You can see that this makes your code a little more concise, but it looks a little different now.  Also, the first and last line act to save and reset your default graphical parameters so that you have a clean slate for your next plot.
+
+  
+> Don't be afraid to mix tools!  After learning to make beautiful figures with R, you may still find yourself trying to annotate figures or combine them in complex ways.  You can do most of this in R, but sometimes it is faster and looks better if you import your figures into a graphics program like Powerpoint or Photoshop.
+
+
+####6.2
+You can also make a histogram using `hist`:
+
+```{r}
+hist(dat$BloodPressure)
+```
+
+A few notes about `hist()`:
+  
+  * For whatever reason, `hist()` does not take a data argument like `plot()` does.  You must specify the vector as a part of the data frame using the `$`: `dat$BloodPressure`.
+  * R automatically sets the breaks; you may adjust them using the `breaks=` argument, which accepts a vector, e.g. `hist(dat$BloodPressure, breaks=c(50,75,100,125,150,175,200))`
+
+####6.3 Saving/Exporting that figure
+If you are going to use a figure in a presentation or paper, you could copy and paste it, but saving/exporting it is programable and reproducible, and allows you to control size, resolution, and file type.
+
+To write a figure to a file, you:
+
+  1. open a plotting 'device' and specify the file path
+  2. run the plot function
+  3. close the device:
+  
+```{r}
+jpeg("C:/Users/Thomas/Desktop/Figure_1.jpg")         #or whatever your file path is
+plot(BloodPressure~Age, data=dat,
+     ylab=c("Blood Pressure (mm Hg)"), xlab=c("Age"),
+     cex=2, cex.axis=1.5, cex.lab=1.5, 
+     pch=21, 
+     col="black", bg="grey",
+     xlim=c(11,21), ylim=c(50,200))
+dev.off()
+```
+
+You won't see the plot produced by this code, until you open the file you just created.
+
+>   Create a figure file, then leave it open while you make adjustments.  Each time you rerun the code and rewrite the file, it *should* update in your image file viewer.
+
+> **Exercise 5**
+>
+>1. For the `aneurysm` data, make a boxplot of any patient variable with respect patient gender.
+>
+>>   *hint: Google "boxplot R" to find the boxplot function... or guess, its an obvious one*
+> 
+>2. For a challenge, save your figure, open it outside R, and show it to someone.
+
 
 
 ### 7. Combining concepts: A full analysis
