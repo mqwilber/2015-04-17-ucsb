@@ -132,8 +132,7 @@ hundred lines long or so, which is what we'll model here.
 
 To keep things simple in this lesson, we won't actually write the code to 
 perform these tasks - instead, we'll create the script file and add simple 
-lines of pseudo-code to describe each action. (Incidentally, we'll actually 
-review some real code to do this in a later lesson.)
+lines of pseudo-code to describe each action. 
 
 To start off, our script file will contain the following text.
 
@@ -295,7 +294,7 @@ commit).
     $ git log
     commit beda5b7b6fa4c3b8642c7d26b87f691fd6bcd8dc
     Author: Mark Wilber <mqwilber@gmail.com>
-    Date:   Mon Jan 13 16:07:01 2014 -0800
+    Date:   Mon Apr 13 16:07:01 2015 -0800
 
         Initial commit of script to analyze camera data
 
@@ -321,8 +320,7 @@ Now that you've got the basics down, we'll turn to our seven "headaches" and
 see how git can help us alleviate each of these.
 
 
-1. Keeping version history
---------------------------
+## 1. Keeping version history
 
 Probably the most basic logistical headache of computational research (or, 
 really, any kind of research) is keeping track of old and new versions of files 
@@ -364,19 +362,19 @@ If we run `git log` again, we should see something like this.
     $ git log
     commit 89f54453b748131b87cee9d5742dd4412cd8183d
     Author: Mark Wilber <mqwilber@gmail.com>
-    Date:   Mon Jan 13 16:08:44 2014 -0800
+    Date:   Mon Apr 13 16:08:44 2015 -0800
 
         Add initial code to make small figure
 
     commit 97e349856f3b3ee2647c327d3a609ff1dc9fae6f
     Author: Mark Wilber <mqwilber@gmail.com>
-    Date:   Mon Jan 13 16:08:20 2014 -0800
+    Date:   Mon Apr 13 16:08:20 2015 -0800
 
         Add code to make table
 
     commit beda5b7b6fa4c3b8642c7d26b87f691fd6bcd8dc
     Author: Mark Wilber <mqwilber@gmail.com>
-    Date:   Mon Jan 13 16:07:01 2014 -0800
+    Date:   Mon Apr 14 16:07:01 2015 -0800
 
         Initial commit of script to analyze camera data
 
@@ -522,8 +520,7 @@ In addition to HEAD and master, we now see that the commit 89f5445 is labeled
 by a tag `lab_mtg`. We can now use this label instead of the commit hash to 
 work with this commit from here forward.
 
-2. Comparing two versions of a file
------------------------------------
+## 2. Comparing two versions of a file
 
 In the previous section, we saw how we could roll back our entire project to a 
 previous state. While this is great for reviewing the history of our project, 
@@ -536,7 +533,7 @@ a version a few commits back). For this, we can use two different techniques.
 If the file that you want to compare is simply a plain text file, like our 
 `script.R`, then we can use an easy command called `git diff`.
 
-    $ git diff beda5b7:script.R 89f5445:script.R
+    $ git diff beda5b7:script.R lab_mtg:script.R
     diff --git a/script.R b/script.R
     index b60af41..b4c75da 100644
     --- a/script.R
@@ -566,8 +563,7 @@ names from the `git diff` command, you'll see the differences between all files
 that changed between two commits.
 
 For large files, the output of `git diff` can be less than helpful. If you want 
-to use this command in "real life", check out the command `git difftool` and 
-how to set up an external, graphical viewer for diff-ing. Still, this is a 
+to use this command in "real life", check out the command `git difftool` or the GUI [SourceTree](https://www.atlassian.com/software/sourcetree/overview) both which provide graphical viewers for diff-ing. Still, this is a 
 reasonable place to start for identifying changes to plain text files.
 
 >###Exercise 3
@@ -609,8 +605,7 @@ approach to approximate the `git diff` command above. Simply use `git show` to
 bring an old copy of your Word doc into your workspace and then use the Word 
 (Compare and Merge Documents)[http://support.microsoft.com/kb/306484] feature.
 
-3. Maintaining multiple project branches
-----------------------------------------
+## 3. Maintaining multiple project branches
 
 So far, the techniques that we've looked at provide a unified way of replacing 
 the "Save As..." technique that you may be using now to save and review old 
@@ -704,7 +699,7 @@ reflected later on in our dissertation.
 >Switch back to the master branch by running `git checkout master`. Run `git 
 >lg` and review your `wildphoto` folder to make sure you understand where you 
 >are now - is the edit to make the figure line red present here? Open 
->`script.R` and add the line "Make header bold" underneath the "Make table" 
+>`script.R` and change the line "Make table" to "Make table, make header bold"
 >line. Commit this change. Run `git lg` and examine the output - does it remind 
 >you of a tree trunk with a branch?
 
@@ -720,8 +715,7 @@ plodding along slowly but surely towards your dissertation.
 
 One final note. Now that we've discussed branches, we're better able to discuss 
 the "detached HEAD" state that we saw earlier. A detached HEAD simply means 
-that your HEAD (i.e., the commit that your project folder currently represents) 
-is not linked to the tip of a branch. What this means is that if you add a 
+that your HEAD (i.e., the commit that your project folder currently represents) is not linked to the tip of a branch. What this means is that if you add a 
 commit, this commit will just be floating in space rather than glued on to the 
 tip of an existing branch (imagine a tree adding 1 inch of new wood floating 
 somewhere by itself in the sky). If we do this, we won't have any easy way of 
@@ -732,8 +726,7 @@ will always take you back to a safe, known location at the tip of your main
 trunk.
 
 
-4. Merging two project branches together
-----------------------------------------
+## 4. Merging two project branches together
 
 We've now discussed how to use branches to develop your project along two 
 parallel lines. Now, we'll discuss how to bring two branches back together 
@@ -804,7 +797,7 @@ mergetool` to make your life easier.
 To create a conflict, we could create another branch and start committing, but 
 to save us some time, we'll instead just undo our last merge and start from 
 there. To undo your last commit, completely nuking everything that you did in 
-tha commit forever, run the following.
+that commit forever, run the following.
 
     $ git reset --hard HEAD^1
     HEAD is now at 013b1af Make header bold
@@ -910,9 +903,7 @@ complete the merge. Go ahead and do so, and run `git lg` once again to make
 sure that you've got the history that you would expect.
 
 And with that, we conclude the main part of our lesson focused on working with 
-git locally for your own projects. Next we'll turn somewhat briefly to the 
-basics of using git remotely for syncing, sharing and collaboration. But before 
-we do that, try your hand at the capstone exercise(s) below.
+git locally for your own projects. Here is a capstone exercise to top it off!
 
 >###Exercise 6
 >To really hammer home everything that we've learned so far, try the following 
@@ -948,8 +939,7 @@ Sourcetree, which you can download and install
 [Smartgit](http://www.syntevo.com/smartgithg/) or search for other 
 alternatives.
 
-5. Sharing a project
---------------------
+## 5. Sharing a project
 
 Once you have your research projects managed with version control, you will 
 soon want to find ways to share your project and its history with the world (or 
@@ -1065,8 +1055,7 @@ to set up and use [SSH
 keys](https://help.github.com/articles/generating-ssh-keys), but we won't go 
 through that process here.
 
-6. Syncing and collaborating
-----------------------------
+## 6. Syncing and collaborating
 
 Syncing files across multiple computers and collaborating with colleagues on a 
 project requires, at the most basic level, essentially the same operations - 
