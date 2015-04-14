@@ -18,12 +18,9 @@ For our example, we will look at our dataset "irises", which is a famous dataset
 
 > ### EXERCISE 1 - Importing the `iris` dataset
 >
-> Import the data using the R command `read.csv`, naming the dataframe `iris` , and look at the first several lines using the `head()` command.
+> Import the data using the R command `read.csv`, naming the dataframe `iris` , and look at the first several lines using the `head()` command. make a ggplot scatterplot, with `Sepal.Length` on the x axis and `Sepal.Width` on the y axis. Color the dots by `Species`. 
 
-The point of this dataset is to look at the different measurements of the flower, and observe differences between the different species. In order to do this, let's use our newfound ggplot skills to make a scatterplot plotting `Sepal.Length`(x axis) against `Sepal.Width`(y axis), and coloring the dots by `Species`. 
-
-    library(ggplot2)
-    ggplot(iris, aes(x = Sepal.Length, y = Sepal.Width, color = Species))+geom_point()
+    
 
 Great! Now let's instead view them as different subplots:
 
@@ -164,9 +161,9 @@ we would write
     library(magrittr)
     mammals %>% #take the mammals data
         group_by(order) %>% #split it up by "order"
-    a #save it to the variable "a"
+        a #save it to the variable "a"
 
-This can make it easy to follow the logical workflow, which makes more and more sense as your operations become more complex. Suppose we want to find the organisms with the biggest mass relative to the rest of its order. WE watn to split the data by `order`, apply the mutate functions from above, sort by `normalized_mass`, and only display the `species`, `adult_body_mass_g`, and `normalized_mass` columns. In longhand it would look like this:
+This can make it easy to follow the logical workflow, which makes more and more sense as your operations become more complex. Suppose we want to find the organisms with the biggest mass relative to the rest of its order. We want to split the data by `order`, apply the mutate functions from above, sort by `normalized_mass`, and only display the `species`, `adult_body_mass_g`, and `normalized_mass` columns. In longhand it would look like this:
 
     a = group_by(mammals, order)
     b = mutate(a, mean_mass = mean(adult_body_mass_g, na.rm = TRUE), normalized_mass = adult_body_mass_g / mean_mass)
@@ -176,7 +173,8 @@ This can make it easy to follow the logical workflow, which makes more and more 
 pipes makes it less messy by reducing the number of variables: 
 
 Or, using pipes: 
-    e = mammals %>%
+
+e = mammals %>%
         group_by(order) %>%
         mutate(mean_mass = mean(adult_body_mass_g, na.rm = TRUE), normalized_mass = adult_body_mass_g / mean_mass) %>%
         arrange(desc(normalized_mass)) %>%
