@@ -36,45 +36,45 @@ base graphics Pros:     |base graphics Cons:|
 ------------------------|-------------------|
 simple, straightforward for simple plots| syntax gets cumbersome for complex figures especially those with separate panels or requiring lots of indexing to show treatments/groups.|
 entirely customizable|fiddly for adjusting positions, sizes, etc.|
-
+***
 # Getting Started:
 
-* install.packages("ggplot2", dependencies = TRUE)
+`install.packages("ggplot2", dependencies = TRUE)`  
+`library("ggplot2")`
 
 Other packages that will enhance ggplots:
 
   - `ggthemes, gridExtra, devtools, colorbrewer` and many, many others.
 
-```{r}
-library("ggplot2")
-```
+> Tip: **`qplot`** - You may come across `qplot` as a function within `ggplot2` that allows you to make quick plots without really learning ggplot2 syntax.  Don't bother, just learn ggplot!.
 
-> Tip: **`qplot`** - You may come across `qplot` as a function within `ggplot2` that allows you to make quick plots without really learning ggplot2 syntax.  Don't bother, just lear.
-
+***
 #Parts of a ggplot plot:
 There are several essential parts of any plot, and in `ggplot2`, they are:
   
   1. the function: `ggplot()`
   2. the arguments:
-    a. **data**
-    b. **aes**
-    c. **geom**
-    d. stats
-    e. facets
-    f. scales
-    g. theme
-    h. others
+    - **data**
+    - **aes**
+    - **geom**
+    - stats
+    - facets
+    - scales
+    - theme
+    - others
 
-We won't cover all of these in much depth, but if you are comfortable with what we show you today, exploring the vast functionality of `geom, stats, scales, and theme` should be a pleasure.
-
+We won't cover these in much depth, but if you are comfortable with what we show you today, exploring the vast functionality of `geom, stats, scales, and theme` should be a pleasure.
+***
 ##`ggplot()`
 Some people like to assign (`<-`) their plot function to a variable, like this:
 
 `myplot<-ggplot(...)`
-
+***
 ##`data`
 - This is the data you want to plot
 - Must be a data.frame
+
+For this lesson, we are going to look at the `iris` data set that lives in R.
 
 ```{r}
 head(iris)
@@ -83,7 +83,7 @@ head(iris)
 Let's **build** a scatter plot of Sepal Length and Sepal Width
 
 `myplot<-ggplot2(data=iris... )`
-
+***
 ##`aes` 
 For **aes**thetics.
 
@@ -100,8 +100,9 @@ myplot<-ggplot(data=iris, aes(x=Sepal.Length, y=Sepal.Width))
 summary(myplot)
 ```
 So far, we have told ggplot where to look for data, and how to represent that data, but not what to do with it.
-
-##`geom` for **geom**etry
+***
+##`geom` 
+For **geom**etry.  
 This is how we create the layer we actually see as our figure.  
 These are the geometric objects likes points, lines, polygons, etc. that are in the plot
 
@@ -169,9 +170,8 @@ ggplot(data=iris, aes(x=Sepal.Width))+
 ```
 > Tip: For most histograms, don't feel like you are not challenging yourself if you still use `hist()` in base graphics: Its often much less typing.
 
+***
 ## `facets`
-**OMG**, we totes **LOVE** facets.
-
 Facets are panels in which plots of mapped variables are arranged according to a categorical grouping variable(s).  
 
 In the `iris` dataset, we can use Species as the grouping variable:
@@ -187,6 +187,7 @@ Specifying the group variable on the left `facet_grid(Species~.)` arranges facet
 You can also use `facet_wrap()`, which we will show you in the next lesson.
 
 ## `stats`
+For `stat`istic`s`.  
 The `geom_boxplot()` and `geom_histogram()` are stats components, and there are a bunch. We don't have a lot of time to cover these, but they are extremely valuable, especially if you are using ggplot2 for reporting results, rather than just exploratory plotting.  
 
 Here is another: you can add a linear fit line to a scatter plot:
@@ -196,7 +197,7 @@ ggplot(data=iris, aes(x=Sepal.Length, y=Sepal.Width))+
   geom_point(size=3)+
   geom_smooth(method=lm)
 ```
-
+***
 ## `theme`
 Themes allow you to specify how the non-data components of your figure look, e.g. legends, axis labels, and backgrounds.
 
@@ -229,6 +230,7 @@ library("wesanderson")
 
 ...and create your own custom themes.
 
+***
 ##Saving a ggplot figure:
 You can use the same approach we showed in the basic plotting lesson, or try this:
 
@@ -238,61 +240,20 @@ ggsave("myplot.jpg", width=8, height=8, unit="cm", dpi=300)
 
 In both methods, you can save as most any image format (jpeg, TIFF, PNG, PDF, etc.), as well as specify the size and resolution (dpi) of the image.
 
+***
 ##Lastly:
 > Tip: ggplot2 will probably not replace all other graphics tools.  You may still use base graphics, and you may export ggplot figures to Powerpoint or Photoshop for final labeling and composition, or to combine figures and images.
 
 Graphics are an important part of the beginning - data exploration - and end -  presentation of results - of the analysis process.  We hope we have shown you the building blocks for making excellent figures!
-
-# Examples
-
+***
 # Exercise 1:
-  > a) Reproduce the boxplot of Blood Pressure vs. Gender (the `aneurysm` data we were calling `dat` yesterday) using your new `ggplot2` skills.
-  > b) What can you do to see if the pattern is similar throughout all three Groups?
-
-### Answer to Exercise 1: ###
-recall that:
-dat<-read.csv("C://Users//Thomas//Documents//2015-04-17-ucsb//data//aneurysm_data_site-1.csv", header = TRUE)
-index_m<-dat$Gender=='m'
-index_f<-dat$Gender=='f'
-index_M<-dat$Gender=='M'
-index_F<-dat$Gender=='F'
-#
-dat$GenderCorrected<-NULL
-dat$GenderCorrected[index_f]<-"Female"
-dat$GenderCorrected[index_F]<-"Female"
-dat$GenderCorrected[index_m]<-"Male"
-dat$GenderCorrected[index_M]<-"Male"
-#
-#par(mar=c(5,5,1,1))
-#boxplot(BloodPressure~GenderCorrected, data=dat, 
-#        ylim=c(50,200),
-#        ylab=c("Blood Pressure (mm Hg)"), xlab=c("Gender"),
-#        col="light grey",
-#        cex.axis=2, cex.lab=2, 
-#        font.lab=2,
-#        lwd=4)
-#abline(mean(dat$BloodPressure),0)
-
-#answer:
-# Part A:
-ggplot(data=dat, aes(x=GenderCorrected, y=BloodPressure))+
-  geom_boxplot()
-#Part B:
-ggplot(data=dat, aes(x=GenderCorrected, y=BloodPressure))+
-  geom_boxplot()+
-  facet_wrap(~Group)
+  > a) Reproduce the boxplot of Blood Pressure vs. Gender (the `aneurysm` data we were calling `dat` yesterday) using your new `ggplot2` skills.  
   
-
-
+  > b) What can you do to see if the pattern is similar throughout all three Groups?
+***
 # Exercise 2:
   > Using the `iris` data, create a faceted figure that includes three panels, one for each species; each panel should include a scatter plot of Petal.Width vs. Petal.Length; lastly, include a linear fit on each panel.  Manipulate the theme to improve the appearance of the figure.
+  > Save your figure and email it to your advisor, with the subject line "For  your refrigerator".
 
-### Answer to Exercise 2: ###
-
-str(iris)
-ggplot(data=iris, aes(x=Petal.Length, y=Petal.Width))+
-  geom_point()+
-  geom_smooth(method="lm")+
-  facet_wrap(~Species, scales="free_x")
 
 
