@@ -142,6 +142,7 @@ To we can add other functions here, such as `max()`, `min()`, and `sd()`.
 
 
 `summarize` makes a new dataset, but `mutate` will add these columns instead to the original dataframe. 
+
     a = group_by(mammals, order)
     mutate(a, mean_mass = mean(adult_body_mass_g, na.rm = TRUE))
 
@@ -174,9 +175,10 @@ pipes makes it less messy by reducing the number of variables:
 
 Or, using pipes: 
 
-e = mammals %>%
+    e = mammals %>%
         group_by(order) %>%
-        mutate(mean_mass = mean(adult_body_mass_g, na.rm = TRUE), normalized_mass = adult_body_mass_g / mean_mass) %>%
+        mutate(mean_mass = mean(adult_body_mass_g, na.rm = TRUE), 
+        normalized_mass = adult_body_mass_g / mean_mass) %>%
         arrange(desc(normalized_mass)) %>%
         select(species, normalized_mass, adult_body_mass_g) 
 
