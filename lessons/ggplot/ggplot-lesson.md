@@ -82,7 +82,7 @@ head(iris)
 
 Let's **build** a scatter plot of Sepal Length and Sepal Width
 
-`myplot<-ggplot2(data=iris... )`
+`myplot<-ggplot(data=iris... )`
 ***
 ##`aes` 
 For **aes**thetics.
@@ -186,6 +186,13 @@ Specifying the group variable on the left `facet_grid(Species~.)` arranges facet
 
 You can also use `facet_wrap()`, which we will show you in the next lesson.
 
+***
+# Exercise 1:
+  > a) Reproduce the boxplot of Blood Pressure vs. Gender (the `aneurysm` data we were calling `dat` yesterday) using your new `ggplot2` skills.  
+  
+  > b) What can you do to see if the pattern is similar throughout all three Groups?
+
+
 ## `stats`
 For `stat`istic`s`.  
 The `geom_boxplot()` and `geom_histogram()` are stats components, and there are a bunch. We don't have a lot of time to cover these, but they are extremely valuable, especially if you are using ggplot2 for reporting results, rather than just exploratory plotting.  
@@ -222,13 +229,33 @@ ggplot(data=iris, aes(x=Sepal.Length, y=Sepal.Width,color=Species))+
         panel.background=element_rect(fill=NA))
 ```
 
-Obviously, one can really go nuts with her/his themes... 
+Obviously, one can really go nuts with her/his themes... and create your own customs:
 
 ```{r}
-library("wesanderson")
+install.packages("wesanderson")
+library(wesanderson)
+```
+To see color palettes:
+```{r}
+wes_palette("Royal1")
+```
+For those studying predation/medium sized mammals/trophic cascades, try:
+```{r}
+wes_palette("FantasticFox")
+```
+...and for the marine biologists (or their interns):
+```
+{r}wes_palette("Zissou")
 ```
 
-...and create your own custom themes.
+```{r}
+ggplot(iris, aes(Sepal.Length, Sepal.Width, color = Species)) + 
+  geom_point(size = 7) + 
+  scale_color_manual(values = wes_palette("Zissou")) + 
+  theme_gray()
+```
+
+
 
 ***
 ##Saving a ggplot figure:
@@ -245,11 +272,7 @@ In both methods, you can save as most any image format (jpeg, TIFF, PNG, PDF, et
 > Tip: ggplot2 will probably not replace all other graphics tools.  You may still use base graphics, and you may export ggplot figures to Powerpoint or Photoshop for final labeling and composition, or to combine figures and images.
 
 Graphics are an important part of the beginning - data exploration - and end -  presentation of results - of the analysis process.  We hope we have shown you the building blocks for making excellent figures!
-***
-# Exercise 1:
-  > a) Reproduce the boxplot of Blood Pressure vs. Gender (the `aneurysm` data we were calling `dat` yesterday) using your new `ggplot2` skills.  
-  
-  > b) What can you do to see if the pattern is similar throughout all three Groups?
+
 ***
 # Exercise 2:
   > Using the `iris` data, create a faceted figure that includes three panels, one for each species; each panel should include a scatter plot of Petal.Width vs. Petal.Length; lastly, include a linear fit on each panel.  Manipulate the theme to improve the appearance of the figure.
