@@ -37,12 +37,15 @@ entirely customizable | |
 base graphics Pros:     |base graphics Cons:|
 ------------------------|-------------------|
 simple, straightforward for simple plots| syntax gets cumbersome for complex figures especially those with separate panels or requiring lots of indexing to show treatments/groups.|
-entirely customizable|fiddly for adjusting positions, sizes, etc.|
+entirely customizable|fiddly for adjusting positions, sizes, etc.| 
+
 ***
 # Getting Started:
 
-`install.packages("ggplot2", dependencies = TRUE)`  
-`library("ggplot2")`
+Here's how to install ggplot2:
+  
+    install.packages("ggplot2", dependencies = TRUE)  
+    library("ggplot2")
 
 Other packages that will enhance ggplots:
 
@@ -78,13 +81,11 @@ Some people like to assign (`<-`) their plot function to a variable, like this:
 
 For this lesson, we are going to look at the `iris` data set that lives in R.
 
-```{r}
-head(iris)
-```
+    head(iris)  
 
 Let's **build** a scatter plot of Sepal Length and Sepal Width
 
-`myplot<-ggplot(data=iris... )`
+    `myplot<-ggplot(data=iris... )`
 ***
 ##`aes` 
 For **aes**thetics.
@@ -97,10 +98,9 @@ How your data are to be visually represented.  One of your variables will be you
 - also: color, size, shape, transparency
 - any character of the plot you set in `aes()` becomes a global setting for your figure.
 
-```{r}
-myplot<-ggplot(data=iris, aes(x=Sepal.Length, y=Sepal.Width))
-summary(myplot)
-```
+    myplot<-ggplot(data=iris, aes(x=Sepal.Length, y=Sepal.Width))  
+    summary(myplot)  
+
 So far, we have told ggplot where to look for data, and how to represent that data, but not what to do with it.
 ***
 ##`geom` 
@@ -117,59 +117,59 @@ These are the geometric objects likes points, lines, polygons, etc. that are in 
   - > 25 more!
 
 Let's add a geom to make a scatter plot:
-```{r}
-myplot<-ggplot(data=iris, aes(x=Sepal.Length, y=Sepal.Width))
-myplot+geom_point()
-summary(myplot)
-```
-###Changing the aesthetics of a `geom`:
-Let's increase the size of the data points...
-```{r}
-ggplot(data=iris, aes(x=Sepal.Length, y=Sepal.Width))+
-  geom_point(size=3)
-```
+
+  myplot<-ggplot(data=iris, aes(x=Sepal.Length, y=Sepal.Width))  
+  myplot+geom_point()  
+  summary(myplot)  
+
+###Changing the aesthetics of a `geom`:  
+Lets increase the size of the data points...  
+
+    ggplot(data=iris, aes(x=Sepal.Length, y=Sepal.Width))+  
+    geom_point(size=3)
+
 
 ...or add some **useful** color:
-```{r}
-ggplot(data=iris, aes(x=Sepal.Length, y=Sepal.Width, color=Species))+
-  geom_point(size=3)
-```
+
+    ggplot(data=iris, aes(x=Sepal.Length, y=Sepal.Width, color=Species))+  
+    geom_point(size=3)
+
 
 Using color to differentiate data points with respect to species allows us to see that *setosa* has a pretty distinct sepal length-width relationship, relative to the other two species.  
 
-If you need to use black and white, you can differentiate points by shape:
-```{r}
-ggplot(data=iris, aes(x=Sepal.Length, y=Sepal.Width, shape=Species))+
-  geom_point(size=3)
-```
+If you need to use black and white, you can differentiate points by shape:  
+
+    ggplot(data=iris, aes(x=Sepal.Length, y=Sepal.Width, shape=Species))+  
+    geom_point(size=3)
+
 
 or, exactly the same result:
-```{r}
-ggplot(data=iris, aes(x=Sepal.Length, y=Sepal.Width))+
-  geom_point(aes(shape=Species), size=3)
-```
 
-If you don't like those shapes, set some other shapes:
-```{r}
-ggplot(data=iris, aes(x=Sepal.Length, y=Sepal.Width))+
-  geom_point(aes(shape=Species), size=3)+
-  scale_shape_manual(values=c(1,2,16))
-```
+    ggplot(data=iris, aes(x=Sepal.Length, y=Sepal.Width))+
+    geom_point(aes(shape=Species), size=3)
+
+
+If you dont like those shapes, set some other shapes:
+
+    ggplot(data=iris, aes(x=Sepal.Length, y=Sepal.Width))+ 
+    geom_point(aes(shape=Species), size=3)+
+    scale_shape_manual(values=c(1,2,16))
+
 Here we used a `geom_scale` to map specific point shapes onto their species values.  If aes() maps shape or color to a grouping variable, then you can use a scale geom to set the values for your shape or color.
 
 ### geoms for summarization:
 **Boxplot**:  
 
-```{r}
-ggplot(data=iris, aes(x=Species, y=Sepal.Width))+
-  geom_boxplot()
-```
+
+    ggplot(data=iris, aes(x=Species, y=Sepal.Width))+  
+    geom_boxplot()
+
 
 **Histogram** - here you need only specify one vector to be visualized in your `aes()`:
-```{r}
-ggplot(data=iris, aes(x=Sepal.Width))+
-  geom_histogram()
-```
+
+    ggplot(data=iris, aes(x=Sepal.Width))+  
+    geom_histogram()
+
 > Tip: For most histograms, don't feel like you are not challenging yourself if you still use `hist()` in base graphics: Its often much less typing.
 
 ***
@@ -178,11 +178,9 @@ Facets are panels in which plots of mapped variables are arranged according to a
 
 In the `iris` dataset, we can use Species as the grouping variable:
 
-```{r}
-ggplot(data=iris, aes(x=Sepal.Length, y=Sepal.Width))+
-  geom_point(size=3)+
-  facet_grid(.~Species)
-```
+    ggplot(data=iris, aes(x=Sepal.Length, y=Sepal.Width))+  
+    geom_point(size=3)+  
+    facet_grid(.~Species)
 
 Specifying the group variable on the left `facet_grid(Species~.)` arranges facets in one column, on the right `facet_grid(~.Species)` in one row.  You can also facet by two (or more) grouping variables.  If we had a categorical site variable in `iris`, that would look like `facet_grid(Site~Species)`
 
@@ -201,11 +199,10 @@ The `geom_boxplot()` and `geom_histogram()` are stats components, and there are 
 
 Here is another: you can add a linear fit line to a scatter plot:
 
-```{r}
-ggplot(data=iris, aes(x=Sepal.Length, y=Sepal.Width))+
-  geom_point(size=3)+
-  geom_smooth(method=lm)
-```
+    ggplot(data=iris, aes(x=Sepal.Length, y=Sepal.Width))+  
+    geom_point(size=3)+  
+    geom_smooth(method=lm)  
+
 ***
 ## `theme`
 Themes allow you to specify how the non-data components of your figure look, e.g. legends, axis labels, and backgrounds.
@@ -214,41 +211,36 @@ Using our color-coded scatterplot of Sepal Width vs Sepal Length, lets make our 
 
 By default it looked like this:
 
-```{r}
-ggplot(data=iris, aes(x=Sepal.Length, y=Sepal.Width))+
-  geom_point()
-```
+    ggplot(data=iris, aes(x=Sepal.Length, y=Sepal.Width))+
+    geom_point()
 
 But it could look like:
 
-```{r}
-ggplot(data=iris, aes(x=Sepal.Length, y=Sepal.Width,color=Species))+
-  geom_point(size=3)+
-  theme(legend.key=element_rect(fill=NA),
+    ggplot(data=iris, aes(x=Sepal.Length, y=Sepal.Width,color=Species))+
+    geom_point(size=3)+
+    theme(legend.key=element_rect(fill=NA),
         legend.position="bottom",
         axis.title=element_text(angle=0, size=18, face="bold"),
         legend.text=element_text(angle=0, size=12, face="bold"),
         panel.background=element_rect(fill=NA))
-```
+
 
 Obviously, one can really go nuts with her/his themes... and create your own customs:
 
-```{r}
-install.packages("wesanderson")
-library(wesanderson)
-```
+    install.packages("wesanderson")
+    library(wesanderson)
+
 To see color palettes:
-```{r}
-wes_palette("Royal1")
-```
+    
+    wes_palette("Royal1")
+
 For those studying predation/medium sized mammals/trophic cascades, try:
-```{r}
-wes_palette("FantasticFox")
-```
+    
+    wes_palette("FantasticFox")
+    
 ...and for the marine biologists (or their interns):
-```{r}
-wes_palette("Zissou")
-```
+
+    wes_palette("Zissou")
 
 ```{r}
 ggplot(iris, aes(Sepal.Length, Sepal.Width, color = Species)) + 
