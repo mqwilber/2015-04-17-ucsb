@@ -43,7 +43,7 @@ entirely customizable|fiddly for adjusting positions, sizes, etc.|
 # Getting Started:
 
 Here's how to install ggplot2:
-  
+
     install.packages("ggplot2", dependencies = TRUE)  
     library("ggplot2")
 
@@ -62,18 +62,18 @@ There are several essential parts of any plot, and in `ggplot2`, they are:
     - **data**
     - **aes**
     - **geom**
-    - stats
-    - facets
-    - scales
-    - theme
-    - others
+    - `stats`
+    - `facets`
+    - `scales`
+    - `theme`
+    - ...and others
 
 We won't cover these in much depth, but if you are comfortable with what we show you today, exploring the vast functionality of `geom, stats, scales, and theme` should be a pleasure.
 ***
 ##`ggplot()`
 Some people like to assign (`<-`) their plot function to a variable, like this:
 
-`myplot<-ggplot(...)`
+    myplot<-ggplot(...)
 ***
 ##`data`
 - This is the data you want to plot
@@ -85,7 +85,9 @@ For this lesson, we are going to look at the `iris` data set that lives in R.
 
 Let's **build** a scatter plot of Sepal Length and Sepal Width
 
-    `myplot<-ggplot(data=iris... )`
+    myplot<-ggplot(data=iris... )
+
+
 ***
 ##`aes` 
 For **aes**thetics.
@@ -96,9 +98,10 @@ How your data are to be visually represented.  One of your variables will be you
 - which data on the x
 - which data on the y
 - also: color, size, shape, transparency
-- any character of the plot you set in `aes()` becomes a global setting for your figure.
+  
 
-    myplot<-ggplot(data=iris, aes(x=Sepal.Length, y=Sepal.Width))  
+
+    myplot<-ggplot(data=iris, aes(x=Sepal.Length, y=Sepal.Width))
     summary(myplot)  
 
 So far, we have told ggplot where to look for data, and how to represent that data, but not what to do with it.
@@ -118,9 +121,9 @@ These are the geometric objects likes points, lines, polygons, etc. that are in 
 
 Let's add a geom to make a scatter plot:
 
-  myplot<-ggplot(data=iris, aes(x=Sepal.Length, y=Sepal.Width))  
-  myplot+geom_point()  
-  summary(myplot)  
+    myplot<-ggplot(data=iris, aes(x=Sepal.Length, y=Sepal.Width))  
+    myplot+geom_point()  
+    summary(myplot)  
 
 ###Changing the aesthetics of a `geom`:  
 Lets increase the size of the data points...  
@@ -160,8 +163,7 @@ Here we used a `geom_scale` to map specific point shapes onto their species valu
 ### geoms for summarization:
 **Boxplot**:  
 
-
-    ggplot(data=iris, aes(x=Species, y=Sepal.Width))+  
+    ggplot(data=iris, aes(x=Species, y=Sepal.Width))+
     geom_boxplot()
 
 
@@ -194,7 +196,7 @@ You can also use `facet_wrap()`, which we will show you in the next lesson.
 
 
 ## `stats`
-For `stat`istic`s`.  
+For `stats`istics.  
 The `geom_boxplot()` and `geom_histogram()` are stats components, and there are a bunch. We don't have a lot of time to cover these, but they are extremely valuable, especially if you are using ggplot2 for reporting results, rather than just exploratory plotting.  
 
 Here is another: you can add a linear fit line to a scatter plot:
@@ -204,17 +206,20 @@ Here is another: you can add a linear fit line to a scatter plot:
     geom_smooth(method=lm)  
 
 ***
-## `theme`
+## `theme` and controlling figure appearance
 Themes allow you to specify how the non-data components of your figure look, e.g. legends, axis labels, and backgrounds.
 
-Using our color-coded scatterplot of Sepal Width vs Sepal Length, lets make our axis labels and such worthy of our next committee meeting.
+First though, there are ways to control the appearance of your data points by setting a value to them, or mapping them to a grouping variable. You can do this in the aes() or in the geom, but any character of the plot you set in `aes()` becomes a global setting for your figure.  For axample, if you set `aes(..., color=pink)`, then all the data in your figure will be pink, no matter what (or how many) geoms you map to the variables.
 
-By default it looked like this:
+You can control the non-data elements (text, axes, legends) using themes.
+Using our color-coded scatterplot of Sepal Width vs Sepal Length, lets add a theme to make our figure worthy of our next committee meeting.
+
+Rerun the code to see how the plot looked by default:
 
     ggplot(data=iris, aes(x=Sepal.Length, y=Sepal.Width))+
     geom_point()
 
-But it could look like:
+But with theme, it could look like:
 
     ggplot(data=iris, aes(x=Sepal.Length, y=Sepal.Width,color=Species))+
     geom_point(size=3)+
@@ -231,23 +236,20 @@ Obviously, one can really go nuts with her/his themes... and create your own cus
     library(wesanderson)
 
 To see color palettes:
-    
+
     wes_palette("Royal1")
 
 For those studying predation/medium sized mammals/trophic cascades, try:
-    
+
     wes_palette("FantasticFox")
     
 ...and for the marine biologists (or their interns):
 
     wes_palette("Zissou")
-
-```{r}
-ggplot(iris, aes(Sepal.Length, Sepal.Width, color = Species)) + 
-  geom_point(size = 7) + 
-  scale_color_manual(values = wes_palette("Zissou")) + 
-  theme_gray()
-```
+    ggplot(iris, aes(Sepal.Length, Sepal.Width, color = Species)) + 
+    geom_point(size = 7) + 
+    scale_color_manual(values = wes_palette("Zissou")) + 
+    theme_gray()
 
 
 
@@ -255,9 +257,7 @@ ggplot(iris, aes(Sepal.Length, Sepal.Width, color = Species)) +
 ##Saving a ggplot figure:
 You can use the same approach we showed in the basic plotting lesson, or try this:
 
-```{r}
-ggsave("myplot.jpg", width=8, height=8, unit="cm", dpi=300)
-```
+    ggsave("myplot.jpg", width=8, height=8, unit="cm", dpi=300)
 
 In both methods, you can save as most any image format (jpeg, TIFF, PNG, PDF, etc.), as well as specify the size and resolution (dpi) of the image.
 
@@ -270,7 +270,8 @@ Graphics are an important part of the beginning - data exploration - and end -  
 ***
 # Exercise 2:
   > Using the `iris` data, create a faceted figure that includes three panels, one for each species; each panel should include a scatter plot of Petal.Width vs. Petal.Length; lastly, include a linear fit on each panel.  Manipulate the theme to improve the appearance of the figure.
-  > Save your figure and email it to your advisor, with the subject line "For  your refrigerator".
+  
+  > Save your figure and email it to your advisor, with the subject line "For your refrigerator!"
 
 
 
