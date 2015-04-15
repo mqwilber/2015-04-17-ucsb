@@ -25,7 +25,7 @@ vs.
 
 Both base R and `ggplot2` have limitations in different areas, and either can be used to make publication quality figures.  Arguably, ggplot excels over base graphics for data exploration and consistent syntax.
 
-`ggplot` Pros: | `ggplot` Cons:|
+ggplot2 Pros: | ggplot2 Cons:|
 ---------------|---------------|
 consistent, concise syntax | different syntax from the rest of R|
 intuitive (to many) | does not handle a few types of output well (e.g. NMDS output)|
@@ -210,9 +210,9 @@ Themes allow you to specify how the non-data components of your figure look, e.g
 
 Using our color-coded scatterplot of Sepal Width vs Sepal Length, lets make our axis labels and such worthy of our next committee meeting.
 
-By default it looked like:
+By default it looked like this:
 
-```{r echo=FALSE}
+```{r}
 ggplot(data=iris, aes(x=Sepal.Length, y=Sepal.Width))+
   geom_point()
 ```
@@ -244,8 +244,8 @@ For those studying predation/medium sized mammals/trophic cascades, try:
 wes_palette("FantasticFox")
 ```
 ...and for the marine biologists (or their interns):
-```
-{r}wes_palette("Zissou")
+```{r}
+wes_palette("Zissou")
 ```
 
 ```{r}
