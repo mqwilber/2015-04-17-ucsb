@@ -18,7 +18,7 @@ For our example, we will look at our dataset `iris`, which is a [famous statisti
 
 This data seems perfectly formatted for many of the plots you conducted. Each individual has a single row, with columns corresponding to the individual measurements as well as the species. Now let's now do a boxplot, comparing the distribution of `Sepal.Length` between each species:
 
-    ggplot(iris, aes(x = Species, y = Sepal.Width))+geom_boxplot()
+    ggplot(iris, aes(x <- Species, y <- Sepal.Width)) + geom_boxplot()
 
 Suppose we want to make four boxplots, to compare between species for each flower measurement. In the last lesson we used `facet_grid()` to divide our data based on the values contained in a certain column. Knowing this, it sounds as though you need a column that says `Sepal.Width`, `Sepal,Length`, `Petal.Length`, `Petal.Width`... but we don't really have that here. In order to subdivide our measurements and plot each dimension on a different plot, we will need to reformat the dataset so there is only one measurement on each row. 
 
@@ -53,41 +53,45 @@ Luckily for us, there's a package in R called `reshape2` that can help you manip
 To add the `individual` column into our result, let's first make that column in our `iris` dataframe. the function `dim` gives us a list with 2 values: the rows and columns in the dataframe. We only want the number of rows, so we're going to go with:'
     
     dim(iris)
-    nRows = nrow(iris)
-    iris$Individual = 1:nRows
+    nRows <- nrow(iris)
+    iris$Individual <- 1:nRows
     head(iris)
 
 Now we can `melt()`! Let's see what happens when we call the function:
     
     install.packages('reshape2')
     library(reshape2)
-    iris2 = melt(iris)
+    iris2 <- melt(iris)
     View(iris2)
 
 Huh, that didn't do exactly what we wanted it to do. By default, `melt` will get rid of all columns with numerical values. Since we want to hold on to the `Individual` row, we have to manually tell `melt` what columns we want to keep.
 
-    iris2 = melt(iris, id.vars =  c("Individual", "Species"))
+    iris2 <- melt(iris, id.vars <-  c("Individual", "Species"))
 
-Now let's plot our boxplot:
+Now let's plot our boxplot. We don't really need facet_grid(), which lets you designate two different variables to divide up the dataset by. We just want it divided by `variable`, as shown below. 
+    
+    ggplot(iris2, aes(x <- Species, y <- value))+geom_boxplot()+facet_wrap(~variable)
+    
+Unlike `facet_grid`, which will display all of your plots horizontally or vertically with just one categorizing variable, `facet_wrap` will wrap them into a grid and keep them nice and tidy. You can even specify the number of rows and columns: 
 
-    ggplot(iris2, aes(x = Species, y = value))+geom_boxplot()+facet_wrap(~variable)
+    ggplot(iris2, aes(x <- Species, y <- value))+geom_boxplot()+facet_wrap(~variable, ncol <- 3)
 
 As an exercise, let's put our data back to its original shape using`dcast`. This has a slightly different syntax, and is in the shape of a formula. We put our id variables (the same ones we specified in `melt`) on the left of the `~`, and put the `variable` on the right. 
 
-    iris3 = dcast(iris2, Individual+Species~variable)
+    iris3 = dcast(iris2, Individual+Species ~ variable)
 
 This forumla can be a bit unintuitive at first, so don't feel discouraged if you don't get it the first time!
 
-> ### EXERCISE 2 - Some reshape2 trick
+> ### EXERCISE 1 - Some reshape2 trick with aneurysm
 >
 >  
 
 Summarizing and Operating: the dPlyr world
 ---------------------------------
 
-For our next section, let's load the file `mammal_stats.csv` from the `data` folder. This is a subset of a *["species-level database of...extant and recently extinct mammals](http://esapubs.org/archive/ecol/E090/184/)*.  
+For our next section, let's load the file `mammal_stats.csv` from the `data` folder. This is a subset of a *["species-level database of extant and recently extinct mammals](http://esapubs.org/archive/ecol/E090/184/)*.  
 
-    mammals = read.csv("mammal_stats.csv")
+    mammals <- read.csv("mammal_stats.csv")
     
 You'll notice that as we work on larger datasets, viewing and visualizing the entire dataset can become more and more difficult. Similarly, analyzing the datasets becomes more complex. Is there a good way to be able to summarize datasets succinctly, and to be able to analyze subsets of a dataset automatically? 
 
@@ -95,6 +99,7 @@ The answer lies in a handy library called `dplyr`. `dplyr` will allow us to perf
 
 First off, though, let's explore some very handy sorting and viewing functions in `dplyr`. `glimpse()` is a quick and pretty alternative to `head()`:
 
+    install.packages('dplyr')
     library(dplyr)  
     head(mammals)
     glimpse(mammals)
@@ -117,43 +122,49 @@ We can also arrange the rows in a dataset based on whichever column you want, us
     head(arrange(mammals, desc(adult_body_mass_g))) #sorts by descending. row 1 is the blue whale. 
     head(arrange(mammals, order, adult_body_mass_g)) #sorts first alphabetically by order, then by mass within order. 
 
-> ### EXERCISE 3 - irises
+> ### EXERCISE 2 - irises
 > Go back to your `iris` data. How many setosa have a `Sepal.Length` greater than 5?
 > Which species has the flower with the longest petal length? The shortest?
 
 With these large datasets, `dplyr` lets you quickly summarize the data. It operates on a principle called *split - apply - recombine* : we will *split* up the data, *apply* some sort of operation, and *combine* the results to display them. Suppose we want to find the average body masss of each order. We first want to *split* up the data by order using the function `group_by()`, apply the `mean()` function to the column `adult_body_mass_g`, and report all of the results using the function `summarise()`. 
 
-    a = group_by(mammals, order)
+    a <- group_by(mammals, order)
     summarize(a, mean_mass = mean(adult_body_mass_g, na.rm = TRUE))
     
 
 To we can add other functions here, such as `max()`, `min()`, and `sd()`. 
 
-    summarize(a, mean_mass = mean(adult_body_mass_g, na.rm = TRUE), sd_mass = sd(adult_body_mass_g, na.rm = TRUE))
-
+    summarize(a, mean_mass <- mean(adult_body_mass_g, na.rm = TRUE), sd_mass <- sd(adult_body_mass_g, na.rm = TRUE))
+    
+> inside of these parenthesees you MUST use equals signs instead of arrows. [Read more here](http://blog.revolutionanalytics.com/2008/12/use-equals-or-arrow-for-assignment.html). 
 
 `summarize` makes a new dataset, but `mutate` will add these columns instead to the original dataframe. 
 
-    a = group_by(mammals, order)
-    mutate(a, mean_mass = mean(adult_body_mass_g, na.rm = TRUE))
+    a <- group_by(mammals, order)
+    mutate(a, mean_mass <- mean(adult_body_mass_g, na.rm = TRUE))
 
 This outputs the same numbers as the equivalent `summarize` function, but puts them in a new column on the same dataset. 
 
 What if we want to figure out how the mass of each animal relates to other animals of its order? To do this, we will divide each species' body mass by its order's mean body mass. 
 
-    a = group_by(mammals, order)
-    mutate(a, mean_mass = mean(adult_body_mass_g, na.rm = TRUE), normalized_mass = adult_body_mass_g / mean_mass)
+    a <- group_by(mammals, order)
+    mutate(a, mean_mass <- mean(adult_body_mass_g, na.rm = TRUE), normalized_mass <- adult_body_mass_g / mean_mass)
 
-You might be noticing that in each of these examples, we are feeding the result of the first line into the second line, using `a` as an intermediate variable. While this is functional, there is a more legible solution called `pipes`. `Pipes` uses the operation `%>%` to push the results of one line to the next. for example, instead of writing 
+You might be noticing that in each of these examples, we are feeding the result of the first line into the second line, using `a` as an intermediate variable. While this is functional, there is a more legible solution called `Pipes`. `Pipes` uses the operation `%>%` to push the results of one line to the next. for example, instead of writing 
 
     a = group_by(mammals, order)
 
 we would write
     
+    install.packages('magrittr')
     library(magrittr)
-    mammals %>% #take the mammals data
+    
+    a = mammals %>% #take the mammals data
         group_by(order) %>% #split it up by "order"
-        a #save it to the variable "a"
+
+<img src="http://uploads7.wikiart.org/images/rene-magritte/the-treachery-of-images-this-is-not-a-pipe-1948(2).jpg" height="400px" align="middle"  />
+
+>  The package is named after René Magritte, a surrealist painter who painted "The Treachery of Images" above. 
 
 This can make it easy to follow the logical workflow, which makes more and more sense as your operations become more complex. Suppose we want to find the organisms with the biggest mass relative to the rest of its order. We want to split the data by `order`, apply the mutate functions from above, sort by `normalized_mass`, and only display the `species`, `adult_body_mass_g`, and `normalized_mass` columns. In longhand it would look like this:
 
@@ -176,7 +187,7 @@ Or, using pipes:
 This lets us see that many of the animals relatively large for their size are rodents. It seems to make sense that the smaller your order's average mass, the easier it would be to be 116x larger than the average! 
 
 
-> ### EXERCISE 4 - Data exploration. Try to use pipes!
+> ### EXERCISE 3 - Data exploration. Try to use pipes!
 > Which species of iris has the longest average sepals?
 > Which species of carnivore has the largest body length to body mass ratio? (Hint: that's `adult_head_body_len_mm / adult_body_mass_g')`
 > 
