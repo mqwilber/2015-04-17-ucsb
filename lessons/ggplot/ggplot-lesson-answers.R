@@ -15,6 +15,7 @@ dat$GenderCorrected[index_F]<-"Female"
 dat$GenderCorrected[index_m]<-"Male"
 dat$GenderCorrected[index_M]<-"Male"
 #
+#Yesterday we made this boxplot:
 #par(mar=c(5,5,1,1))
 #boxplot(BloodPressure~GenderCorrected, data=dat, 
 #        ylim=c(50,200),
@@ -46,4 +47,8 @@ ggplot(data=iris, aes(x=Petal.Length, y=Petal.Width))+
   geom_point()+
   geom_smooth(method="lm")+
   facet_wrap(~Species, scales="free_x")+
-  theme()
+  theme(legend.key=element_rect(fill=NA),
+        legend.position="bottom",
+        axis.title=element_text(angle=0, size=18, face="bold"),
+        legend.text=element_text(angle=0, size=12, face="bold"),
+        panel.background=element_rect(fill=NA))
