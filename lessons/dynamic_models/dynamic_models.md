@@ -60,7 +60,7 @@ For this exercise, we're going to use the example of a SIR (Susceptible-Infected
 
 We've defined our derivative as a function with three inputs:
 
-1. t -
+1. t - time
 
 2. x - our state variables (we will set the initial values or starting places or all of our state variables)
 
