@@ -62,10 +62,10 @@ There are several essential parts of any plot, and in `ggplot2`, they are:
     - **data**
     - **aes**
     - **geom**
-    - `stats`
-    - `facets`
-    - `scales`
-    - `theme`
+    - stats
+    - facets
+    - scales
+    - theme
     - ...and others
 
 We won't cover these in much depth, but if you are comfortable with what we show you today, exploring the vast functionality of `geom, stats, scales, and theme` should be a pleasure.
