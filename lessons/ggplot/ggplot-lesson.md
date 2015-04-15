@@ -6,6 +6,8 @@ title: ggplot
 
 *by Thomas C. Smith, based on material by Naupaka Zimmerman, Andrew Tredennick, & Kartik Ram*
 
+**Supplementary Material**: [answers to exercises](ggplot-lesson-answers.R)
+
 #What is ggplot?
 
 - The 'gg' stands for grammar of graphics.  
