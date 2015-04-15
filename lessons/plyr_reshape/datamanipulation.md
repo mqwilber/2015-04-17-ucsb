@@ -4,10 +4,7 @@ root: ../..
 title: Data Manipulation - reshape2 and plyr
 ---
 
-*Test - Umi Hoshijima* 
-
-
-
+*Prepared by Umihiko Hoshijima, Inspiration/Material from Sean Anderson in [Reshape2](http://seananderson.ca/2013/10/19/reshape.html) and [plyr](http://seananderson.ca/2014/09/13/dplyr-intro.html)*
 
 Reshaping data in R
 -----
@@ -52,7 +49,6 @@ Luckily for us, there's a package in R called `reshape2` that can help you manip
 
 To add the `individual` column into our result, let's first make that column in our `iris` dataframe. the function `dim` gives us a list with 2 values: the rows and columns in the dataframe. We only want the number of rows, so we're going to go with:'
     
-    dim(iris)
     nRows <- nrow(iris)
     iris$Individual <- 1:nRows
     head(iris)
@@ -104,6 +100,8 @@ First off, though, let's explore some very handy sorting and viewing functions i
     head(mammals)
     glimpse(mammals)
 
+> **Tip**: You may see people using `require()` in their code instead of `library()`. This is [not advised in most cases](http://yihui.name/en/2014/07/library-vs-require/), as it can make it difficult to trace mistakes in your code. 
+
 If i want to shrink the dataset, we can `select()` columns. We can do that either manually (by naming the columns we want), or by using an operation. where the column name `contains()` a certain string, or `starts_with()` or `ends_with()` one. 
 
     select(mammals, order, species) #narrows down to these two columns
@@ -126,17 +124,16 @@ We can also arrange the rows in a dataset based on whichever column you want, us
 > Go back to your `iris` data. How many setosa have a `Sepal.Length` greater than 5?
 > Which species has the flower with the longest petal length? The shortest?
 
-With these large datasets, `dplyr` lets you quickly summarize the data. It operates on a principle called *split - apply - recombine* : we will *split* up the data, *apply* some sort of operation, and *combine* the results to display them. Suppose we want to find the average body masss of each order. We first want to *split* up the data by order using the function `group_by()`, apply the `mean()` function to the column `adult_body_mass_g`, and report all of the results using the function `summarise()`. 
+With these large datasets, `dplyr` lets you quickly summarize the data. It operates on a principle called *split - apply - recombine* : we will *split* up the data, *apply* some sort of operation, and *combine* the results to display them. Suppose we want to find the average body masss of each order. We first want to *split* up the data by order using the function `group_by()`, *apply* the `mean()` function to the column `adult_body_mass_g`, and report all of the results using the function `summarise()`. 
 
     a <- group_by(mammals, order)
     summarize(a, mean_mass = mean(adult_body_mass_g, na.rm = TRUE))
-    
 
 To we can add other functions here, such as `max()`, `min()`, and `sd()`. 
 
     summarize(a, mean_mass <- mean(adult_body_mass_g, na.rm = TRUE), sd_mass <- sd(adult_body_mass_g, na.rm = TRUE))
     
-> inside of these parenthesees you MUST use equals signs instead of arrows. [Read more here](http://blog.revolutionanalytics.com/2008/12/use-equals-or-arrow-for-assignment.html). 
+> inside of these inner parenthesees you MUST use equals signs instead of arrows. [Read more here](http://blog.revolutionanalytics.com/2008/12/use-equals-or-arrow-for-assignment.html). 
 
 `summarize` makes a new dataset, but `mutate` will add these columns instead to the original dataframe. 
 
@@ -174,8 +171,6 @@ This can make it easy to follow the logical workflow, which makes more and more 
     d = select(c, species, normalized_mass)
 
 pipes makes it less messy by reducing the number of variables: 
-
-Or, using pipes: 
 
     e = mammals %>%
         group_by(order) %>%
