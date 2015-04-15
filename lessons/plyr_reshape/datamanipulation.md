@@ -14,23 +14,13 @@ Reshaping data in R
 
 As scientists, we format datasheets to make our data entry intuitive. However, different forms of data analysis in R can require data in different formats. Manipulating data for various analyses and visualization can be facilitated by the package `reshape2`.
 
-For our example, we will look at our dataset "irises", which is a famous dataset that measures the length and width of both sepals and petals on three species of irises (50 individuals each, 150 flowers total). This data is located in the "data" directory, and is called `iris.csv`. 
+For our example, we will look at our dataset `iris`, which is a [famous statistics dataset](http://rcs.chemometrics.ru/Tutorials/classification/Fisher.pdf)  that measures the length and width of both sepals and petals on three species of irises (50 individuals each, 150 flowers total). You used `iris` for your previous ggplot lesson. 
 
-> ### EXERCISE 1 - Importing the `iris` dataset
->
-> Import the data using the R command `read.csv`, naming the dataframe `iris` , and look at the first several lines using the `head()` command. make a ggplot scatterplot, with `Sepal.Length` on the x axis and `Sepal.Width` on the y axis. Color the dots by `Species`. 
+This data seems perfectly formatted for many of the plots you conducted. Each individual has a single row, with columns corresponding to the individual measurements as well as the species. Now let's now do a boxplot, comparing the distribution of `Sepal.Length` between each species:
 
-    
+    ggplot(iris, aes(x = Species, y = Sepal.Width))+geom_boxplot()
 
-Great! Now let's instead view them as different subplots:
-
-    ggplot(iris, aes(x = Sepal.Length, y = Sepal.Width))+geom_point() + facet_wrap(~Species)
-
-This data seems perfectly formatted for these plots. Each individual has a single row, with it species and each of its values. Let's now do a boxplot, comparing the distribution of `Sepal.Length` between each species:
-
-    ggplot(iris, aes(x = Species, y = Sepal.Length))+geom_boxplot()
-
-Great! Now can we make individual graphs doing this for the other petal and sepal measurements? We want to use `facet_wrap` to split up our data by values in a column. We just used `facet_wrap` to separate our data by `Species`, which we can do because we have a column for that. How can we make a column for our different measurements (`Sepal.Length`, `Sepal.Width`, etc.) and have a row for each individual measurement?
+Suppose we want to make four boxplots, to compare between species for each flower measurement. In the last lesson we used `facet_grid()` to divide our data based on the values contained in a certain column. Knowing this, it sounds as though you need a column that says `Sepal.Width`, `Sepal,Length`, `Petal.Length`, `Petal.Width`... but we don't really have that here. In order to subdivide our measurements and plot each dimension on a different plot, we will need to reformat the dataset so there is only one measurement on each row. 
 
 Essentially we want to go from this: 
 
@@ -63,12 +53,13 @@ Luckily for us, there's a package in R called `reshape2` that can help you manip
 To add the `individual` column into our result, let's first make that column in our `iris` dataframe. the function `dim` gives us a list with 2 values: the rows and columns in the dataframe. We only want the number of rows, so we're going to go with:'
     
     dim(iris)
-    nRows = dim(iris)[1]
+    nRows = nrow(iris)
     iris$Individual = 1:nRows
     head(iris)
 
 Now we can `melt()`! Let's see what happens when we call the function:
-
+    
+    install.packages('reshape2')
     library(reshape2)
     iris2 = melt(iris)
     View(iris2)
