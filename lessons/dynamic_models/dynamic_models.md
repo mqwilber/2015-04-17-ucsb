@@ -116,19 +116,6 @@ R has simulated our model for 14 days and stored the values in the matrix result
 
 >Make a plot of your results.
 
-**THIS IS THE ANSWER, DELETE THIS LATER**
-```{r eval=FALSE}
-params0 <- c(0.01, 0.0025)
-x_init <- c(10, 10, 0)
-t = seq(1:100)
-results2 <- ode(x_init, t, SIR.model, params0)
-
-plot(results2[,1], results2[,2], type="l", col="black", ylab="S, I, and R individuals", xlab="Time (days)", main="SIR Model Output", ylim=c(0, 20), lwd=1.25)
-lines(results2[,1], results2[,3], type="l", col="red", lwd=1.25)
-lines(results2[,1], results2[,4], type="l", col="blue", lwd=1.25)
-legend("right", c("S", "I", "R"), col=c("black", "red", "blue"), lty=1)
-```
-
 ### Data to fit to SIR model
 
 Suppose we have the following data on the number of individuals infected with flu (I(t)) each day during a 2-week epidemic:
@@ -212,5 +199,8 @@ Finally, we can plot the model prediction with these best-fit parameters (the re
     mod.pred <- as.data.frame(ode(c(S=762, I=1, R=0), t, SIR.model, fit1$par, hmax=0.01))
     lines(t, mod.pred$I)
     legend("topright", c("Model", "Data"), col=c("black", "red"), lty=c(1,5))
-
-
+    
+>### Exercise 2:
+>Let's return to the logistic growth equation we discussed in the Intro to R lesson yesterday. Simulate the logistic growth model for 120 hours and then fit the model to data on the nitrite limited growth of the microalga *Chlamydomonas* from Cunningham and Maas (1978) ('CunninghamMaasAlgaeData.csv'). Cunningham and Maas grew a freshwater green algae,  We're thinking about models in continuous (not discrete) time, and the model for logistic growth of a popoulation (N):
+>$$ dN/dt = rN (1 - N/K) $$
+>Begin by simulating the logistic growth model with a starting population of 6 cells/$\mu$L, a growth rate of 0.1 1/hr and a carrying capacity of 900 cells/$\mu$L. Then estimate the parameters 'r' and 'K' using the data provided from Cunningham and Maas (1978) ('CunninghamMaasAlgaeData.csv') and a SSE method (use the parameter values you used to simulate the model as your first guess). Show the fit of the model to the data with a plot.
