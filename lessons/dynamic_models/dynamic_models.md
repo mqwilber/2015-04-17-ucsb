@@ -35,7 +35,7 @@ For this exercise, we're going to use the example of a SIR (Susceptible-Infected
 
 3. R - the number of recovered individuals, who are now resistant to further infection
 
-<center> <img src="http://i.imgur.com/rdFWsJJ.png"/> </center>
+<img src="http://i.imgur.com/rdFWsJJ.png"/>
 
 <center> <img src="http://jmbe.asm.org/asm/index.php/jmbe/article/viewFile/429/html/4674" width="300" height="80" /> </center>
 
