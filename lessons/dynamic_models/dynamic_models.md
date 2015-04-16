@@ -5,6 +5,8 @@ title: Dynamic Models
 ---
 *Written by Louise Stevenson and Cherie Briggs*
 
+**Supplementary Material**: [Data for Exercise 2](../../data/CunninghamMaasAlgaeData.csv), [Answers to exercises](dynamic_models_answers.R)
+
 ### Introduction to Solving Ordinary Differential Equations
 The function 'lsoda' in the R package, deSolve, calculates numerical solutions to systems of first order ordinary differential equations for a given set of parameter values and initial conditions (this is one of a number of ODE solving packages in R).
 
@@ -39,7 +41,7 @@ For this exercise, we're going to use the example of a SIR (Susceptible-Infected
 
 <center> <img src="http://jmbe.asm.org/asm/index.php/jmbe/article/viewFile/429/html/4674"/> </center>
 
-<right> [source](http://jmbe.asm.org/asm/index.php/jmbe/article/viewFile/429/html/4674) </right>
+<center><a href="http://jmbe.asm.org/asm/index.php/jmbe/article/viewFile/429/html/4674">source</a></center>
 
 &#946; is the transmission rate, in which we are assuming susceptible individuals are becoming infected by randomly encountering infected individuals
 
@@ -201,6 +203,6 @@ Finally, we can plot the model prediction with these best-fit parameters (the re
     legend("topright", c("Model", "Data"), col=c("black", "red"), lty=c(1,5))
     
 >### Exercise 2:
->Let's return to the logistic growth equation we discussed in the Intro to R lesson yesterday. Simulate the logistic growth model for 120 hours and then fit the model to data on the nitrite limited growth of the microalga *Chlamydomonas* from Cunningham and Maas (1978) ('CunninghamMaasAlgaeData.csv'). Cunningham and Maas grew a freshwater green algae,  We're thinking about models in continuous (not discrete) time, and the model for logistic growth of a popoulation (N):
+>Let's return to the logistic growth equation we discussed in the Intro to R lesson yesterday. Simulate the logistic growth model for 120 hours and then fit the model to data on the nitrite limited growth of the microalga *Chlamydomonas* from Cunningham and Maas (1978) (Get the data by clicking [here](../../data/CunninghamMaasAlgaeData.csv): 'CunninghamMaasAlgaeData.csv'). Cunningham and Maas grew a freshwater green algae,  We're thinking about models in continuous (not discrete) time, and the model for logistic growth of a popoulation (N):
 >$$ dN/dt = rN (1 - N/K) $$
->Begin by simulating the logistic growth model with a starting population of 6 cells/$\mu$L, a growth rate of 0.1 1/hr and a carrying capacity of 900 cells/$\mu$L. Then estimate the parameters 'r' and 'K' using the data provided from Cunningham and Maas (1978) ('CunninghamMaasAlgaeData.csv') and a SSE method (use the parameter values you used to simulate the model as your first guess). Show the fit of the model to the data with a plot.
+>Begin by simulating the logistic growth model with a starting population of 6 cells/ &#956; L, a growth rate of 0.1 1/hr and a carrying capacity of 900 cells/&#956;L. Then estimate the parameters 'r' and 'K' using the data provided from Cunningham and Maas (1978) ('CunninghamMaasAlgaeData.csv') and a SSE method (use the parameter values you used to simulate the model as your first guess). Show the fit of the model to the data with a plot.
