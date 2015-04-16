@@ -1,0 +1,62 @@
+---
+layout: lesson
+root: ../..
+title: Big Data with R
+---
+
+*Prepared by Tom Bell, Adapted from lesson by Marc in the box 
+
+*Supplementary Files*: [Answers to Exercises](R_basics_I_answers.R)
+
+Goals
+-----
+
+Background
+-----------------------
+	What is big data?
+	How can we use it for our purposes?
+	Why can’t I just download it?
+	
+
+	Why are you still talking Tom? I want to get started!
+
+
+
+
+Asking Questions
+----------------
+
+As we go through this lesson, you can ask questions in two ways:
+
+1.  If you have a question for me, just raise your hand and ask.
+2.  If you have a question that you think might be restricted to just you (like something on your computer isn't working), raise your hand an a volunteer 
+will come over to help you individually.
+
+What is R?
+-----------
+
+R is a versatile, open source programming language that was specifically designed for data analysis. As such R is extremely useful both for statistics and data science and was inspired by the programming language S.  Here are some fun facts to usher you into the R community.
+
+* Open source software under GPL.
+* Superior (if not just comparable) to commercial alternatives. R has over 5,000 user contributed packages at this time. It's widely used both in academia and industry.
+* Available on all platforms.
+* Not just for statistics, but also general purpose programming.
+* Is (sort of) object oriented and functional.
+* Large and growing community of peers.
+
+Starting with RStudio
+----------------------
+
+To open RStudio, click on the RStudio icon in the Applications (if you are on a Mac) or in your Programs if you are on Windows.
+
+There are four windows in RStudio that we will refer to throughout the workshop
+
+1. *The R Script*: Typically the upper left hand corner of RSutdio.  This is where you write R code that you can save and reuse later.
+2. *The R Console*: Typically in the lower left hand corner. This is where you execute R code.
+3. *The R Environment*: Typically in the upper right hand corner. This is where you can see defined variables. 
+4. *R "Information"*: Typically in the lower right hand corner. This is where you see plots, help and other R information.
+
+For all the work in this workshop, we will be typing code in the R script and then executing it in the R console.  For simple commands (e.g. `2 + 2`) this may seem stupid, but writing in a script will help all of your work be reproducible! Think of the script as your lab notebook.
+
+> **TIP**: Some helpful R studio shortcuts
+>
