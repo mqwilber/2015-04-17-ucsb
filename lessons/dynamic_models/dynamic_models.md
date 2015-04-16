@@ -6,7 +6,7 @@ title: Dynamic Models
 *Written by Louise Stevenson and Cherie Briggs*
 
 ### Introduction to Solving Ordinary Differential Equations
-The function lsoda() in the R package, deSolve, calculates numerical solutions to systems of first order ordinary differential equations for a given set of parameter values and initial conditions (this is one of a number of ODE solving packages in R).
+The function 'lsoda' in the R package, deSolve, calculates numerical solutions to systems of first order ordinary differential equations for a given set of parameter values and initial conditions (this is one of a number of ODE solving packages in R).
 
 The first thing you need to do is load the deSolve package.
 
@@ -35,10 +35,11 @@ For this exercise, we're going to use the example of a SIR (Susceptible-Infected
 
 3. R - the number of recovered individuals, who are now resistant to further infection
 
+<center> <img src="http://i.imgur.com/rdFWsJJ.png"/> </center>
 
 <center> <img src="http://jmbe.asm.org/asm/index.php/jmbe/article/viewFile/429/html/4674" width="300" height="80" /> </center>
 
-[source](http://jmbe.asm.org/asm/index.php/jmbe/article/viewFile/429/html/4674)
+<right> [source](http://jmbe.asm.org/asm/index.php/jmbe/article/viewFile/429/html/4674) </right>
 
 &#946; is the transmission rate, in which we are assuming susceptible individuals are becoming infected by randomly encountering infected individuals
 
