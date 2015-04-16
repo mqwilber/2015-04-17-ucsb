@@ -334,7 +334,7 @@ to Excel file formats for saving and working with tabular data.
 >you see that one of these prints to standard out and one drops you into its 
 >own environment? (For the latter, press `q` to exit when you're done.)
 
-`R`, the program/language that we will be using during this workshop can also be invoked from the command line. Just type `R` (or `r`) with no arguments at the command prompt and you should see
+`R`, the program/language that we will be using during this workshop can also be invoked from the command line (**Note**: This will not work for Windows users). Just type `R` (or `r`) with no arguments at the command prompt and you should see
 
      ~$ R
 
