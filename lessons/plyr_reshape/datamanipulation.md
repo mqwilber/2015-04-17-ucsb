@@ -13,6 +13,11 @@ As scientists, we format datasheets to make our data entry intuitive. However, d
 
 For our example, we will look at our dataset `iris`, which is a [famous statistics dataset](http://rcs.chemometrics.ru/Tutorials/classification/Fisher.pdf)  that measures the length and width of both sepals and petals on three species of irises (50 individuals each, 150 flowers total). You used `iris` for your previous ggplot lesson. 
 
+<img src="http://upload.wikimedia.org/wikipedia/commons/5/56/Kosaciec_szczecinkowaty_Iris_setosa.jpg" height="400px" align="middle"  />
+
+> *Iris setosa*, one of the species you will be looking at.
+
+
 This data seems perfectly formatted for many of the plots you conducted. Each individual has a single row, with columns corresponding to the individual measurements as well as the species. Now let's now do a boxplot, comparing the distribution of `Sepal.Length` between each species:
 
     ggplot(iris, aes(x <- Species, y <- Sepal.Width)) + geom_boxplot()
@@ -79,8 +84,8 @@ As an exercise, let's put our data back to its original shape using`dcast`. This
 This forumla can be a bit unintuitive at first, so don't feel discouraged if you don't get it the first time!
 
 > ### EXERCISE 1 - Some reshape2 trick with aneurysm
->
->  
+> open up `aneurysm_data_site-1.csv`. In four individual subplots divided by aneurysm condition (`Aneurisms_q1, q2, q3, q4`), Plot the `Blood Pressure` against the respective aneurysm condition. Color the scatterplot based on the age of the patient. 
+>  When you are done, retrace your steps using dcast() to `reshape` your melted dataframe back into its original shape. 
 
 Summarizing and Operating: the dPlyr world
 ---------------------------------
@@ -106,7 +111,7 @@ If i want to shrink the dataset, we can `select()` columns. We can do that eithe
 
     select(mammals, order, species) #narrows down to these two columns
     select(mammals, species, starts_with("adult")) #the column species, and any column that starts with "adult"
-    select(mammals, -order) #every row, except `Species`.
+    select(mammals, -order) #every row, except `Order`.
 
 We can also select certain rows using the function `filter()`. As rows aren't named the same way columns are, we will instead use the logical operators `>`, `<` , `==`, etc. to select the rows we want. 
 
