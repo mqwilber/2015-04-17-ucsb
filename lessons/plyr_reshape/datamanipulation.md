@@ -15,7 +15,7 @@ For our example, we will look at our dataset `iris`, which is a [famous statisti
 
 <img src="http://upload.wikimedia.org/wikipedia/commons/5/56/Kosaciec_szczecinkowaty_Iris_setosa.jpg" height="400px" align="middle"  />
 
-> *Iris setosa*, one of the species you will be looking at.
+> *Iris setosa*, one of the species you will be looking at. *Wikipedia Commmons*
 
 
 This data seems perfectly formatted for many of the plots you conducted. Each individual has a single row, with columns corresponding to the individual measurements as well as the species. Now let's now do a boxplot, comparing the distribution of `Sepal.Length` between each species:
@@ -129,7 +129,11 @@ We can also arrange the rows in a dataset based on whichever column you want, us
 > Go back to your `iris` data. How many setosa have a `Sepal.Length` greater than 5?
 > Which species has the flower with the longest petal length? The shortest?
 
-With these large datasets, `dplyr` lets you quickly summarize the data. It operates on a principle called *split - apply - recombine* : we will *split* up the data, *apply* some sort of operation, and *combine* the results to display them. Suppose we want to find the average body masss of each order. We first want to *split* up the data by order using the function `group_by()`, *apply* the `mean()` function to the column `adult_body_mass_g`, and report all of the results using the function `summarise()`. 
+https://upload.wikimedia.org/wikipedia/en/b/be/Craseonycteris_thonglongyai.JPG
+<img src="https://upload.wikimedia.org/wikipedia/en/b/be/Craseonycteris_thonglongyai.JPG" height="400px" align="middle"  />
+> The bumblebee bat. *Wikipedia Commmons*
+
+With these large datasets, `dplyr` lets you quickly summarize the data. It operates on a principle called *[split - apply - recombine](http://citeseerx.ist.psu.edu/viewdoc/download?doi=10.1.1.182.5667&rep=rep1&type=pdf)* : we will *split* up the data, *apply* some sort of operation, and *combine* the results to display them. Suppose we want to find the average body masss of each order. We first want to *split* up the data by order using the function `group_by()`, *apply* the `mean()` function to the column `adult_body_mass_g`, and report all of the results using the function `summarise()`. 
 
     a <- group_by(mammals, order)
     summarize(a, mean_mass = mean(adult_body_mass_g, na.rm = TRUE))
@@ -166,7 +170,7 @@ we would write
 
 <img src="http://uploads7.wikiart.org/images/rene-magritte/the-treachery-of-images-this-is-not-a-pipe-1948(2).jpg" height="400px" align="middle"  />
 
->  The package is named after René Magritte, a surrealist painter who painted "The Treachery of Images" above. 
+>  The package is named after René Magritte, a surrealist painter who painted "The Treachery of Images" above. This painting is currently on display at the LA County Museum of Art! *Wikipedia Commmons*
 
 This can make it easy to follow the logical workflow, which makes more and more sense as your operations become more complex. Suppose we want to find the organisms with the biggest mass relative to the rest of its order. We want to split the data by `order`, apply the mutate functions from above, sort by `normalized_mass`, and only display the `species`, `adult_body_mass_g`, and `normalized_mass` columns. In longhand it would look like this:
 
