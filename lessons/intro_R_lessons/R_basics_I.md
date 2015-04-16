@@ -6,7 +6,7 @@ title: Scientific Programming with R
 
 *Prepared by Mark Wilber, Original Material from Justin Kitzes and Tom Wright*
 
-*Supplementary Files*: [Answers to Exercises](R_basics_I_answers.R)
+**Supplementary Material**: [Answers to Exercises](R_basics_I_answers.R)
 
 Goals
 -----
