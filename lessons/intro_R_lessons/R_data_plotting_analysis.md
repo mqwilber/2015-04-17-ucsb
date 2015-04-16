@@ -364,7 +364,7 @@ We just got an idea of what our aneurysm data looks like by calculating some par
 
 Let's create a very quick plot of the `aneurysm` data set using R's default graphics.  First, make sure your data is loaded.  We fixed the m/M and f/F problem in the `dat$Gender` variable earlier, but will do it slightly differently here, by creating a new vector of reformatted genders:
 
-    dat<-read.csv("C://Users//Thomas//Documents//2015-04-17-ucsb//data//aneurysm_data_site-1.csv", header = TRUE)
+    dat<-read.csv("aneurysm_data_site-1.csv", header = TRUE)
     index_m<-dat$Gender=='m'
     index_f<-dat$Gender=='f'
     index_M<-dat$Gender=='M'
