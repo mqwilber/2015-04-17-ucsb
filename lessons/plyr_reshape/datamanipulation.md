@@ -129,7 +129,6 @@ We can also arrange the rows in a dataset based on whichever column you want, us
 > Go back to your `iris` data. How many setosa have a `Sepal.Length` greater than 5?
 > Which species has the flower with the longest petal length? The shortest?
 
-https://upload.wikimedia.org/wikipedia/en/b/be/Craseonycteris_thonglongyai.JPG
 <img src="https://upload.wikimedia.org/wikipedia/en/b/be/Craseonycteris_thonglongyai.JPG" height="400px" align="middle"  />
 > The bumblebee bat. *Wikipedia Commmons*
 
