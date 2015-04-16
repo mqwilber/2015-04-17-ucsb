@@ -276,7 +276,7 @@ have to go via a character vector. Compare:
     table(exprmt)
     barplot(table(exprmt))
 
->  Question: How can you recreate this plot but by having "control"
+>  **Question**: How can you recreate this plot but by having "control"
 >  being listed last instead of first?
 
 ### Removing levels from a factor
@@ -354,36 +354,31 @@ For example, you can calculate the row-wise or column-wise means with `rowMeans`
 > 
 > 1. Make a new column in `dat` called `min_aneurysm` which is the minimum aneurysms over `Aneurisms_q1-4` for each patient (*Hint*: Try `dat['min_aneurysm'] <- something` for making the new column).  
 > 
-> 2. Write your new data as a csv file called `updated_data.csv` using the function `write.csv(...)` called update
+> 2. Write your new data as a csv file called `updated_data.csv` using the function `write.csv(...)`. 
 > 
-> 3. Read in `updated_data.csv` back into R. 
+> 3. Read in `updated_data.csv` back into R.  Try using the `new_data <- read.csv(file.choose(), header=T)` and see what happens.
 
-
-### 6. Exploratory Plotting!
+### 7. Exploratory Plotting!
 
 We just got an idea of what our aneurysm data looks like by calculating some partial statistics.  We can also do this using some exploratory plots.  Of course, plotting will become one of your most important tools for exploring, interpreting, and communicating your data, but here we will take a moment just to introduce plotting.
 
 Let's create a very quick plot of the `aneurysm` data set using R's default graphics.  First, make sure your data is loaded.  We fixed the m/M and f/F problem in the `dat$Gender` variable earlier, but will do it slightly differently here, by creating a new vector of reformatted genders:
 
-```{r}
-dat<-read.csv("C://Users//Thomas//Documents//2015-04-17-ucsb//data//aneurysm_data_site-1.csv", header = TRUE)
-index_m<-dat$Gender=='m'
-index_f<-dat$Gender=='f'
-index_M<-dat$Gender=='M'
-index_F<-dat$Gender=='F'
+    dat<-read.csv("C://Users//Thomas//Documents//2015-04-17-ucsb//data//aneurysm_data_site-1.csv", header = TRUE)
+    index_m<-dat$Gender=='m'
+    index_f<-dat$Gender=='f'
+    index_M<-dat$Gender=='M'
+    index_F<-dat$Gender=='F'
 
-dat$GenderCorrected<-NULL
-dat$GenderCorrected[index_f]<-"Female"
-dat$GenderCorrected[index_F]<-"Female"
-dat$GenderCorrected[index_m]<-"Male"
-dat$GenderCorrected[index_M]<-"Male"
-```
+    dat$GenderCorrected<-NULL
+    dat$GenderCorrected[index_f]<-"Female"
+    dat$GenderCorrected[index_F]<-"Female"
+    dat$GenderCorrected[index_m]<-"Male"
+    dat$GenderCorrected[index_M]<-"Male"
 
 You can start by telling R to plot the whole data frame, and see what happens:
 
-```{r}
-plot(dat)
-```
+    plot(dat)
 
 R will plot each variable against every other variable, whether or not that makes sense.
 
@@ -407,19 +402,17 @@ Nothing looks suspicious, and it does look like there might be patterns among ge
   
 Scientists tend to make two or three types of plots very frequently: scatter plots, histograms, and boxplots.  For the `aneurysm` data, let's make a scatter plot of Blood Pressure and Age.
 
-####6.1 Scatter Plot
+####7.2 Scatter Plot
 This time, rather than plotting the whole data frame, we will plot only those variables for which we want to see the relationship.
 
-```{r}
-plot(BloodPressure~Age, data=dat)
-```
+    plot(BloodPressure~Age, data=dat)
 
 `plot` takes three arguments to make a very basic plot:  
 
   * The third, 'data' specifies the data frame from which which you are drawing data.
   * The first two are the two variables you want to examine.  They are related by `~` which means something like "BloodPressure with respect to Age".  You'll see that symbol again in later lessons, doing something similar.
 
-####6.2 A little style
+#### 7.3 A little style
 This figure looks OK, certainly useful for exploratory analyses and proofing your data.  But lets add a couple arguments to the `plot()` function to enhance the figure so you can show it to your committee!  Here's a few we like to use when making basic figures for presentation:
   
   * `xlab` and `ylab` allow you to specify character strings to change your axis labels; for example, to remove that `.` and to add your measurement units.
@@ -431,28 +424,24 @@ This figure looks OK, certainly useful for exploratory analyses and proofing you
   
 Let's give that plot some steez:
 
-```{r}
-windows()
-plot(BloodPressure~Age, data=dat,
-     ylab=c("Blood Pressure (mm Hg)"), xlab=c("Age"),
-     cex=2, cex.axis=1.5, cex.lab=1.5, 
-     pch=21, 
-     col="black", bg="grey",
-     xlim=c(11,21), ylim=c(50,200))
-dev.off()
-```
+    windows()
+    plot(BloodPressure~Age, data=dat,
+         ylab=c("Blood Pressure (mm Hg)"), xlab=c("Age"),
+         cex=2, cex.axis=1.5, cex.lab=1.5, 
+         pch=21, 
+         col="black", bg="grey",
+         xlim=c(11,21), ylim=c(50,200))
+    dev.off()
 
 There is a very long list of graphical parameters you can set. Use `?par` to see most of them.  Here, we have moved some of the parameters you set in `plot()` to a new function `par()` that precedes the plot.  
 
-```{r}
-windows()
-par(bg="white", fg="black", cex=1.5)
-plot(BloodPressure~Age, data=dat,
-     ylab=c("Blood Pressure (mm Hg)"), xlab=c("Age"),
-     pch=21, bg="grey",
-     xlim=c(11,21), ylim=c(50,200))
-dev.off()
-```
+    windows()
+    par(bg="white", fg="black", cex=1.5)
+    plot(BloodPressure~Age, data=dat,
+         ylab=c("Blood Pressure (mm Hg)"), xlab=c("Age"),
+         pch=21, bg="grey",
+         xlim=c(11,21), ylim=c(50,200))
+    dev.off()
 
 You can see that this makes your code a little more concise, but it looks a little different now.  Also, the first and last line act to save and reset your default graphical parameters so that you have a clean slate for your next plot.
 
@@ -460,12 +449,10 @@ You can see that this makes your code a little more concise, but it looks a litt
 > Don't be afraid to mix tools!  After learning to make beautiful figures with R, you may still find yourself trying to annotate figures or combine them in complex ways.  You can do most of this in R, but sometimes it is faster and looks better if you import your figures into a graphics program like Powerpoint or Photoshop.
 
 
-####6.2
+#### 7.4 Histograms
 You can also make a histogram using `hist`:
 
-```{r}
-hist(dat$BloodPressure)
-```
+    hist(dat$BloodPressure)
 
 A few notes about `hist()`:
   
@@ -473,24 +460,24 @@ A few notes about `hist()`:
   * R automatically sets the breaks; you may adjust them using the `breaks=` argument, which accepts a vector, e.g. `hist(dat$BloodPressure, breaks=c(50,75,100,125,150,175,200))`
 
 ####6.3 Saving/Exporting that figure
-If you are going to use a figure in a presentation or paper, you could copy and paste it, but saving/exporting it is programable and reproducible, and allows you to control size, resolution, and file type.
+If you are going to use a figure in a presentation or paper, you could copy and paste it, but saving/exporting it is programmable and reproducible, and allows you to control size, resolution, and file type.
 
 To write a figure to a file, you:
 
   1. open a plotting 'device' and specify the file path
   2. run the plot function
   3. close the device:
+
+Like this
   
-```{r}
-jpeg("C:/Users/Thomas/Desktop/Figure_1.jpg")         #or whatever your file path is
-plot(BloodPressure~Age, data=dat,
-     ylab=c("Blood Pressure (mm Hg)"), xlab=c("Age"),
-     cex=2, cex.axis=1.5, cex.lab=1.5, 
-     pch=21, 
-     col="black", bg="grey",
-     xlim=c(11,21), ylim=c(50,200))
-dev.off()
-```
+    jpeg("C:/Users/Thomas/Desktop/Figure_1.jpg")         #or whatever your file path is
+    plot(BloodPressure~Age, data=dat,
+         ylab=c("Blood Pressure (mm Hg)"), xlab=c("Age"),
+         cex=2, cex.axis=1.5, cex.lab=1.5, 
+         pch=21, 
+         col="black", bg="grey",
+         xlim=c(11,21), ylim=c(50,200))
+    dev.off()
 
 You won't see the plot produced by this code, until you open the file you just created.
 
@@ -506,7 +493,7 @@ You won't see the plot produced by this code, until you open the file you just c
 
 
 
-### 7. Combining concepts: A full analysis
+### 8. Combining concepts: A full analysis
 
 Now that you are familiar with the basics of R computing, reading and writing data, and plotting let's work through an analysis work flow you might encounter in your everyday work. Here is the **goal**.
 
@@ -541,11 +528,11 @@ Here's at outline of how this problem might look in pseudocode. Let's build on t
 
     }
 
-#### 7.1 Load in your data
+#### 8.1 Load in your data
 
 > **Exercise 5**: Within the function `analyze`, use `read.csv` to load in the `filename` and assign it to the variable `tdata`. What is the `class` of this filename? Test that your function works.
 
-#### 7.2 Clean your data
+#### 8.2 Clean your data
 
 Let's reuse the code that we previously wrote in this lesson to clean our data.
 
@@ -559,7 +546,7 @@ Let's test if our function works.
  
 >**Exercise 6**: Make your code more readable by making the cleaning step a separate function of its own called `clean_data` that takes in a dataframe as an argument, cleans the data set and returns the cleaned dataset. *Hint*:  Make sure you define the `clean_data` function *before* the `analyze` function.
 
-#### 7.3 Make a new variable
+#### 8.3 Make a new variable
 
 We now want to define a new variable called `avg_an` in our dataframe which is the average over all four aneurysm columns.  Let's just copy the code we used before
 
@@ -569,11 +556,11 @@ or
 
     tdata['avg_an'] <- rowMeans(tdata[, 6:9])
 
-#### 7.4 Visualize your data with a few plots
+#### 8.4 Visualize your data with a few plots
 
 > **Exercise 7**: Choose one or two of the plots you learned and plot the data in some way to visualize whether Gender, Treatment, and/or BloodPressure might be having some effect of average number of aneurysms per person.  Any plot will do!
 
-#### 7.5 Fit a statistical model to the data and return results
+#### 8.5 Fit a statistical model to the data and return results
 
 R is an amazing statistical environment that you can begin to explore once you understand the inner workings of R. To answer our question we are going to use two of the thousands of statistical functions that R has to offer: `lm` (Linear Model) and `anova`.
 
@@ -584,7 +571,7 @@ R is an amazing statistical environment that you can begin to explore once you u
 
 Now you have a function that performs your analysis on a single dataset! 
 
-#### 7.6 Repeat for all 5 datasets 
+#### 8.6 Repeat for all 5 datasets 
 
 We know how to repeat ourselves - use loops. In the case we might want to loop over the all 5 datasets and use our `analyze` function on each.  But how do we get the names for these data sets?
 
