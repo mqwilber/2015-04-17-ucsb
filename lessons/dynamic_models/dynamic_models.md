@@ -37,7 +37,7 @@ For this exercise, we're going to use the example of a SIR (Susceptible-Infected
 
 <img src="http://i.imgur.com/rdFWsJJ.png"/>
 
-<center> <img src="http://jmbe.asm.org/asm/index.php/jmbe/article/viewFile/429/html/4674" width="300" height="80" /> </center>
+<center> <img src="http://jmbe.asm.org/asm/index.php/jmbe/article/viewFile/429/html/4674"/> </center>
 
 <right> [source](http://jmbe.asm.org/asm/index.php/jmbe/article/viewFile/429/html/4674) </right>
 
