@@ -15,7 +15,7 @@ For our example, we will look at our dataset `iris`, which is a [famous statisti
 
 <img src="http://upload.wikimedia.org/wikipedia/commons/5/56/Kosaciec_szczecinkowaty_Iris_setosa.jpg" height="400px" align="middle"  />
 
-> *Iris setosa*, one of the species you will be looking at.
+> *Iris setosa*, one of the species you will be looking at. *Wikipedia Commmons*
 
 
 This data seems perfectly formatted for many of the plots you conducted. Each individual has a single row, with columns corresponding to the individual measurements as well as the species. Now let's now do a boxplot, comparing the distribution of `Sepal.Length` between each species:
@@ -83,18 +83,27 @@ As an exercise, let's put our data back to its original shape using`dcast`. This
 
 This forumla can be a bit unintuitive at first, so don't feel discouraged if you don't get it the first time!
 
-> ### EXERCISE 1 - Some reshape2 trick with aneurysm
+> ### EXERCISE 1 - Reshaping Aneurysm.
 > open up `aneurysm_data_site-1.csv`. In four individual subplots divided by aneurysm condition (`Aneurisms_q1, q2, q3, q4`), Plot the `Blood Pressure` against the respective aneurysm condition. Color the scatterplot based on the age of the patient. 
 >  When you are done, retrace your steps using dcast() to `reshape` your melted dataframe back into its original shape. 
 
 Summarizing and Operating: the dPlyr world
 ---------------------------------
 
-For our next section, let's load the file `mammal_stats.csv` from the `data` folder. This is a subset of a *["species-level database of extant and recently extinct mammals](http://esapubs.org/archive/ecol/E090/184/)*.  
+For our next section, let's load the file `mammal_stats.csv` from the `data` folder. This is a subset of a *["species-level database of extant and recently extinct mammals](http://esapubs.org/archive/ecol/E090/184/)*. 
 
-    mammals <- read.csv("mammal_stats.csv")
+So far we've successfully loaded data by navigating to the directory and typing the name into `read.csv()`. But what if we're writing the script for another computer, or for a collaborator that may have the data in a different location? We can instead have the script pop up a window to select their data from. 
+
+    # Instead of this: 
+    # mammals <- read.csv("mammal_stats.csv")
+    # Use this: 
+    mammals <- read.csv(filename = file.choose())
+    #mammals.directory=dirname(filename)
+    #mammals.filename=basename(filename)
     
-You'll notice that as we work on larger datasets, viewing and visualizing the entire dataset can become more and more difficult. Similarly, analyzing the datasets becomes more complex. Is there a good way to be able to summarize datasets succinctly, and to be able to analyze subsets of a dataset automatically? 
+The function `file.choose()` is what pulls up the window and lets you select a file. It then returns that file name and directory, which gets used by `read.csv()`. The next two rows are optional, but let you extract the directory and the file name of the csv that you pulled from. You can use this when outputting your results by naming them based on the input (Example: input file name is "data1.csv", output file name is "data1_processed.csv"). 
+    
+Alright, back to mammals! You'll notice that as we work on larger datasets, viewing and visualizing the entire dataset can become more and more difficult. Similarly, analyzing the datasets becomes more complex. Is there a good way to be able to summarize datasets succinctly, and to be able to analyze subsets of a dataset automatically? 
 
 The answer lies in a handy library called `dplyr`. `dplyr` will allow us to perform more complex operations on datasets in intuitive ways.
 
@@ -129,7 +138,10 @@ We can also arrange the rows in a dataset based on whichever column you want, us
 > Go back to your `iris` data. How many setosa have a `Sepal.Length` greater than 5?
 > Which species has the flower with the longest petal length? The shortest?
 
-With these large datasets, `dplyr` lets you quickly summarize the data. It operates on a principle called *split - apply - recombine* : we will *split* up the data, *apply* some sort of operation, and *combine* the results to display them. Suppose we want to find the average body masss of each order. We first want to *split* up the data by order using the function `group_by()`, *apply* the `mean()` function to the column `adult_body_mass_g`, and report all of the results using the function `summarise()`. 
+<img src="https://upload.wikimedia.org/wikipedia/en/b/be/Craseonycteris_thonglongyai.JPG" height="400px" align="middle"  />
+> The bumblebee bat. *Wikipedia Commmons*
+
+With these large datasets, `dplyr` lets you quickly summarize the data. It operates on a principle called *[split - apply - recombine](http://citeseerx.ist.psu.edu/viewdoc/download?doi=10.1.1.182.5667&rep=rep1&type=pdf)* : we will *split* up the data, *apply* some sort of operation, and *combine* the results to display them. Suppose we want to find the average body masss of each order. We first want to *split* up the data by order using the function `group_by()`, *apply* the `mean()` function to the column `adult_body_mass_g`, and report all of the results using the function `summarise()`. 
 
     a <- group_by(mammals, order)
     summarize(a, mean_mass = mean(adult_body_mass_g, na.rm = TRUE))
@@ -166,7 +178,7 @@ we would write
 
 <img src="http://uploads7.wikiart.org/images/rene-magritte/the-treachery-of-images-this-is-not-a-pipe-1948(2).jpg" height="400px" align="middle"  />
 
->  The package is named after René Magritte, a surrealist painter who painted "The Treachery of Images" above. 
+>  The package is named after René Magritte, a surrealist painter who painted "The Treachery of Images" above. This painting is currently on display at the LA County Museum of Art! *Wikipedia Commmons*
 
 This can make it easy to follow the logical workflow, which makes more and more sense as your operations become more complex. Suppose we want to find the organisms with the biggest mass relative to the rest of its order. We want to split the data by `order`, apply the mutate functions from above, sort by `normalized_mass`, and only display the `species`, `adult_body_mass_g`, and `normalized_mass` columns. In longhand it would look like this:
 
