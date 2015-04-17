@@ -232,7 +232,7 @@ on this concept later) - `rm -r directory-name` will delete a directory called
 As you perform the above steps, there are two very useful productivity 
 shortcuts for working in the shell that you should try out. The first is called 
 tab completion. After you create the `workshop` directory, for example, try 
-typing `cd bo` and then hitting tab - you'll see that the shell fills in the 
+typing `cd wo` and then hitting tab - you'll see that the shell fills in the 
 rest of the directory or file name for you (if there are multiple options that 
 start with those letters, your shell will either show you all of the options or 
 do nothing - in either case, you'll need to enter more letters and press tab 
