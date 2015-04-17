@@ -367,8 +367,8 @@ Let's create a very quick plot of the `aneurysm` data set using R's default grap
     dat<-read.csv("aneurysm_data_site-1.csv", header = TRUE)
     index_m<-dat$Gender=='m'
     index_f<-dat$Gender=='f'
-    dat$GenderCorrected[index_f]<-"F"
-    dat$GenderCorrected[index_m]<-"M"
+    dat$Gender[index_f]<-"F"
+    dat$Gender[index_m]<-"M"
     dat<-droplevels(dat)
 
 You can start by telling R to plot the whole data frame, and see what happens:
