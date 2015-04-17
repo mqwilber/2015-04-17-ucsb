@@ -362,20 +362,14 @@ For example, you can calculate the row-wise or column-wise means with `rowMeans`
 
 We just got an idea of what our aneurysm data looks like by calculating some partial statistics.  We can also do this using some exploratory plots.  Of course, plotting will become one of your most important tools for exploring, interpreting, and communicating your data, but here we will take a moment just to introduce plotting.
 
-Let's create a very quick plot of the `aneurysm` data set using R's default graphics.  First, make sure your data is loaded.  We fixed the m/M and f/F problem in the `dat$Gender` variable earlier, but will do it slightly differently here, by creating a new vector of reformatted genders:
+Let's create a very quick plot of the `aneurysm` data set using R's default graphics.  First, make sure your data is loaded.  We fixed the m/M and f/F problem in the `dat$Gender` variable earlier, so it should be formatted fine, but just in case:
 
     dat<-read.csv("aneurysm_data_site-1.csv", header = TRUE)
     index_m<-dat$Gender=='m'
     index_f<-dat$Gender=='f'
-    index_M<-dat$Gender=='M'
-    index_F<-dat$Gender=='F'
-
-    dat$GenderCorrected<-NULL
-    dat$GenderCorrected[index_f]<-"Female"
-    dat$GenderCorrected[index_F]<-"Female"
-    dat$GenderCorrected[index_m]<-"Male"
-    dat$GenderCorrected[index_M]<-"Male"
-    dat$GenderCorrected<-as.factor(dat.GenderCorrected)
+    dat$GenderCorrected[index_f]<-"F"
+    dat$GenderCorrected[index_m]<-"M"
+    dat<-droplevels(dat)
 
 You can start by telling R to plot the whole data frame, and see what happens:
 
