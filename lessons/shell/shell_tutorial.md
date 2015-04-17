@@ -569,8 +569,7 @@ integrate all that we've learned so far.
 >1. `cd` to your desktop and create a directory called `classes`.
 >2. Using `nano`, create two text files in this directory, `fall.txt` and 
 >   `spring.txt`, which contain one line for the title and units of each class 
->   that you took last fall and that you will take this spring. For example, 
->   `Intro Bio (3)`.
+>   that you took (or wanted to take) last fall and that you took/are taking this spring/winter. For example,  `Quantitative Bio (3)`.  If you can't remember or didn't take any, just make some up!
 >3. Using pipes, redirects, and/or the programs that we've mentioned so far, 
 >   save a file `3_unit_classes.txt` that contains a single number giving the 
 >   count of the number of classes you will take this year that are exactly 3 
