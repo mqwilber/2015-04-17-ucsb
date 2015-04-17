@@ -388,7 +388,7 @@ Though these plots are messy, tiny, and potentially meaningless, they allow you 
   
   * are there wild outliers that might be typos?  __No.__
   * are all your variables coded correctly - typos, number vs. factor? __Looks like it.__
-    * They may not it you did not chance "m" and "f" to "M" and "F" in Exercise 1.
+    * They may not if you did not change "m" and "f" to "M" and "F" in Exercise 1.
   * are you excited about any of those patterns?  __Well, are ya, tiger?__
   
 Nothing looks suspicious, and it does look like there might be patterns among gender, blood pressure, and some of the aneurysm variables.
