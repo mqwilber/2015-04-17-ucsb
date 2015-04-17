@@ -375,6 +375,7 @@ Let's create a very quick plot of the `aneurysm` data set using R's default grap
     dat$GenderCorrected[index_F]<-"Female"
     dat$GenderCorrected[index_m]<-"Male"
     dat$GenderCorrected[index_M]<-"Male"
+    dat$GenderCorrected<-as.factor(dat.GenderCorrected)
 
 You can start by telling R to plot the whole data frame, and see what happens:
 
