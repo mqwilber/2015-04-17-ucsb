@@ -11,6 +11,8 @@ Reshaping data in R
 
 [Download data files here](../../data/mammal_stats.csv)
 
+[Get the exercise answers](datamanipulation_answers.R)
+
 As scientists, we format datasheets to make our data entry intuitive. However, different forms of data analysis in R can require data in different formats. Manipulating data for various analyses and visualization can be facilitated by the package `reshape2`.
 
 For our example, we will look at our dataset `iris`, which is a [famous statistics dataset](http://rcs.chemometrics.ru/Tutorials/classification/Fisher.pdf)  that measures the length and width of both sepals and petals on three species of irises (50 individuals each, 150 flowers total). You used `iris` for your previous ggplot lesson. 
