@@ -114,6 +114,10 @@ The function is structured like this:
 For example, for day 3/31/2012 in the Southern CA Bight we would type:
 
     SoCal_2012 <-extractOISST1day(sst_2012,lsmask,239,243.25,32.5,34.75)
+
+We can plot our results using the plotOISST function   
+
+    plotOISST(SoCal_2012) #Plot SST 2012
     
 We would then repeat this for the next three timesteps  
 
@@ -121,7 +125,7 @@ We would then repeat this for the next three timesteps
     SoCal_2014 <-extractOISST1day(sst_2014,lsmask,239,243.25,32.5,34.75)
     SoCal_2015 <-extractOISST1day(sst_2015,lsmask,239,243.25,32.5,34.75)
 
-We can plot our results using the plotOISST function
+and plot each one
 
     plotOISST(SoCal_2012) #Plot SST 2012
     plotOISST(SoCal_2013) #Plot SST 2013
