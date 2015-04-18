@@ -454,7 +454,7 @@ A few notes about `hist()`:
   * For whatever reason, `hist()` does not take a data argument like `plot()` does.  You must specify the vector as a part of the data frame using the `$`: `dat$BloodPressure`.
   * R automatically sets the breaks; you may adjust them using the `breaks=` argument, which accepts a vector, e.g. `hist(dat$BloodPressure, breaks=c(50,75,100,125,150,175,200))`
 
-####6.3 Saving/Exporting that figure
+#### 7.5 Saving/Exporting that figure
 If you are going to use a figure in a presentation or paper, you could copy and paste it, but saving/exporting it is programmable and reproducible, and allows you to control size, resolution, and file type.
 
 To write a figure to a file, you:
@@ -485,7 +485,6 @@ You won't see the plot produced by this code, until you open the file you just c
 >>   *hint: Google "boxplot R" to find the boxplot function... or guess, its an obvious one*
 > 
 >2. For a challenge, save your figure, open it outside R, and show it to someone.
-
 
 
 ### 8. Combining concepts: A full analysis
