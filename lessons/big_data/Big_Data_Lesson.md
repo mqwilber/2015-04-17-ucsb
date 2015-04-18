@@ -127,7 +127,6 @@ We would then repeat this for the next three timesteps
 
 and plot each one
 
-    plotOISST(SoCal_2012) #Plot SST 2012
     plotOISST(SoCal_2013) #Plot SST 2013
     plotOISST(SoCal_2014) #Plot SST 2014
     plotOISST(SoCal_2015) #Plot SST 2015
