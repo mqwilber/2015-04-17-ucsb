@@ -100,7 +100,12 @@ Let's simulate the model to see what the results are. Remember our ODE solver (`
 
     results <- ode(x_init, t, SIR.model, params0)
 
-R has simulated our model for 100 days and stored the values in the matrix results. The column order is: 1) time, 2) state variable 1 (S), 3) state variable 2 (I), and 4) state variable 3 (R).
+R has simulated our model for 100 days and stored the values in the matrix results. The column order is: 1) time, 2) state variable 1 (S), 3) state variable 2 (I), and 4) state variable 3 (R). Let's rename the columns to reflect that and plot the output:
+
+    colnames(results) <- c("time", "S", "I", "R")
+    plot(results)
+
+It may be easiest to watch how the S, I, and R populations change through time by looking at them on the same plot, as opposed to a multi-paneled figure:
 
     plot(results[,1], results[,2], type="l", col="black", ylab="S, I, and R 
         individuals", xlab="Time (days)", main="SIR Model Output", ylim=c(0, 20), lwd=1.25)
