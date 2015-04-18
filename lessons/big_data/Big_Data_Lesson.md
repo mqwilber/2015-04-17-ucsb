@@ -22,7 +22,7 @@ These skills can be used to create longer time series and convert data from vari
 Background
 ------
  1. *What is big data?*   
-    Big data is a broad term for datasets that are so large or complex that they defy traditional data processing applications. Today we are going to focus on remotely sensed images. Luckily for us, while these data matrices are large, most are neatly organized by government agencies and many are freely available
+    Big data is a broad term for datasets that are so large or complex that they defy traditional data processing applications. Today we are going to focus on remotely sensed data. Luckily for us, while these data matrices are large, most are neatly organized by government agencies and many are freely available
 
  2. *How can we use it for our purposes?*  
  Most of us could use time series of environmental variables to examine how organisms or systems respond to these temporal and spatial changes. We don't have unlimited time and money to outfit every site with various sensors, however we can get many of these environmental variables from existing resources online. We can track changing vegetation greenness with NDVI, photosynthetically active radiation, land and sea surface temperature, or phytoplankton biomass, etc.
