@@ -84,7 +84,7 @@ Then we define the differential equations the describe how the state variables c
     dR <- gamma*I
     list(c(dS,dI,dR))
 
-Let's say that our first guess of &#946; is 0.001 and &#947; is 0.5. Not that in the derivative, we defined the first parameter in our parameter vector as &#946; and the second as &#947; - make sure you order it in the same way.
+Let's set our parameter values: &#946; to 0.001 and &#947; to 0.5. Note that in the derivative, we defined the first parameter in our parameter vector as &#946; and the second as &#947; - make sure you order it in the same way.
 
     params0 <- c(0.001, 0.05)
 
@@ -92,7 +92,7 @@ Now let's define the initial conditions (initial values of the state variables).
 
     x_init <- c(20, 10, 5)
 
-Let's simulate the model for 14 days:
+Let's run the model for 100 days:
 
     t <- seq(1:100)
 
@@ -100,7 +100,7 @@ Let's simulate the model to see what the results are. Remember our ODE solver (`
 
     results <- ode(x_init, t, SIR.model, params0)
 
-R has simulated our model for 14 days and stored the values in the matrix results. The column order is: 1) time, 2) state variable 1 (S), 3) state variable 2 (I), and 4) state variable 3 (R).
+R has simulated our model for 100 days and stored the values in the matrix results. The column order is: 1) time, 2) state variable 1 (S), 3) state variable 2 (I), and 4) state variable 3 (R).
 
     plot(results[,1], results[,2], type="l", col="black", ylab="S, I, and R 
         individuals", xlab="Time (days)", main="SIR Model Output", ylim=c(0, 20), lwd=1.25)
@@ -131,7 +131,7 @@ You can create an R dataframe named “fludata” using the command:
     fludata <- data.frame(day,flu)
 
 ### Fitting continuous-time models to data
-If we can assume that the only source of variability in our data is measurement error (variability imposed by our imperfect observation of the world) and that the measurement error is symmetrically distributed with a constant variance around the mean of our data, we can use the method of **least squares** to estimate model parameters. In the case that errors are normally distributed with a Gaussian distribution then least squares estimates are also the **maximum likelihood** estimates.
+If we can assume that the only source of variability in our data is **measurement error** (variability imposed by our imperfect observation of the world) and that the measurement error is symmetrically distributed with a constant variance around the mean of our data, we can use the method of **least squares** to estimate model parameters. In the case that errors are normally distributed with a Gaussian distribution then least squares estimates are also the **maximum likelihood** estimates.
 
 Now we set up a function that will calculate the sum of the squared differences between the observations and the model at any parameterization (more commonly known as **sum of squared errors**). First we'll define our initial values again and our starting values of the parameters (our best guess of the parameter values we're estimating):
 
@@ -152,7 +152,7 @@ Next the function to calculate the sum of squared errors:
      sse <- sum((out$I-cases)^2)
     }
 
-Just like the model function we defined above, we again need to give this function three inputs: parameter values, initial values of the state variables, and time. This time we also give the SSE function data with which to minimize the sum of squared error (`data[,2]``).
+Just like the model function we defined above, we again need to give this function three inputs: parameter values, initial values of the state variables, and time. This time we also give the SSE function data with which to minimize the sum of squared error (`data[,2]`).
 
 The lines:
 
@@ -179,7 +179,7 @@ To find the values of &#946; and &#947; that simultaneously minimize the sums of
     fit0 <- optim(params0, sse.sir, data=fludata)
     fit0$par
 
-The `optim` function requires three inputs: an initial set of parameters to optimize over, a function to be minimized (or maximized), and data to compare to the model function. We are storing the results of this optimization procedure in a structure that we are calling `fit0`. `fit0$par` gives the best set of parameters found - the algorithm found the lowest value of sse for &#946; = 0.00257 and &#9467; = 0.473.
+The `optim` function requires three inputs: an initial set of parameters to optimize over, a function to be minimized (or maximized), and data to compare to the model function. We are storing the results of this optimization procedure in a structure that we are calling `fit0`. `fit0$par` gives the best set of parameters found - the algorithm found the lowest value of sse for &#946; = 0.00257 and &#947; = 0.473.
 
 `fit0$value` gives the value of the function (in this case the sum of squared errors) corresponding to the estimated parameters. In our case we get:
 
@@ -203,6 +203,8 @@ Finally, we can plot the model prediction with these best-fit parameters (the re
     legend("topright", c("Model", "Data"), col=c("black", "red"), lty=c(1,5))
     
 >### Exercise 2:
->Let's return to the logistic growth equation we discussed in the Intro to R lesson yesterday. Simulate the logistic growth model for 120 hours and then fit the model to data on the nitrite limited growth of the microalga *Chlamydomonas* from Cunningham and Maas (1978) (Get the data by clicking [here](../../data/CunninghamMaasAlgaeData.csv): 'CunninghamMaasAlgaeData.csv'). Cunningham and Maas grew a freshwater green algae,  We're thinking about models in continuous (not discrete) time, and the model for logistic growth of a popoulation (N):
->$$ dN/dt = rN (1 - N/K) $$
+>Let's return to the logistic growth equation we discussed in the Intro to R lesson yesterday. Simulate the logistic growth model for 120 hours and then fit the model to data on the nitrite limited growth of the microalga *Chlamydomonas* from Cunningham and Maas (1978) (Get the data by clicking [here](../../data/CunninghamMaasAlgaeData.csv): 'CunninghamMaasAlgaeData.csv'). We're thinking about models in continuous (not discrete) time, and the model for logistic growth of a popoulation (N):
+
+>dN/dt = rN (1 - N/K)
+
 >Begin by simulating the logistic growth model with a starting population of 6 cells/ &#956; L, a growth rate of 0.1 1/hr and a carrying capacity of 900 cells/&#956;L. Then estimate the parameters 'r' and 'K' using the data provided from Cunningham and Maas (1978) ('CunninghamMaasAlgaeData.csv') and a SSE method (use the parameter values you used to simulate the model as your first guess). Show the fit of the model to the data with a plot.
