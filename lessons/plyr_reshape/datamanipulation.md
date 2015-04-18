@@ -141,6 +141,7 @@ We can also arrange the rows in a dataset based on whichever column you want, us
 > Which species has the flower with the longest petal length? The shortest?
 
 <img src="https://upload.wikimedia.org/wikipedia/en/b/be/Craseonycteris_thonglongyai.JPG" height="400px" align="middle"  />
+
 > The bumblebee bat. *Wikipedia Commmons*
 
 With these large datasets, `dplyr` lets you quickly summarize the data. It operates on a principle called *[split - apply - recombine](http://citeseerx.ist.psu.edu/viewdoc/download?doi=10.1.1.182.5667&rep=rep1&type=pdf)* : we will *split* up the data, *apply* some sort of operation, and *combine* the results to display them. Suppose we want to find the average body masss of each order. We first want to *split* up the data by order using the function `group_by()`, *apply* the `mean()` function to the column `adult_body_mass_g`, and report all of the results using the function `summarise()`. 

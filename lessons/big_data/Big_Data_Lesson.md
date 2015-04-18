@@ -9,8 +9,8 @@ title: Big Data with R
 Before we start this lesson we will have to install packages ncdf and fields    
 
     install.packages("ncdf")  
-    library(ncdf)  
-    install.packages("fields")  
+    install.packages("fields") 
+    library(ncdf) 
     library(fields)  
     
 Goals
@@ -22,15 +22,13 @@ These skills can be used to create longer time series and convert data from vari
 Background
 ------
  1. *What is big data?*   
-    Big data is a broad term for datasets that are so large or complex that they defy traditional data processing applications. Today we are going to focus on remotely sensed images. Luckily for us, while these data matrices are large, most are neatly organized by government agencies and many are freely available
+    Big data is a broad term for datasets that are so large or complex that they defy traditional data processing applications. Today we are going to focus on remotely sensed data. Luckily for us, while these data matrices are large, most are neatly organized by government agencies and many are freely available
 
  2. *How can we use it for our purposes?*  
  Most of us could use time series of environmental variables to examine how organisms or systems respond to these temporal and spatial changes. We don't have unlimited time and money to outfit every site with various sensors, however we can get many of these environmental variables from existing resources online. We can track changing vegetation greenness with NDVI, photosynthetically active radiation, land and sea surface temperature, or phytoplankton biomass, etc.
     
  3. *Why can’t I just download it?*  
- We can and we can't. Today we will be talking about data collected daily from satellites. These sensors on board satellite vehicles measure Earth's radiance or emitted energy in digital number (DN) units, the number of which vary depending on the bit number of the sensor. For example, an 8-bit sensor (like Landsat 5 TM) measures radiance in a particular band as integers between 0-255, or 2^8. Also for ease of data storage, these large datasets may be stored as 16-bit signed or unsigned integers. This means that most of the time the numbers you see aren't in the units you are really interested in  
-
- Many of these data files are stored in unfamiliar file types like hdf4, hdf5, and netCDF. These types of files contain both the data and the metadata, which will allow you to convert these DN's into the units you are intestest in. This usually means that the metadata will contain an equation to convert these integers to real units, as well as spatial information, like coordinates and elevation, or temporal information, like the time and day the image was acquired
+ We can and we can't. Today we will be talking about data collected daily from satellites. These sensors on board satellite vehicles measure Earth's radiance or emitted energy in digital number (DN) units, the number of which vary depending on the bit number of the sensor. For example, an 8-bit sensor (like Landsat 5 TM) measures radiance in a particular band as integers between 0-255, or 2^8. Also for ease of data storage, these large datasets may be stored as 16-bit signed or unsigned integers. This means that most of the time the numbers you see aren't in the units you are really interested in. Many of these data files are stored in unfamiliar file types like hdf4, hdf5, and netCDF. These types of files contain both the data and the metadata, which will allow you to convert these DN's into the units you are intestest in. This usually means that the metadata will contain an equation to convert these integers to real units, as well as spatial information, like coordinates and elevation, or temporal information, like the time and day the image was acquired
  
  4. *Why are you still talking Tom? I want to get started!*  
  OK!
@@ -123,7 +121,7 @@ We would then repeat this for the next three timesteps
     SoCal_2014 <-extractOISST1day(sst_2014,lsmask,239,243.25,32.5,34.75)
     SoCal_2015 <-extractOISST1day(sst_2015,lsmask,239,243.25,32.5,34.75)
 
-We can plot our results using the plotOISST function
+We can plot our results using the plotOISST function  
 
     plotOISST(SoCal_2012) #Plot SST 2012
     plotOISST(SoCal_2013) #Plot SST 2013
@@ -135,7 +133,10 @@ We can plot our results using the plotOISST function
 We can find the mean SST for each 31st day of March for each year by typing
 
     sst.list <- list(SoCal_2012, SoCal_2013, SoCal_2014, SoCal_2015)
-    sapply(sst.list, function(x){mean(x, na.rm=TRUE)})
+    mean_temps <- sapply(sst.list, function(x){mean(x, na.rm=TRUE)})
+    years <- as.integer(2012:2015)
+
+    plot(years, mean_temps, type = "l")
     
 This forms a list of the four variables we created and applies a function to find the mean of each
 
@@ -163,15 +164,16 @@ We can then define a vector and write short for loop to find the mean SST for th
     for (i in 1:365 ) {
     SST_2014[i] <- mean(A2014[,,i],na.rm=TRUE)
     }
-    plot(SST_2014)
+    Days <- as.integer(1:365)
+    plot(Days, SST_2014, type = "l")
 
-If you were interested in the pixel directly over your study plot you would find the pixel closest to your site. For example, if you study Mohawk Reef (34.394N, 240.27E), the closest pixel is found at row 3, column 7. Again write a short for loop specifying that cell and run it for all dates
+If you were interested in the pixel directly over your study plot you would find the pixel closest to your site. For example, if you study Mohawk Reef (34.394N, 240.27E), the closest pixel is found at row 3, column 7. **Rows before columns, ALWAYS**. Again write a short for loop specifying that cell and run it for all dates
 
     Mohawk_2014 <- numeric(365)
     for (i in 1:365 ) {
     Mohawk_2014[i] <- mean(A2014[3,7,i],na.rm=TRUE)
     }
-    plot(Mohawk_2014)
+    plot(Days, Mohawk_2014, type = "l")
 
 THANK YOU!
 ----
