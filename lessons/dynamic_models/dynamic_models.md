@@ -8,7 +8,7 @@ title: Dynamic Models
 **Supplementary Material**: [Data for Exercise 2](../../data/CunninghamMaasAlgaeData.csv), [Answers to exercises](dynamic_models_answers.R)
 
 ### Introduction to Solving Ordinary Differential Equations
-The function 'lsoda' in the R package, deSolve, calculates numerical solutions to systems of first order ordinary differential equations for a given set of parameter values and initial conditions (this is one of a number of ODE solving packages in R).
+The function 'ode' in the R package, deSolve, calculates numerical solutions to systems of first order ordinary differential equations for a given set of parameter values and initial conditions (this is one of a number of ODE solving packages in R).
 
 The first thing you need to do is load the deSolve package.
 
@@ -20,12 +20,12 @@ There are two steps involved in obtain numerical solutions to differential equat
 1. Write the derivative function (`func`), that describes the right hand side of the differential equations.
 `func` must take as its first three arguments the current time (t), the current values of the variables (y), and a vector containing the parameter values. It must also return a list (using list(item1, item2, item3), where the items can be any R objects) whose elements are a vector of ODEs (see examples below).
 
-2. Use `lsoda` to solve the differential equations.
-`lsoda`'s main arguments are the starting values (`y`), the times at which you want to compute the values of the variables you are interested in (`times`), the derivative function (`func`), and some parameters (`parms`).
+2. Use `ode` to solve the differential equations.
+`ode`'s main arguments are the starting values (`y`), the times at which you want to compute the values of the variables you are interested in (`times`), the derivative function (`func`), and some parameters (`parms`).
 
 The function call will look something like
 
-    lsoda(initial values, time interval, function, parameters)
+    ode(initial values, time interval, function, parameters)
 
 ### SIR (Susceptible-Infected-Resistant) Model Example
 
@@ -96,11 +96,16 @@ Let's run the model for 100 days:
 
     t <- seq(1:100)
 
-Let's simulate the model to see what the results are. Remember our ODE solver (`lsoda`)'s inputs from previously:
+Let's simulate the model to see what the results are. Remember our ODE solver (`ode`)'s inputs from previously:
 
     results <- ode(x_init, t, SIR.model, params0)
 
-R has simulated our model for 100 days and stored the values in the matrix results. The column order is: 1) time, 2) state variable 1 (S), 3) state variable 2 (I), and 4) state variable 3 (R).
+R has simulated our model for 100 days and stored the values in the matrix results. The column order is: 1) time, 2) state variable 1 (S), 3) state variable 2 (I), and 4) state variable 3 (R). Let's rename the columns to reflect that and plot the output:
+
+    colnames(results) <- c("time", "S", "I", "R")
+    plot(results)
+
+It may be easiest to watch how the S, I, and R populations change through time by looking at them on the same plot, as opposed to a multi-paneled figure:
 
     plot(results[,1], results[,2], type="l", col="black", ylab="S, I, and R 
         individuals", xlab="Time (days)", main="SIR Model Output", ylim=c(0, 20), lwd=1.25)
