@@ -9,7 +9,7 @@ title: Data Manipulation - reshape2 and plyr
 Reshaping data in R
 -----
 
-[Download data files here](../../data/datamanipulation.zip)
+[Download data files here](../../data/mammal_stats.csv)
 
 As scientists, we format datasheets to make our data entry intuitive. However, different forms of data analysis in R can require data in different formats. Manipulating data for various analyses and visualization can be facilitated by the package `reshape2`.
 
