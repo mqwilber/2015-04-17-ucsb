@@ -10,7 +10,6 @@ Before we start this lesson we will have to install packages ncdf and fields
 
     install.packages("ncdf")  
     install.packages("fields") 
-    
     library(ncdf) 
     library(fields)  
     
