@@ -164,7 +164,8 @@ We can then define a vector and write short for loop to find the mean SST for th
     for (i in 1:365 ) {
     SST_2014[i] <- mean(A2014[,,i],na.rm=TRUE)
     }
-    plot(SST_2014, type = "l")
+    Days <- as.integer(1:365)
+    plot(Days, SST_2014, type = "l")
 
 If you were interested in the pixel directly over your study plot you would find the pixel closest to your site. For example, if you study Mohawk Reef (34.394N, 240.27E), the closest pixel is found at row 3, column 7. **Rows before columns, ALWAYS**. Again write a short for loop specifying that cell and run it for all dates
 
@@ -172,7 +173,7 @@ If you were interested in the pixel directly over your study plot you would find
     for (i in 1:365 ) {
     Mohawk_2014[i] <- mean(A2014[3,7,i],na.rm=TRUE)
     }
-    plot(Mohawk_2014, type = "l")
+    plot(Days, Mohawk_2014, type = "l")
 
 THANK YOU!
 ----
