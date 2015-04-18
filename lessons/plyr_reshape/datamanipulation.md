@@ -4,10 +4,12 @@ root: ../..
 title: Data Manipulation - reshape2 and plyr
 ---
 
-*Prepared by Umihiko Hoshijima, Inspiration/Material from Sean Anderson in [Reshape2](http://seananderson.ca/2013/10/19/reshape.html) and [plyr](http://seananderson.ca/2014/09/13/dplyr-intro.html)*
+*Prepared by [Umihiko Hoshijima](mailto:umihiko.hoshijima@lifesci.ucsb.edu), Inspiration/Material from Sean Anderson in [Reshape2](http://seananderson.ca/2013/10/19/reshape.html) and [plyr](http://seananderson.ca/2014/09/13/dplyr-intro.html)*
 
 Reshaping data in R
 -----
+
+[Download data files here](../../data/datamanipulation.zip)
 
 As scientists, we format datasheets to make our data entry intuitive. However, different forms of data analysis in R can require data in different formats. Manipulating data for various analyses and visualization can be facilitated by the package `reshape2`.
 
@@ -200,11 +202,14 @@ This lets us see that many of the animals relatively large for their size are ro
 
 
 > ### EXERCISE 3 - Data exploration. Try to use pipes!
-> Which species of iris has the longest average sepals?
+> Which species of iris has the longest average sepals? Which species has the smallest variance of sepal length over all of its individuals measured?
 > Which species of carnivore has the largest body length to body mass ratio? (Hint: that's `adult_head_body_len_mm / adult_body_mass_g')`
 > 
 
 
-Sources: http://seananderson.ca/2013/10/19/reshape.html
-http://rpubs.com/justmarkham/dplyr-tutorial
-https://github.com/datacarpentry/R-dplyr-ecology/blob/master/03-data-analysis.Rmd
+**Sources and Umi's additional tips/tricks:**
+
+* This is where I learned reshape: [Sean Anderson](http://seananderson.ca/2013/10/19/reshape.html) as well as dplyr: [Sean Anderson](http://seananderson.ca/2014/09/13/dplyr-intro.html). He actually helped me over twitter in suggesting dPlyr - so a shout-out to him for being awesome and accessible!
+* This is another dplyr tutorial that may help in addition to that first one: [Kevin Markham](http://rpubs.com/justmarkham/dplyr-tutorial)
+* Sometimes `dPlyr` might not do exactly what you want. In reality, `dPlyr` is a streamlined version of a more powerful (but slower) library called `plyr`. [Sean Anderson's plyr tutorial](https://www.google.com/webhp?sourceid=chrome-instant&ion=1&espv=2&ie=UTF-8#q=plyr). While `dplyr` always takes in a dataframe and outputs a dataframe (summarize and mutate), `plyr` can take in a dataframe, list, or array and output a dataframe, list, or array. There are also individual R functions that go from array to array (`apply`) or data frame to data frame (`aggregate`) but plyr brings them all under one roof for easier syntax. 
+* This whole lesson plan is written in `Markdown`, which lets us have those blocks of code. However, there are ways of making documents where the code actually RUNS. This means you can have code generating figures right inside of your document! The two I would suggest for this are [R markdown](http://rmarkdown.rstudio.com/), which is nice but doesn't give you as much customizability as [knitr](http://yihui.name/knitr/). `knitr` (a beefed-up version of another format `Sweave`) is \LaTeX with blocks of R code embedded. You might use this to give code to your collaborators that you can GUARANTEE works, because the outputs go straight into your document. 
