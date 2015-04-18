@@ -172,9 +172,9 @@ The final line:
 
 for each time point subtracts the actual number of infected cases from the predicted number of Infecteds from the model, squares this difference, and adds up these squared differences for all of the time points. `sse.sir` now contains the sum of squared differences between the actual and predicted number of infected.
 
-We would like to be able to simultaneously find the values of both &#946; and &#9467; which will give us a two dimensional surface over which we’d like to find the minimum SSE. The process to find the minimum is called optimization, and there are a number of algorithms available for doing this numerically. In R, we’ll use the function `optim`, for which the default algorithm is the Nelder-Mead algorithm.
+We would like to be able to simultaneously find the values of both &#946; and &#947; which will give us a two dimensional surface over which we’d like to find the minimum SSE. The process to find the minimum is called optimization, and there are a number of algorithms available for doing this numerically. In R, we’ll use the function `optim`, for which the default algorithm is the Nelder-Mead algorithm.
 
-To find the values of &#946; and &#9467; that simultaneously minimize the sums of squared differences between the model and data, we use:
+To find the values of &#946; and &#947; that simultaneously minimize the sums of squared differences between the model and data, we use:
 
     fit0 <- optim(params0, sse.sir, data=fludata)
     fit0$par
