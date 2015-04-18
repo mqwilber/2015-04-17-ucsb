@@ -133,7 +133,10 @@ We can plot our results using the plotOISST function
 We can find the mean SST for each 31st day of March for each year by typing
 
     sst.list <- list(SoCal_2012, SoCal_2013, SoCal_2014, SoCal_2015)
-    sapply(sst.list, function(x){mean(x, na.rm=TRUE)})
+    mean_temps <- sapply(sst.list, function(x){mean(x, na.rm=TRUE)})
+    years <- as.integer(2012:2015)
+
+    plot(years, mean_temps, type = "l")
     
 This forms a list of the four variables we created and applies a function to find the mean of each
 
@@ -161,15 +164,15 @@ We can then define a vector and write short for loop to find the mean SST for th
     for (i in 1:365 ) {
     SST_2014[i] <- mean(A2014[,,i],na.rm=TRUE)
     }
-    plot(SST_2014)
+    plot(SST_2014, type = "l")
 
-If you were interested in the pixel directly over your study plot you would find the pixel closest to your site. For example, if you study Mohawk Reef (34.394N, 240.27E), the closest pixel is found at row 3, column 7. Again write a short for loop specifying that cell and run it for all dates
+If you were interested in the pixel directly over your study plot you would find the pixel closest to your site. For example, if you study Mohawk Reef (34.394N, 240.27E), the closest pixel is found at row 3, column 7. **Rows before columns, ALWAYS**. Again write a short for loop specifying that cell and run it for all dates
 
     Mohawk_2014 <- numeric(365)
     for (i in 1:365 ) {
     Mohawk_2014[i] <- mean(A2014[3,7,i],na.rm=TRUE)
     }
-    plot(Mohawk_2014)
+    plot(Mohawk_2014, type = "l")
 
 THANK YOU!
 ----
