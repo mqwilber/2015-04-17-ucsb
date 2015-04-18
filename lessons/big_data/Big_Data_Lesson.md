@@ -37,7 +37,7 @@ Background
  
 First we will have to download a few netCDF SST files and an R script will will use later on. 
 
- **Supplementary Material**: [SST data, landmask, and R code]
+ **Supplementary Material**: [R script](NOAA_OISST_function.R), [Data in Dropbox](https://www.dropbox.com/sh/di6a3dggx3419n7/AACLDkENBxDGCnnPLbjsZ2Wga?dl=0)
 
 Downloading and Loading Data
 -----  
@@ -69,7 +69,7 @@ Go ahead and examine the data frame by typing
     
 The output states that the file has 4 dimensions (time, zlev, lat, and lon), which correspond to the the day value of the data, elevation/depth, and coordinates for the each pixel. Because these are daily SST data, time and zlev both have size = 1, while lat size = 720 and lon size = 1440 (1/4° data)
 
-The file also contains 4 variables: SST, SST Anomoly, SST Standard Deviation, and Sea Ice Concentration. Missing values = -999. NOAA 1/4° daily Optimum Interpolation Sea Surface Temperature files are already converted to degrees Celcius, so you don't have to worry about converting DN's, NOAA has already done this for you
+The file also contains 4 variables: SST, SST Anomaly, SST Standard Deviation, and Sea Ice Concentration. Missing values = -999. NOAA 1/4° daily Optimum Interpolation Sea Surface Temperature files are already converted to degrees Celcius, so you don't have to worry about converting DN's, NOAA has already done this for you
 
 We can now extract global SST values from this file and retrieve a few summary stats
 
