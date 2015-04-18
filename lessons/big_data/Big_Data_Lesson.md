@@ -9,8 +9,9 @@ title: Big Data with R
 Before we start this lesson we will have to install packages ncdf and fields    
 
     install.packages("ncdf")  
-    library(ncdf)  
-    install.packages("fields")  
+    install.packages("fields") 
+    
+    library(ncdf) 
     library(fields)  
     
 Goals
