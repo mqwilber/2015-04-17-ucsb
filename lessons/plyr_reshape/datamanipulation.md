@@ -24,7 +24,7 @@ For our example, we will look at our dataset `iris`, which is a [famous statisti
 
 This data seems perfectly formatted for many of the plots you conducted. Each individual has a single row, with columns corresponding to the individual measurements as well as the species. Now let's now do a boxplot, comparing the distribution of `Sepal.Length` between each species:
 
-    ggplot(iris, aes(x <- Species, y <- Sepal.Width)) + geom_boxplot()
+    ggplot(iris, aes(x = Species, y = Sepal.Width)) + geom_boxplot()
 
 Suppose we want to make four boxplots, to compare between species for each flower measurement. In the last lesson we used `facet_grid()` to divide our data based on the values contained in a certain column. Knowing this, it sounds as though you need a column that says `Sepal.Width`, `Sepal,Length`, `Petal.Length`, `Petal.Width`... but we don't really have that here. In order to subdivide our measurements and plot each dimension on a different plot, we will need to reformat the dataset so there is only one measurement on each row. 
 
@@ -71,15 +71,15 @@ Now we can `melt()`! Let's see what happens when we call the function:
 
 Huh, that didn't do exactly what we wanted it to do. By default, `melt` will get rid of all columns with numerical values. Since we want to hold on to the `Individual` row, we have to manually tell `melt` what columns we want to keep.
 
-    iris2 <- melt(iris, id.vars <-  c("Individual", "Species"))
+    iris2 <- melt(iris, id.vars =  c("Individual", "Species"))
 
 Now let's plot our boxplot. We don't really need facet_grid(), which lets you designate two different variables to divide up the dataset by. We just want it divided by `variable`, as shown below. 
     
-    ggplot(iris2, aes(x <- Species, y <- value))+geom_boxplot()+facet_wrap(~variable)
+    ggplot(iris2, aes(x = Species, y = value))+geom_boxplot()+facet_wrap(~variable)
     
 Unlike `facet_grid`, which will display all of your plots horizontally or vertically with just one categorizing variable, `facet_wrap` will wrap them into a grid and keep them nice and tidy. You can even specify the number of rows and columns: 
 
-    ggplot(iris2, aes(x <- Species, y <- value))+geom_boxplot()+facet_wrap(~variable, ncol <- 3)
+    ggplot(iris2, aes(x = Species, y = value))+geom_boxplot()+facet_wrap(~variable, ncol = 3)
 
 As an exercise, let's put our data back to its original shape using`dcast`. This has a slightly different syntax, and is in the shape of a formula. We put our id variables (the same ones we specified in `melt`) on the left of the `~`, and put the `variable` on the right. 
 
