@@ -155,7 +155,7 @@ To we can add other functions here, such as `max()`, `min()`, and `sd()`.
 
     summarize(a, mean_mass <- mean(adult_body_mass_g, na.rm = TRUE), sd_mass <- sd(adult_body_mass_g, na.rm = TRUE))
     
-> inside of these inner parenthesees you MUST use equals signs instead of arrows. [Read more here](http://blog.revolutionanalytics.com/2008/12/use-equals-or-arrow-for-assignment.html). 
+> **Tip**: inside of these inner parenthesees you MUST use equals signs instead of arrows. [Read more here](http://blog.revolutionanalytics.com/2008/12/use-equals-or-arrow-for-assignment.html). 
 
 `summarize` makes a new dataset, but `mutate` will add these columns instead to the original dataframe. 
 
